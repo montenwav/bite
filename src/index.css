@@ -1,0 +1,88 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.logo {
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+:root {
+    --sans-serif-font: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-family: var(--sans-serif-font)
+}
+
+main {
+    width: 100vw;
+    position: relative;
+    height: 100vh;
+    background: url(/src/images/main.webp) no-repeat center;
+    background-size: cover;
+}
+
+.button {
+    width: 80%;
+    height: 50px;
+    background: #000;    
+    transition: .5s;
+    border: none;
+    color: white;
+    font-family: var(--sans-serif-font);
+    cursor: pointer;
+}
+
+.button:hover {
+    background: lightcyan;
+    color: black;
+}
+
+.mainContent {
+    top: 50%;
+    left: 20%;
+    transform: translate(-50%, -50%);
+    position: absolute; /* Connected to main */
+    text-align: center;
+}
+
+.mainContent h1 {
+    overflow: hidden;
+    font-family: serif;
+    padding: 10px;
+    line-height: 60px;
+    font-size: 4.5em;
+    max-width: 550px;
+}
+
+.mainContent p {
+    overflow: hidden;
+    max-width: 400px;
+    margin: auto;
+    margin-bottom: 30px;
+    font-size: 1.7em;
+    line-height: 1;
+    font-family: var(--sans-serif-font);
+}
+
+.cardBtn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.cardBtn:hover {
+    background: lightcyan;
+    color: black;
+    border: 2px solid black 
+}
