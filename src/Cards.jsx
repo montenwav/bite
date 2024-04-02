@@ -1,29 +1,34 @@
-import { useImmer } from "use-immer"
 import { useState } from "react"
 
 export default function Cards() {
-    const [cards, setCards] = useImmer(cardsArr)
+    const [cards, setCards] = useState(cardsArr)
 
     return (
         <div className='cardsMain'>
             <h1>Shop Best Sellers</h1>
 
-            <ul className='cardsDiv'>
-                {cards.map(card =>
-                    <li key={card.id} className={`cards card-${card.id}`}>
-                        <div className='preview'>
-                            <img style={{ width: '100%' }} src={card.imgURL} />
-                        </div>
-                        <h1>{card.title}</h1>
-                        <p>{card.type}</p>
-                        <ColorPicker card={card} setCards={setCards} cards={cards}/>
-                        <p>{card.id == 0 ? `From $${card.price}/month` : `$${card.price}/month`}</p>
-                        <Stars style={{ width: '10px' }} card={card} />
-                        <button className="button cardBtn">ADD TO BAG</button>
-                    </li>
-                )}
-            </ul>
+            <AdaptiveCards cards={cards} setCards={setCards} />
         </div>
+    )
+}
+
+const AdaptiveCards = ({ cards, setCards }) => {
+    return (
+        <ul className='cardsDiv'>
+            {cards.map(card =>
+                <li key={card.id} className={`cards card-${card.id}`}>
+                    <div className='preview'>
+                        <img style={{ width: '100%' }} src={card.imgURL} />
+                    </div>
+                    <h1>{card.title}</h1>
+                    <p>{card.type}</p>
+                    <ColorPicker cardID={card.id} card={card} setCards={setCards} cards={cards} />
+                    <p>{card.id == 0 ? `From $${card.price}/month` : `$${card.price}/month`}</p>
+                    <Stars style={{ width: '10px' }} card={card} />
+                    <button className="button cardBtn">ADD TO BAG</button>
+                </li>
+            )}
+        </ul>
     )
 }
 
@@ -44,16 +49,28 @@ const Stars = ({ style, card }) => {
 
 {/*Display card colors*/ }
 
-const ColorPicker = ({ card, cards, setCards }) => {
-    // const [click, setClick] = useState(false) // handle Click
+const ColorPicker = ({cardID, card, cards, setCards }) => {
 
-    const handleColorPicker = (cID) => {
-        setCards(draft => {
-            const colors = draft.find(c => c.colorId === cID)
-            colors.clicked = true
-        })
-
+    const handleColorPicker = (colID) => {
+        setCards(cards.map(card => {
+            if (card.id == cardID) {
+                return {
+                    ...card, colors: card.colors.map(item => {
+                        if (item.colorId == colID) {
+                            return { ...item, clicked: true }
+                        }
+                        return { ...item, clicked: false }
+                    })
+                }
+            }
+            return card
+        }
+        ))
     }
+
+    {/* Change cards */}
+
+    
 
     return (
         <ul className='cardColorDiv'>
@@ -91,7 +108,7 @@ const cardsArr = [
         id: 1,
         title: 'TOOTHPASTE BITS WITH FLUORIDE',
         imgURL: '/src/images/products/2/pc-tpb-wf-2oz-mint-fluoride-no-bg.webp',
-        colors: [{ colorId: 3, color: 'lightcyan', clicked: true }],
+        colors: [{ colorId: 0, color: 'lightcyan', clicked: true }],
         type: 'Mint',
         reviews: '21,266',
         price: 8
@@ -101,10 +118,10 @@ const cardsArr = [
         title: 'DEODORANT SET',
         imgURL: '/src/images/products/3/pdp-product-card-desktop-silver-case-open-no-bg.webp',
         colors: [
-            { colorId: 4, color: 'white', clicked: true },
-            { colorId: 5, color: 'orange', clicked: false },
-            { colorId: 6, color: 'pink', clicked: false },
-            { colorId: 7, color: 'green', clicked: false }
+            { colorId: 0, color: 'white', clicked: true },
+            { colorId: 1, color: 'orange', clicked: false },
+            { colorId: 2, color: 'pink', clicked: false },
+            { colorId: 3, color: 'green', clicked: false }
         ],
         type: 'Fragrance-Free',
         reviews: '644',
@@ -114,7 +131,7 @@ const cardsArr = [
         id: 3,
         title: 'MOUTHWASH BITS',
         imgURL: '/src/images/products/4/pc-mouthwash-no-bg.webp',
-        colors: [{ colorId: 8, color: 'lightcyan', clicked: true }],
+        colors: [{ colorId: 0, color: 'lightcyan', clicked: true }],
         type: 'Mint',
         reviews: '834',
         price: 5

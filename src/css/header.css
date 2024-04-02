@@ -7,7 +7,6 @@ body {
 * {
     box-sizing: border-box;
     font-size: 16px;
-    /* font-family: 'Times New Roman', Times, serif; */
     font-family: sans-serif;
 }
 
@@ -23,9 +22,9 @@ body {
 /* HEADER */
 
 .headerBg {
+    box-shadow: 0px 1px black;
     width: 100vw;
     height: 70px;
-    box-shadow: 0px, 2px, black;
     background: white;
     align-items: center;
     position: fixed;

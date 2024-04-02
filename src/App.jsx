@@ -1,6 +1,6 @@
-import HeaderBg from './header.jsx'
+import HeaderBg from './Header.jsx'
 import Cards from './Cards.jsx'
-// import CompaniesCarousel from './CompaniesCarousel.jsx'
+import CompaniesCarousel from './CompaniesCarousel.jsx'
 
 export default function App() {
   return (
@@ -9,7 +9,7 @@ export default function App() {
         <HeaderBg />
         <MainContent />
       </Main>
-      {/* <CompaniesCarousel /> */}
+      <CompaniesCarousel />
       <Cards/>
     </>
   )

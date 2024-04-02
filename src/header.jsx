@@ -1,8 +1,10 @@
 export default function HeaderBg() {
     return (
+        <>
         <div className='headerBg'>
             <HeaderMain />
         </div>
+        </>
     )
 }
 
