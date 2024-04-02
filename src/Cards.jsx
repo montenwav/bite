@@ -2,6 +2,7 @@ import { useState } from "react"
 
 export default function Cards() {
     const [cards, setCards] = useState(cardsArr)
+    // const [selectedItem, setSelectedItem] = useState()
 
     return (
         <div className='cardsMain'>
@@ -20,7 +21,7 @@ const AdaptiveCards = ({ cards, setCards }) => {
                     <div className='preview'>
                         <img style={{ width: '100%' }} src={card.imgURL} />
                     </div>
-                    <h1>{card.title}</h1>
+                    <h1>{card.title}</h1>r
                     <p>{card.type}</p>
                     <ColorPicker cardID={card.id} card={card} setCards={setCards} cards={cards} />
                     <p>{card.id == 0 ? `From $${card.price}/month` : `$${card.price}/month`}</p>
@@ -49,28 +50,85 @@ const Stars = ({ style, card }) => {
 
 {/*Display card colors*/ }
 
-const ColorPicker = ({cardID, card, cards, setCards }) => {
+const ColorPicker = ({ cardID, card, cards, setCards }) => {
 
     const handleColorPicker = (colID) => {
         setCards(cards.map(card => {
-            if (card.id == cardID) {
-                return {
-                    ...card, colors: card.colors.map(item => {
-                        if (item.colorId == colID) {
-                            return { ...item, clicked: true }
-                        }
-                        return { ...item, clicked: false }
-                    })
+            if (card.id == 0 && card.id == cardID) {
+                if (colID == 0) {
+                    return {
+                        ...card, type: 'Mint', colors: card.colors.map(item => {
+                            if (item.colorId == colID) {
+                                return { ...item, clicked: true }
+                            }
+                            return { ...item, clicked: false }
+                        })
+                    }
+                } else if (colID == 1) {
+                    return {
+                        ...card, type: 'Mint Charcoal', colors: card.colors.map(item => {
+                            if (item.colorId == colID) {
+                                return { ...item, clicked: true }
+                            }
+                            return { ...item, clicked: false }
+                        })
+                    }
+                } else if (colID == 2) {
+                    return {
+                        ...card, type: 'Berry Twist', colors: card.colors.map(item => {
+                            if (item.colorId == colID) {
+                                return { ...item, clicked: true }
+                            }
+                            return { ...item, clicked: false }
+                        })
+                    }
                 }
             }
+
+            if (card.id == 2 && card.id == cardID) {
+                if (colID == 0) {
+                    return {
+                        ...card, type: 'Fragrance-Free', colors: card.colors.map(item => {
+                            if (item.colorId == colID) {
+                                return { ...item, clicked: true }
+                            }
+                            return { ...item, clicked: false }
+                        })
+                    }
+                } else if (colID == 1) {
+                    return {
+                        ...card, type: 'Neroli', colors: card.colors.map(item => {
+                            if (item.colorId == colID) {
+                                return { ...item, clicked: true }
+                            }
+                            return { ...item, clicked: false }
+                        })
+                    }
+                } else if (colID == 2) {
+                    return {
+                        ...card, type: 'Rose Vert', colors: card.colors.map(item => {
+                            if (item.colorId == colID) {
+                                return { ...item, clicked: true }
+                            }
+                            return { ...item, clicked: false }
+                        })
+                    }
+                } else if (colID == 3) {
+                    return {
+                        ...card, type: 'Santal', colors: card.colors.map(item => {
+                            if (item.colorId == colID) {
+                                return { ...item, clicked: true }
+                            }
+                            return { ...item, clicked: false }
+                        })
+                    }
+                }
+            }
+
             return card
-        }
-        ))
+        }))
+
     }
-
-    {/* Change cards */}
-
-    
 
     return (
         <ul className='cardColorDiv'>
@@ -90,11 +148,15 @@ const ColorPicker = ({cardID, card, cards, setCards }) => {
     )
 }
 
+// const selectedItem = { colorId: 0, color: 'lightcyan', clicked: true }
+
 const cardsArr = [
     {
         id: 0,
         title: 'TOOTHPASTE BITS FLUORIDE-FREE',
-        imgURL: '/src/images/products/1/pc-tpb-ff-4oz-mint-no-bg.webp',
+        imgURL: ['/src/images/products/1/pc-tpb-ff-4oz-mint-no-bg.webp',
+            '/src/images/products/1/pdp-product-card-tpb-ff-4oz-mint-charcoal.webp',
+            '/src/images/products/1/pdp-product-card-tpb-ff-4oz-berry-twist-no-bg-012524.webp'],
         colors: [
             { colorId: 0, color: 'lightcyan', clicked: true },
             { colorId: 1, color: 'gray', clicked: false },
