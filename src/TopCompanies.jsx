@@ -1,23 +1,30 @@
 import { useRef } from 'react';
 
+const windowInnerWidth = window.innerWidth 
+
 export default function TopCompanies() {
     const itemsRef = useRef(null)
+    const ref = useRef(null)
 
-    let currentIndex = 0; // init ialize index to track the current position
-    setInterval(() => {
-        currentIndex = (currentIndex + 1) % 6; // update index for next iteration
-        const map = getMap();
-        const node = map.get(currentIndex);
-        node.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
-            inline: 'center'
-        });
-    }, 3000);
+
+    if (windowInnerWidth < 600) { // activates slider
+
+        let currentIndex = 3; // init ialize index to track the current position
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % 6; // update index for next iteration
+            const map = getMap();
+            const node = map.get(currentIndex);
+            node.scrollIntoView({
+                behavior: 'smooth',
+                block: 'nearest',
+                inline: 'center'
+            });
+        }, 2000);
+    }
 
     function getMap() {
         if (!itemsRef.current) {
-            // Initialize the Map on first usage.
+            // initialize the map on first usage.
             itemsRef.current = new Map();
         }
         return itemsRef.current;
@@ -26,7 +33,7 @@ export default function TopCompanies() {
     return (
         <>
             <Hr />
-            <div className='companiesList'>
+            <div ref={ref} className='companiesList'>
                 <h4>AS SEEN IN</h4>
                 <div className='companies_container'>
                     <ul>

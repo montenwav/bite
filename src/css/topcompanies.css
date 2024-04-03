@@ -6,13 +6,14 @@
 }
 
 .companies_container {
+    width: 100%;
     margin-top: 10px;
     margin-bottom: 10px;
-    width: 100%;
     overflow: hidden; 
 }
 
 .companies_container ul {   
+    width: auto;
     padding: 0;
     margin: 0;
     display: flex;
@@ -21,13 +22,11 @@
 
 .companies_container li {
     display: inline;
-    /* display: flex;
-    align-items: center; */
-    padding: 15px;
+    padding: 12px;
 }
 
 .companies_container li img {
-    height: 23px;
+    height: 20px;
 }
 
 .companiesList h4 {
@@ -35,7 +34,7 @@
     min-width: 150px;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 600px) {
     .companiesList {
         flex-direction: column;
     }

@@ -17,6 +17,10 @@ body {
     font-family: 'Times New Roman', Times, serif;
 }
 
+ul {
+    list-style-type: none;
+}
+
 h1 {
     line-height: 60px;
     font-size: 4.8em;
