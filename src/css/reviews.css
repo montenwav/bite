@@ -1,0 +1,75 @@
+.Reviews {
+    height: 1000px;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background: #131313;
+}
+
+.ReviewCardsContainer {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.ReviewCard {
+    height: 700px;
+    min-width: 350px;
+    border: 2px solid white;
+    position: relative;
+}
+
+.Reviews h1 {
+    font-size: 3em;
+    text-align: center;
+    color: white;
+    margin: auto;
+    padding: 40px;
+    font-weight: normal;
+}
+
+.ReviewsBtn {
+    background: #72f2c7; 
+    color: #131313;
+    margin: 50px;
+    font-size: 1.5em;
+    width: 450px;
+    height: 70px;
+}
+
+.ReviewsBtn:hover {
+    background: white;
+}
+
+.ReviewCardImg {
+    height: 50%;
+    width: 100%;
+    object-fit: auto;
+    position: absolute;
+    bottom: 0px;
+}
+
+.ReviewTitle {
+    padding: 20px;
+    color: white;
+    padding-left: 10%;
+}
+
+.ReviewTitle p {
+    font-size: 1.4em;
+    font-family: sans-serif;
+}
+
+.AuthorAndStars {
+    position: absolute;
+    top: 33%;
+    left: 10%;
+}
+
+.reviews-stars {
+    margin-top: -15px;
+    width: 100px;
+    color: #c7f6e6;
+}

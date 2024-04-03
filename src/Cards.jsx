@@ -2,7 +2,6 @@ import { useState } from "react"
 
 export default function Cards() {
     const [cards, setCards] = useState(cardsArr)
-    // const [selectedItem, setSelectedItem] = useState()
 
     return (
         <div className='cardsMain'>
@@ -18,10 +17,10 @@ const AdaptiveCards = ({ cards, setCards }) => {
         <ul className='cardsDiv'>
             {cards.map(card =>
                 <li key={card.id} className={`cards card-${card.id}`}>
-                    <div className='preview'>
-                        <img style={{ width: '100%' }} src={card.imgURL} />
+                    <div className='preview' style={{background: card.bgPrevirew}}>
+                        <img style={{ width: '100%'}} src={card.imgURL} />
                     </div>
-                    <h1>{card.title}</h1>r
+                    <h4>{card.title}</h4>
                     <p>{card.type}</p>
                     <ColorPicker cardID={card.id} card={card} setCards={setCards} cards={cards} />
                     <p>{card.id == 0 ? `From $${card.price}/month` : `$${card.price}/month`}</p>
@@ -53,29 +52,32 @@ const Stars = ({ style, card }) => {
 const ColorPicker = ({ cardID, card, cards, setCards }) => {
 
     const handleColorPicker = (colID) => {
+
+        {/*Change cards*/ }
+
         setCards(cards.map(card => {
+
+            {/*First Card*/ }
             if (card.id == 0 && card.id == cardID) {
-                if (colID == 0) {
-                    return {
-                        ...card, type: 'Mint', colors: card.colors.map(item => {
+                switch (colID) {
+                    case 0: return {
+                        ...card, imgURL: '/src/images/products/1/pc-tpb-ff-4oz-mint-no-bg.webp', type: 'Mint', colors: card.colors.map(item => {
                             if (item.colorId == colID) {
                                 return { ...item, clicked: true }
                             }
                             return { ...item, clicked: false }
                         })
                     }
-                } else if (colID == 1) {
-                    return {
-                        ...card, type: 'Mint Charcoal', colors: card.colors.map(item => {
+                    case 1: return {
+                        ...card, imgURL: '/src/images/products/1/pdp-product-card-tpb-ff-4oz-mint-charcoal.webp', type: 'Mint Charcoal', colors: card.colors.map(item => {
                             if (item.colorId == colID) {
                                 return { ...item, clicked: true }
                             }
                             return { ...item, clicked: false }
                         })
                     }
-                } else if (colID == 2) {
-                    return {
-                        ...card, type: 'Berry Twist', colors: card.colors.map(item => {
+                    case 2: return {
+                        ...card, imgURL: '/src/images/products/1/pdp-product-card-tpb-ff-4oz-berry-twist-no-bg-012524.webp', type: 'Berry Twist', colors: card.colors.map(item => {
                             if (item.colorId == colID) {
                                 return { ...item, clicked: true }
                             }
@@ -85,37 +87,35 @@ const ColorPicker = ({ cardID, card, cards, setCards }) => {
                 }
             }
 
+            {/*Second Card*/ }
             if (card.id == 2 && card.id == cardID) {
-                if (colID == 0) {
-                    return {
-                        ...card, type: 'Fragrance-Free', colors: card.colors.map(item => {
+                switch (colID) {
+                    case 0: return {
+                        ...card, bgPrevirew: '#f0f0f0', type: 'Fragrance-Free', colors: card.colors.map(item => {
                             if (item.colorId == colID) {
                                 return { ...item, clicked: true }
                             }
                             return { ...item, clicked: false }
                         })
                     }
-                } else if (colID == 1) {
-                    return {
-                        ...card, type: 'Neroli', colors: card.colors.map(item => {
+                    case 1: return {
+                        ...card, bgPrevirew: '#f27c2d', type: 'Neroli', colors: card.colors.map(item => {
                             if (item.colorId == colID) {
                                 return { ...item, clicked: true }
                             }
                             return { ...item, clicked: false }
                         })
                     }
-                } else if (colID == 2) {
-                    return {
-                        ...card, type: 'Rose Vert', colors: card.colors.map(item => {
+                    case 2: return {
+                        ...card, bgPrevirew: '#e5497a', type: 'Rose Vert', colors: card.colors.map(item => {
                             if (item.colorId == colID) {
                                 return { ...item, clicked: true }
                             }
                             return { ...item, clicked: false }
                         })
                     }
-                } else if (colID == 3) {
-                    return {
-                        ...card, type: 'Santal', colors: card.colors.map(item => {
+                    case 3: return {
+                        ...card, bgPrevirew: '#51511a', type: 'Santal', colors: card.colors.map(item => {
                             if (item.colorId == colID) {
                                 return { ...item, clicked: true }
                             }
@@ -124,10 +124,8 @@ const ColorPicker = ({ cardID, card, cards, setCards }) => {
                     }
                 }
             }
-
             return card
         }))
-
     }
 
     return (
@@ -148,19 +146,15 @@ const ColorPicker = ({ cardID, card, cards, setCards }) => {
     )
 }
 
-// const selectedItem = { colorId: 0, color: 'lightcyan', clicked: true }
-
 const cardsArr = [
     {
         id: 0,
         title: 'TOOTHPASTE BITS FLUORIDE-FREE',
-        imgURL: ['/src/images/products/1/pc-tpb-ff-4oz-mint-no-bg.webp',
-            '/src/images/products/1/pdp-product-card-tpb-ff-4oz-mint-charcoal.webp',
-            '/src/images/products/1/pdp-product-card-tpb-ff-4oz-berry-twist-no-bg-012524.webp'],
+        imgURL: '/src/images/products/1/pc-tpb-ff-4oz-mint-no-bg.webp',
         colors: [
-            { colorId: 0, color: 'lightcyan', clicked: true },
-            { colorId: 1, color: 'gray', clicked: false },
-            { colorId: 2, color: 'pink', clicked: false }
+            { colorId: 0, color: '#c7f6e6', clicked: true },
+            { colorId: 1, color: '#4d4c4c', clicked: false },
+            { colorId: 2, color: '#ffbdb9', clicked: false }
         ],
         type: 'Mint',
         reviews: '21,266',
@@ -170,7 +164,7 @@ const cardsArr = [
         id: 1,
         title: 'TOOTHPASTE BITS WITH FLUORIDE',
         imgURL: '/src/images/products/2/pc-tpb-wf-2oz-mint-fluoride-no-bg.webp',
-        colors: [{ colorId: 0, color: 'lightcyan', clicked: true }],
+        colors: [{ colorId: 0, color: '#c7f6e6', clicked: true }],
         type: 'Mint',
         reviews: '21,266',
         price: 8
@@ -180,10 +174,10 @@ const cardsArr = [
         title: 'DEODORANT SET',
         imgURL: '/src/images/products/3/pdp-product-card-desktop-silver-case-open-no-bg.webp',
         colors: [
-            { colorId: 0, color: 'white', clicked: true },
-            { colorId: 1, color: 'orange', clicked: false },
-            { colorId: 2, color: 'pink', clicked: false },
-            { colorId: 3, color: 'green', clicked: false }
+            { colorId: 0, color: '#f0f0f0', clicked: true },
+            { colorId: 1, color: '#f27c2d', clicked: false },
+            { colorId: 2, color: '#e5497a', clicked: false },
+            { colorId: 3, color: '#51511a', clicked: false }
         ],
         type: 'Fragrance-Free',
         reviews: '644',
@@ -193,7 +187,7 @@ const cardsArr = [
         id: 3,
         title: 'MOUTHWASH BITS',
         imgURL: '/src/images/products/4/pc-mouthwash-no-bg.webp',
-        colors: [{ colorId: 0, color: 'lightcyan', clicked: true }],
+        colors: [{ colorId: 0, color: '#c7f6e6', clicked: true }],
         type: 'Mint',
         reviews: '834',
         price: 5

@@ -1,0 +1,43 @@
+.FirstSecBg {
+    background: url(/src/images/section1_bg.png) no-repeat center;
+    width: 100%;
+    height: 600px;
+}
+
+.FirstSecMain {
+    width: 1000px;
+    height: 100%;
+    margin: auto;
+}
+
+.BitsAreBetter {
+    background-color: #fafafa;
+}
+
+.BitsAreBetter h1 {
+    padding-top: 25px;
+    text-align: center;
+    /* font-size: 3em; */
+}
+
+.FirstSecMain {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    text-align: center;
+}
+
+.FirstSecMain h2 {
+    font-weight: normal;
+    font-family: sans-serif;
+}
+
+.FirstSecColumn > div {
+    padding: 10px;
+}
+
+.FirstSecColumn {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}

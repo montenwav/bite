@@ -1,6 +1,9 @@
 import HeaderBg from './Header.jsx'
 import Cards from './Cards.jsx'
-import CompaniesCarousel from './CompaniesCarousel.jsx'
+import TopCompanies from './TopCompanies.jsx'
+import BitsAreBetter from './BitsAreBetter.jsx'
+import Reviews from './Reviews.jsx'
+import ShopByCategory from './ShopByCategory.jsx'
 
 export default function App() {
   return (
@@ -9,8 +12,11 @@ export default function App() {
         <HeaderBg />
         <MainContent />
       </Main>
-      <CompaniesCarousel />
+      <TopCompanies />
       <Cards/>
+      <BitsAreBetter/>
+      <Reviews/>
+      <ShopByCategory/>
     </>
   )
 }
