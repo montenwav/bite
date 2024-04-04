@@ -4,6 +4,8 @@ import TopCompanies from './TopCompanies.jsx'
 import BitsAreBetter from './BitsAreBetter.jsx'
 import Reviews from './Reviews.jsx'
 import ShopByCategory from './ShopByCategory.jsx'
+import BottomCompanies from './BottomCompanies.jsx'
+import FAQs from './FAQs.jsx'
 
 export default function App() {
   return (
@@ -17,6 +19,8 @@ export default function App() {
       <BitsAreBetter/>
       <Reviews/>
       <ShopByCategory/>
+      <BottomCompanies/>
+      <FAQs/>
     </>
   )
 }

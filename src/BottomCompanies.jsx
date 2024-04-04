@@ -1,10 +1,11 @@
 import { motion, useMotionValue } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
-export default function ShopByCategory() {
+export default function BottomCompanies() {
     const [imgIndex, setImgIndex] = useState(0)
 
     // Drag effect 
+
     const [isDragging, setIsDragging] = useState(false)
 
     const ChangeThreshold = 50 // How much you should drag to change an image
@@ -17,7 +18,7 @@ export default function ShopByCategory() {
 
         const x = dragLenght.get()
 
-        if (x <= -ChangeThreshold && imgIndex < imgs.length - 1) {
+        if (x <= -ChangeThreshold && imgIndex < companiesList.length - 1) {
             setImgIndex(prev => prev + 1)
         } else if (x >= ChangeThreshold && imgIndex > 0) {
             setImgIndex(prev => prev - 1)
@@ -25,6 +26,7 @@ export default function ShopByCategory() {
     }
 
     //Autoplay effect
+
     useEffect(() => {
         const interval = setInterval(() => {
             updateIndex(imgIndex + 1);
@@ -37,53 +39,51 @@ export default function ShopByCategory() {
     });
 
     const updateIndex = (newIndex) => {
-        if (newIndex >= imgs.length) {
+        if (newIndex >= companiesList.length) {
             newIndex = 0;
         }
         setImgIndex(newIndex);
     };
 
     return (
-        <section className="shop_by_category">
-            <h1>Shop By Category</h1>
+        <section className="bottom_companies">
             <motion.div
                 style={{
-                    transform: `translateX(-${imgIndex * 89}%)`,
+                    transform: `translateX(-${imgIndex * 100}%)`,
                     x: dragLenght,
                 }}
                 drag="x"
                 dragConstraints={{ right: 0, left: 0 }}
-                animate={{ translateX: `-${imgIndex * 89}%` }} // translate by img size
+                animate={{ translateX: `-${imgIndex * 100}%` }} // translate by img size
                 onDragStart={onDragStart}
                 onDragEnd={onDragEnd}
-                className="carousel">
-                <Images />
+                className="bottom_comp_container">
+                <Companies />
             </motion.div>
         </section>
     )
 }
 
-const Images = () => {
+const Companies = () => {
     return (
         <>
-            {imgs.map(img => (
+            {companiesList.map((company, index) => (
                 <motion.div
-                    key={img.id}
+                    key={index}
                     whileTap={{ cursor: 'grabbing' }}
-                    className='inner_carousel'>
-                    <div className="card_image">
-                        <h4>{img.name}</h4>
-                        <img src={img.src} alt={img.name} />
-                    </div>
-                    <button className="shop_by_btn">SHOP NOW</button>
+                    className='bottom_comp_item'
+                >
+                    <h4>{company.title}</h4>
+                    <img height='25px' src={company.src} />
                 </motion.div>
             ))}
         </>
     )
 }
 
-const imgs = [
-    { id: 0, name: 'ORAL CARE', src: '/src/images/shopby/hp-shop-by-category-oral-care.webp' },
-    { id: 1, name: 'SETS', src: '/src/images/shopby/hp-shop-by-category-sets.webp' },
-    { id: 3, name: 'BODY CARE', src: '/src/images/shopby/hp-shop-by-category-body-care.webp' },
+const companiesList = [
+    {title: '“Just what your toiletry bag didn’t know it was missing.”', src: '/src/images/companies/1.png'},
+    {title: '“These have changed my life.”', src: '/src/images/companies/4.png'},
+    {title: '“Give love to your pearly whites.”', src: '/src/images/companies/6.png'},
+    {title: '“Best Whitening Toothpaste Tablets”', src: '/src/images/companies/7.png'},
 ]

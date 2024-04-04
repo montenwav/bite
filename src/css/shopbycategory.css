@@ -14,11 +14,11 @@
     display: flex;
     flex-direction: row;
     justify-content: left;
+    cursor: grab;
 }
 
 .inner_carousel {
     padding: 10px;
-    cursor: grab;
     width: 100%;
     height: auto;
 }
@@ -33,7 +33,7 @@
 .card_image img {
     width: 85vw;
     height: 100%;
-    object-fit: auto;
+    object-fit: cover;
 }
 
 .shop_by_btn {

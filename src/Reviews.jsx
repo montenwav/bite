@@ -1,49 +1,64 @@
+import { useEffect, useState } from 'react';
+
 export default function Reviews() {
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            updateIndex(activeIndex + 1);
+        }, 3000);
+        return () => {
+            if (interval) {
+                clearInterval(interval);
+            }
+        };
+    });
+
+    const updateIndex = (newIndex) => {
+        if (newIndex >= reviews.length - 2) {
+            newIndex = 0;
+        }
+        setActiveIndex(newIndex);
+    };
+
     return (
-        <div className="Reviews">
+        <section className="reviews">
             <h1>20,000+ Reviews For A Reason</h1>
-            <div className='ReviewCardsContainer'>
-                <ReviewCard
-                    title='No mess, cleans and whitens beautifully, and no plastic or repeat containers!'
-                    author='KATHLEEN M.'
-                    src='/src/images/reviews/homepage-ugc-review-1.webp' />
-                <ReviewCard
-                    title='I love the sustainable packaging and my teeth have gotten whiter since using this toothpaste. Easy to travel with!'
-                    author='CHRISSY B.'
-                    src='/src/images/reviews/homepage-ugc-review-3.webp' />
-                <ReviewCard
-                    title='Best toothpaste I’ve ever used!'
-                    author='LUCY R.'
-                    src='/src/images/reviews/homepage-ugc-review-4.webp' />
-                <ReviewCard
-                    title='I’ve tried a few other brands of toothpaste tablets and these bits are by far the best. 
-                    They foam up like regular toothpaste and have a great flavor.'
-                    author='BRITT W.'
-                    src='/src/images/reviews/homepage-ugc-review-2.webp' />
-                <ReviewCard
-                    title='I have been using Bits for a year now, and I am very happy with them. My dental hygienist is too! I highly recommend them!'
-                    author='ANNE L.'
-                    src='/src/images/reviews/homepage-ugc-review-5.webp' />
+            <div
+                className="review_container"
+                style={{
+                    transform: `translateX(-${activeIndex * 34}%)`,
+                }}
+            >
+                <ReviewCards />
             </div>
-            <button className='ReviewsBtn'>READ ALL REVIEWS</button>
-        </div>
+            <button className='reviews_btn'>READ ALL REVIEWS</button>
+        </section>
     )
 }
 
-const ReviewCard = ({ title, author, src }) => {
+const ReviewCards = () => {
     return (
-        <div className='ReviewCard'>
-            <div className='ReviewTitle'>
-                <p>{title}</p>
+        <>
+            {reviews.map(review =>
+                <div
+                    key={review.id}
+                    className='review_card'>
+                    <div className='ReviewTitle'>
+                        <p>{review.title}</p>
 
-                <div className="AuthorAndStars">
-                    <p>{author}</p>
-                    <Stars />
+                        <div className="AuthorAndStars">
+                            <p>{review.author}</p>
+                            <Stars />
+                        </div>
+                    </div>
+                    <img
+                        className='review_card_img'
+                        src={review.src}
+                        alt={review.author} />
                 </div>
-            </div>
-
-            <img className='ReviewCardImg' src={src} alt={author} />
-        </div>
+            )}
+        </>
     )
 }
 
@@ -123,3 +138,66 @@ const Stars = () => {
         </div>
     )
 }
+
+const reviews = [
+    {
+        id: 0,
+        title: 'No mess, cleans and whitens beautifully, and no plastic or repeat containers!',
+        author: 'KATHLEEN M.',
+        src: '/src/images/reviews/homepage-ugc-review-1.webp'
+    },
+    {
+        id: 1,
+        title: 'I love the sustainable packaging and my teeth have gotten whiter since using this toothpaste. Easy to travel with!',
+        author: 'CHRISSY B.',
+        src: '/src/images/reviews/homepage-ugc-review-3.webp'
+    },
+    {
+        id: 2,
+        title: 'Best toothpaste I’ve ever used!',
+        author: 'LUCY R.',
+        src: '/src/images/reviews/homepage-ugc-review-4.webp'
+    },
+    {
+        id: 3,
+        title: 'I’ve tried a few other brands of toothpaste tablets and these bits are by far the best. They foam up like regular toothpaste and have a great flavor.',
+        author: 'BRITT W.',
+        src: '/src/images/reviews/homepage-ugc-review-2.webp'
+    },
+    {
+        id: 4,
+        title: 'I have been using Bits for a year now, and I am very happy with them. My dental hygienist is too! I highly recommend them!',
+        author: 'ANNE L.',
+        src: '/src/images/reviews/homepage-ugc-review-5.webp'
+    },
+    {
+        id: 5,
+        title: 'No mess, cleans and whitens beautifully, and no plastic or repeat containers!',
+        author: 'KATHLEEN M.',
+        src: '/src/images/reviews/homepage-ugc-review-1.webp'
+    },
+    {
+        id: 6,
+        title: 'I love the sustainable packaging and my teeth have gotten whiter since using this toothpaste. Easy to travel with!',
+        author: 'CHRISSY B.',
+        src: '/src/images/reviews/homepage-ugc-review-3.webp'
+    },
+    {
+        id: 7,
+        title: 'Best toothpaste I’ve ever used!',
+        author: 'LUCY R.',
+        src: '/src/images/reviews/homepage-ugc-review-4.webp'
+    },
+    {
+        id: 8,
+        title: 'I’ve tried a few other brands of toothpaste tablets and these bits are by far the best. They foam up like regular toothpaste and have a great flavor.',
+        author: 'BRITT W.',
+        src: '/src/images/reviews/homepage-ugc-review-2.webp'
+    },
+    {
+        id: 9,
+        title: 'I have been using Bits for a year now, and I am very happy with them. My dental hygienist is too! I highly recommend them!',
+        author: 'ANNE L.',
+        src: '/src/images/reviews/homepage-ugc-review-5.webp'
+    },
+]
