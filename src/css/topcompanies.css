@@ -6,14 +6,13 @@
 }
 
 .companies_container {
-    width: 100%;
+    width: auto;
     margin-top: 10px;
     margin-bottom: 10px;
     overflow: hidden; 
 }
 
 .companies_container ul {   
-    width: auto;
     padding: 0;
     margin: 0;
     display: flex;
