@@ -27,7 +27,7 @@ export default function Reviews() {
             <div
                 className="review_container"
                 style={{
-                    transform: `translateX(-${activeIndex * 34}%)`,
+                    transform: `translateX(calc(-${activeIndex} * 100% / 3 + ${activeIndex} * -10px))`, //card width + gap
                 }}
             >
                 <ReviewCards />
@@ -40,9 +40,9 @@ export default function Reviews() {
 const ReviewCards = () => {
     return (
         <>
-            {reviews.map(review =>
+            {reviews.map((review, idx) =>
                 <div
-                    key={review.id}
+                    key={idx}
                     className='review_card'>
                     <div className='ReviewTitle'>
                         <p>{review.title}</p>
@@ -139,65 +139,33 @@ const Stars = () => {
     )
 }
 
-const reviews = [
-    {
-        id: 0,
-        title: 'No mess, cleans and whitens beautifully, and no plastic or repeat containers!',
-        author: 'KATHLEEN M.',
-        src: '/src/images/reviews/homepage-ugc-review-1.webp'
-    },
-    {
-        id: 1,
-        title: 'I love the sustainable packaging and my teeth have gotten whiter since using this toothpaste. Easy to travel with!',
-        author: 'CHRISSY B.',
-        src: '/src/images/reviews/homepage-ugc-review-3.webp'
-    },
-    {
-        id: 2,
-        title: 'Best toothpaste I’ve ever used!',
-        author: 'LUCY R.',
-        src: '/src/images/reviews/homepage-ugc-review-4.webp'
-    },
-    {
-        id: 3,
-        title: 'I’ve tried a few other brands of toothpaste tablets and these bits are by far the best. They foam up like regular toothpaste and have a great flavor.',
-        author: 'BRITT W.',
-        src: '/src/images/reviews/homepage-ugc-review-2.webp'
-    },
-    {
-        id: 4,
-        title: 'I have been using Bits for a year now, and I am very happy with them. My dental hygienist is too! I highly recommend them!',
-        author: 'ANNE L.',
-        src: '/src/images/reviews/homepage-ugc-review-5.webp'
-    },
-    {
-        id: 5,
-        title: 'No mess, cleans and whitens beautifully, and no plastic or repeat containers!',
-        author: 'KATHLEEN M.',
-        src: '/src/images/reviews/homepage-ugc-review-1.webp'
-    },
-    {
-        id: 6,
-        title: 'I love the sustainable packaging and my teeth have gotten whiter since using this toothpaste. Easy to travel with!',
-        author: 'CHRISSY B.',
-        src: '/src/images/reviews/homepage-ugc-review-3.webp'
-    },
-    {
-        id: 7,
-        title: 'Best toothpaste I’ve ever used!',
-        author: 'LUCY R.',
-        src: '/src/images/reviews/homepage-ugc-review-4.webp'
-    },
-    {
-        id: 8,
-        title: 'I’ve tried a few other brands of toothpaste tablets and these bits are by far the best. They foam up like regular toothpaste and have a great flavor.',
-        author: 'BRITT W.',
-        src: '/src/images/reviews/homepage-ugc-review-2.webp'
-    },
-    {
-        id: 9,
-        title: 'I have been using Bits for a year now, and I am very happy with them. My dental hygienist is too! I highly recommend them!',
-        author: 'ANNE L.',
-        src: '/src/images/reviews/homepage-ugc-review-5.webp'
-    },
-]
+const reviews = [];
+for (let i = 0; i < 20; i++) {
+    reviews.push(
+        {
+            title: 'No mess, cleans and whitens beautifully, and no plastic or repeat containers!',
+            author: 'KATHLEEN M.',
+            src: '/src/images/reviews/homepage-ugc-review-1.webp'
+        },
+        {
+            title: 'I love the sustainable packaging and my teeth have gotten whiter since using this toothpaste. Easy to travel with!',
+            author: 'CHRISSY B.',
+            src: '/src/images/reviews/homepage-ugc-review-3.webp'
+        },
+        {
+            title: 'Best toothpaste I’ve ever used!',
+            author: 'LUCY R.',
+            src: '/src/images/reviews/homepage-ugc-review-4.webp'
+        },
+        {
+            title: 'I’ve tried a few other brands of toothpaste tablets and these bits are by far the best. They foam up like regular toothpaste and have a great flavor.',
+            author: 'BRITT W.',
+            src: '/src/images/reviews/homepage-ugc-review-2.webp'
+        },
+        {
+            title: 'I have been using Bits for a year now, and I am very happy with them. My dental hygienist is too! I highly recommend them!',
+            author: 'ANNE L.',
+            src: '/src/images/reviews/homepage-ugc-review-5.webp'
+        }
+    )
+}

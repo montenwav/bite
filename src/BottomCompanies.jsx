@@ -2,7 +2,7 @@ import { motion, useMotionValue } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
 export default function BottomCompanies() {
-    const [imgIndex, setImgIndex] = useState(0)
+    const [imgIndex, setImgIndex] = useState(52)
 
     // Drag effect 
 
@@ -81,9 +81,12 @@ const Companies = () => {
     )
 }
 
-const companiesList = [
-    {title: '“Just what your toiletry bag didn’t know it was missing.”', src: '/src/images/companies/1.png'},
-    {title: '“These have changed my life.”', src: '/src/images/companies/4.png'},
-    {title: '“Give love to your pearly whites.”', src: '/src/images/companies/6.png'},
-    {title: '“Best Whitening Toothpaste Tablets”', src: '/src/images/companies/7.png'},
-]
+const companiesList = []
+for (let i = 0; i < 25; i++) {
+    companiesList.push(
+        { title: '“Just what your toiletry bag didn’t know it was missing.”', src: '/src/images/companies/1.png' },
+        { title: '“These have changed my life.”', src: '/src/images/companies/4.png' },
+        { title: '“Give love to your pearly whites.”', src: '/src/images/companies/6.png' },
+        { title: '“Best Whitening Toothpaste Tablets”', src: '/src/images/companies/7.png' },
+    )
+} 
