@@ -1,5 +1,5 @@
 import { motion, useScroll, useMotionValueEvent, useAnimation } from 'framer-motion'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { hamburgerContext, setHamburgerContext } from '../HamburgerContext.jsx'
 
 export default function Header() {
@@ -10,11 +10,17 @@ export default function Header() {
     const controls = useAnimation()
     const { scrollY } = useScroll()
 
-    useMotionValueEvent(scrollY, "change", (latest) => {
+    useMotionValueEvent(scrollY, "change", (latest) => { // Changes depends on scroll
         if (latest >= 100) {
             controls.start('visible')
         } else if (latest <= 100) {
             controls.start('hidden')
+        }
+    })
+
+    useEffect(() => { // Changes depends on page load
+        if(scrollY.current >= 100) {
+            controls.start('visible')
         }
     })
 

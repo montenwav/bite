@@ -1,90 +1,42 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function TopCompanies() {
     const [imgId, setImgId] = useState(0)
 
-    // useEffect(() => {
-    //     const resizeHandler = () => {
-    //         setSize(innerWidth);
-    //     };
-    
-    //     window.addEventListener("resize", resizeHandler);
-    //     resizeHandler();
+    // Add dynamic width
+    const [windowSize, setWindowSize] = useState(window.innerWidth);
 
-    //     console.log(window.innerWidth)
+    useEffect(() => {
+        const windowSizeHandler = () => {
+            setWindowSize(window.innerWidth);
+        };
+        window.addEventListener("resize", windowSizeHandler);
 
-        // if (size < 1000) {
-        //     for (let j = 0; j < 5; j++) {
-        //         for (let i = 1; i < 9; i++) {
-        //             companiesList.push({ src: `/src/images/companies/${i}.png` });
-        //         }
-        //     }
+        return () => {
+            window.removeEventListener("resize", windowSizeHandler);
+        };
+    }, []);
 
-        //     const interval = setInterval(() => {
-        //         updateIndex(imgId + 1);
-        //     }, 3000);
+    const updateIndex = (newIndex) => {
+        if (newIndex >= companiesList.length - 3) {
+            newIndex = 0;
+        }
+        setImgId(newIndex);
+    };
 
-        //     return () => {
-        //         if (interval) {
-        //             clearInterval(interval);
-        //         }
-        //     };
-        // }
+    useEffect(() => { //Start slider animation
+        if (windowSize <= 1000) {
+            const interval = setInterval(() => {
+                updateIndex(imgId + 1);
+            }, 3000);
 
-        // if (size > 1000) {
-        //     for (let j = 0; j < 5; j++) {
-        //         for (let i = 1; i < 9; i++) {
-        //             companiesList.pop();
-        //         }
-        //     }
-        // }
-
-    //     return () => {
-    //         window.removeEventListener("resize", resizeHandler);
-    //     };
-    // }, []);
-
-    /////
-
-    // useEffect(() => {
-    //     if (size < 1000) {
-    //         for (let j = 0; j < 5; j++) {
-    //             for (let i = 1; i < 9; i++) {
-    //                 companiesList.push({ src: `/src/images/companies/${i}.png` });
-    //             }
-    //         }
-    //     }
-
-    //     if (size > 1000) {
-    //         for (let j = 0; j < 5; j++) {
-    //             for (let i = 1; i < 9; i++) {
-    //                 companiesList.pop();
-    //             }
-    //         }
-    //     }
-    // }, [size])
-
-    // useEffect(() => {
-    //     if (size < 1000) {
-    //         const interval = setInterval(() => {
-    //             updateIndex(imgId + 1);
-    //         }, 3000);
-    //         return () => {
-    //             if (interval) {
-    //                 clearInterval(interval);
-    //             }
-    //         };
-    //     }
-    // });
-
-    // const updateIndex = (newIndex) => {
-    //     if (newIndex >= companiesList.length - 3) {
-    //         newIndex = 0;
-    //     }
-    //     setImgId(newIndex);
-    // };
-
-
+            return () => {
+                if (interval) {
+                    clearInterval(interval);
+                }
+            };
+        }
+    })
 
     return (
         <>
