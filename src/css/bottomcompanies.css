@@ -32,3 +32,9 @@
 .bottom_comp_item img {
     margin-top: 10px;
 }
+
+@media (max-width: 1000px) {
+    .bottom_companies {
+        width: 100%;
+    }
+}

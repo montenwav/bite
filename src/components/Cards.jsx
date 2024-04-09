@@ -6,7 +6,6 @@ export default function Cards() {
     return (
         <div className='cardsMain'>
             <h1>Shop Best Sellers</h1>
-
             <AdaptiveCards cards={cards} setCards={setCards} />
         </div>
     )
@@ -14,9 +13,9 @@ export default function Cards() {
 
 const AdaptiveCards = ({ cards, setCards }) => {
     return (
-        <ul className='cardsDiv'>
+        <div className='cardsDiv'>
             {cards.map(card =>
-                <li key={card.id} className={`cards card-${card.id}`}>
+                <div key={card.id} className={`cards card-${card.id}`}>
                     <div className='preview' style={{background: card.bgPrevirew}}>
                         <img style={{ width: '100%'}} src={card.imgURL} />
                     </div>
@@ -26,9 +25,9 @@ const AdaptiveCards = ({ cards, setCards }) => {
                     <p>{card.id == 0 ? `From $${card.price}/month` : `$${card.price}/month`}</p>
                     <Stars style={{ width: '10px' }} card={card} />
                     <button className="button cardBtn">ADD TO BAG</button>
-                </li>
+                </div>
             )}
-        </ul>
+        </div>
     )
 }
 

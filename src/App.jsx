@@ -1,19 +1,17 @@
-import HeaderBg from './Header.jsx'
-import Cards from './Cards.jsx'
-import TopCompanies from './TopCompanies.jsx'
-import BitsAreBetter from './BitsAreBetter.jsx'
-import Reviews from './Reviews.jsx'
-import ShopByCategory from './ShopByCategory.jsx'
-import BottomCompanies from './BottomCompanies.jsx'
-import FAQs from './FAQs.jsx'
+import Main from './components/Main.jsx'
+import Cards from './components/Cards.jsx'
+import TopCompanies from './components/TopCompanies.jsx'
+import BitsAreBetter from './components/BitsAreBetter.jsx'
+import Reviews from './components/Reviews.jsx'
+import ShopByCategory from './components/ShopByCategory.jsx'
+import BottomCompanies from './components/BottomCompanies.jsx'
+import FAQs from './components/FAQs.jsx'
+import Footer from './components/Footer.jsx'
 
 export default function App() {
   return (
     <>
-      <Main>
-        <HeaderBg />
-        <MainContent />
-      </Main>
+      <Main/>
       <TopCompanies />
       <Cards/>
       <BitsAreBetter/>
@@ -21,18 +19,7 @@ export default function App() {
       <ShopByCategory/>
       <BottomCompanies/>
       <FAQs/>
+      <Footer/>
     </>
-  )
-}
-
-const Main = ({ children }) => <main>{children}</main>
-
-const MainContent = () => {
-  return (
-    <div className='mainContent'>
-      <h1>A better way to brush your teeth.</h1>
-      <p>Toothpaste Bits without the plastic tubes or harsh chemicals that <i>actually</i> work.</p>
-      <button className='button'>SHOP NOW</button>
-    </div>
   )
 }

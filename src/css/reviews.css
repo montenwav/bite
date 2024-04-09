@@ -1,7 +1,3 @@
-:root {
-    --bg-reviews: #131313
-}
-
 .reviews {
     /* width: 100%; */
     background: var(--bg-reviews);

@@ -1,8 +1,8 @@
 import { motion, useMotionValue } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
 export default function ShopByCategory() {
-    const [imgIndex, setImgIndex] = useState(0)
+    const [imgIndex, setImgIndex] = useState(39)
 
     // Drag effect 
     const [isDragging, setIsDragging] = useState(false)
@@ -48,12 +48,12 @@ export default function ShopByCategory() {
             <h1>Shop By Category</h1>
             <motion.div
                 style={{
-                    transform: `translateX(-${imgIndex * 89}%)`,
+                    transform: `translateX(calc(-${imgIndex * 85}vw - ${imgIndex} * 16px))`, //card width + padding 
                     x: dragLenght,
                 }}
                 drag="x"
                 dragConstraints={{ right: 0, left: 0 }}
-                animate={{ translateX: `-${imgIndex * 89}%` }} // translate by img size
+                animate={{ translateX: `calc(-${imgIndex * 85}vw - ${imgIndex} * 16px)` }} // translate by img size
                 onDragStart={onDragStart}
                 onDragEnd={onDragEnd}
                 className="carousel">
@@ -66,9 +66,9 @@ export default function ShopByCategory() {
 const Images = () => {
     return (
         <>
-            {imgs.map(img => (
+            {imgs.map((img, idx) => (
                 <motion.div
-                    key={img.id}
+                    key={idx}
                     whileTap={{ cursor: 'grabbing' }}
                     className='inner_carousel'>
                     <div className="card_image">
@@ -82,8 +82,11 @@ const Images = () => {
     )
 }
 
-const imgs = [
-    { id: 0, name: 'ORAL CARE', src: '/src/images/shopby/hp-shop-by-category-oral-care.webp' },
-    { id: 1, name: 'SETS', src: '/src/images/shopby/hp-shop-by-category-sets.webp' },
-    { id: 3, name: 'BODY CARE', src: '/src/images/shopby/hp-shop-by-category-body-care.webp' },
-]
+const imgs = []
+for (let i = 0; i < 30; i++) {
+    imgs.push(
+        { name: 'ORAL CARE', src: '/src/images/shopby/hp-shop-by-category-oral-care.webp' },
+        { name: 'SETS', src: '/src/images/shopby/hp-shop-by-category-sets.webp' },
+        { name: 'BODY CARE', src: '/src/images/shopby/hp-shop-by-category-body-care.webp' },
+    )
+}
