@@ -87,58 +87,6 @@ a {
     font-family: var(--sans-serif-font)
 }
 
-.main_wallpaper {
-    /* background: url('//bitetoothpastebits.com/cdn/shop/files/hp-home-hero-desktop-1.jpg?v=1705612565&width=3840'); */
-    position: relative;
-    left: 0;
-    top: 0;
-    min-height: 80vh;
-    width: 100%;
-}
-
-.main_wallpaper img {
-    object-fit: cover;
-    object-position: top center;
-    position: absolute;
-    height: 100%;
-    width: 100%;
-}
-
-.main_content {
-    text-align: center;
-    width: 50%;
-    position: absolute;
-    left: 0%;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.main_content h1 {
-    padding: 10px;
-    max-width: 550px;
-}
-
-.main_сontent p {
-    margin: auto;
-    margin-bottom: 30px;
-    font-size: 1.7em;
-    line-height: 1;
-    font-family: var(--sans-serif-font);
-}
-
-/* main {
-    width: 100vw;
-    position: relative;
-    height: 1000px;
-    background: url(/src/images/main.webp) no-repeat center;
-    background-size: cover;
-} */
-
-.button {
-    background: #000;
-    color: white;
-}
-
 button {
     width: 250px;
     height: 50px;
@@ -148,41 +96,79 @@ button {
     cursor: pointer;
 }
 
+
+.button {
+    background: #000;
+    color: white;
+}
+
 .button:hover {
     background: lightcyan;
     color: black;
 }
 
-.cardBtn {
+/* MAIN */
+
+.main_wallpaper {
+    background-image: url(//bitetoothpastebits.com/cdn/shop/files/hp-home-hero-desktop-1.jpg?v=1705612565&width=3840);
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    left: 0;
+    top: 0;
+    min-height: 790px;
     width: 100%;
-    margin-top: 10px;
 }
 
-.cardBtn:hover {
-    background: lightcyan;
-    color: black;
-    border: 2px solid black
-}
-
-.cardStars {
+.main_content_container {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: calc(100% - 70px); /*Main - header height */
+    width: 90%;
+    margin: auto;
     display: flex;
-    flex-direction: row;
 }
 
-.cardStarsDiv {
+.main_content {
+    height: 300px;
     display: flex;
-    flex-direction: row;
-    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
-@media (min-width: 1000px) {
+.main_content h1 {
+    max-width: 450px;
+    padding: 0;
+    margin: 0;
+}
+
+.main_content p {
+    max-width: 300px;
+}
+
+@media (max-width: 760px) {
+    .main_content_container {
+        justify-content: center;
+        align-items: top;
+    }
     .main_wallpaper {
-        min-height: 500px;
+        background-image: url(//bitetoothpastebits.com/cdn/shop/files/v2-home-hero-mobile.jpg?v=1700002377&width=780);
+        min-height: 80vh;
+    }
+
+    .main_content {
+        padding-top: 50px;
     }
 }
 
-@media (min-width: 400px) {
-    .main_wallpaper {
-        min-height: 80vh;
+@media (min-width: 760px) {
+    .main_content_container {
+        justify-content: left;
+        align-items: center;
     }
 }

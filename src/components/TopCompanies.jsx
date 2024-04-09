@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function TopCompanies() {
     const [imgId, setImgId] = useState(0)
+    // const [isAdaptive, setIsAdaptive] = useState(false)
 
     // Add dynamic width
     const [windowSize, setWindowSize] = useState(window.innerWidth);
@@ -24,17 +25,36 @@ export default function TopCompanies() {
         setImgId(newIndex);
     };
 
-    useEffect(() => { //Start slider animation
-        if (windowSize <= 1000) {
+    useEffect(() => {
+        if (windowSize < 1000) {
+            // setIsAdaptive(true)
+
+            // for (let j = 0; j < 5; j++) { //Push duplicates
+            //     for (let i = 1; i < 9; i++) {
+            //         companiesList.push({ src: `/src/images/companies/${i}.png` });
+            //     }
+            // }
+
             const interval = setInterval(() => {
                 updateIndex(imgId + 1);
-            }, 3000);
+            }, 1000);
+
 
             return () => {
                 if (interval) {
                     clearInterval(interval);
                 }
             };
+        }
+
+        if (windowSize > 1000) {
+            setImgId(0)
+            // for (let j = 0; j < 5; j++) { // Remove duplicates
+            //     for (let i = 1; i < 9; i++) {
+            //         companiesList.pop();
+            //     }
+            // }
+            // setIsAdaptive(false)
         }
     })
 
@@ -45,8 +65,9 @@ export default function TopCompanies() {
                 <div className='as_seen_in'>
                     <h4>AS SEEN IN</h4>
                 </div>
+
                 <div
-                    style={{ transform: `translateX(-${imgId * 170}px)` }}
+                    style={{ transform: `translateX(-${imgId * 188}px)` }}
                     className='companies_container'>
                     <>
                         {companiesList.map((company, idx) => (

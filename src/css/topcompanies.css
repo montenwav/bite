@@ -4,39 +4,40 @@
     max-width: 95%;
     margin: auto;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
 .as_seen_in {
+    margin-right: 50px;
     white-space: nowrap;
 }
 
 .as_seen_in h4 {
-    font-size: 1em;
+    font-size: 1.3em;
     padding-right: 10px;
 }
 
 .companies_container {
-    width: 100%;
     transition: .5s;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    gap: 40px;
 }
 
 .top_copm_item {
-    height: 100%;
-    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 27px;
 }
 
 .top_copm_item img {
-    width: 80%;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
-    height: 70%;
 }
 
 @media (max-width: 1000px) {
@@ -48,15 +49,20 @@
         padding: 5px;
         margin: 0;
     }
+    
+    .as_seen_in {
+        margin-right: 0px;
+    }
+
+    .top_copm_item {
+        height: 30px;
+        width: 150px;
+    }
 
     .companies_container {
-        min-width: 100%;
-        margin-left: 175px;
+        margin-left: 190px;
+        height: 50px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
-
-    .top_copm_item img {
-        width: 150px;
-        height: 25px;
-    }
-
 }

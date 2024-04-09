@@ -1,3 +1,26 @@
+
+.cardBtn {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.cardBtn:hover {
+    background: lightcyan;
+    color: black;
+    border: 2px solid black
+}
+
+.cardStars {
+    display: flex;
+    flex-direction: row;
+}
+
+.cardStarsDiv {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
 .cardsMain {
     width: 100%;
     height: auto;
