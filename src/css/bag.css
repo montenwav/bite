@@ -12,8 +12,6 @@
 
 .bag h4 {
     font-size: 1em;
-    margin-top: 25px;
-    margin-bottom: 15px;
 }
 
 .bag h6 {
@@ -58,8 +56,13 @@
 }
 
 @keyframes opacityAnimation {
-    from {opacity: 0;}
-    to {opacity: .7;}
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: .7;
+    }
 }
 
 .bag_container {
@@ -150,10 +153,10 @@
     z-index: 4
 }
 
-.why_not_to_add h4 {
+.why_not_to_add_h4 {
     width: 90%;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 8px;
 }
 
 .why_not_to_add_flex {
@@ -186,7 +189,105 @@
     color: white;
 }
 
-.why_not_to_add_button:hover, .shop_all_prod:hover {
+.why_not_to_add_button:hover,
+.shop_all_prod:hover {
     background: var(--lightblue);
     color: white;
+}
+
+.checkout_container {
+    height: 65px;
+    background: var(--lightblue);
+    display: flex;
+    align-items: center;
+}
+
+.checkout {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    margin: auto;
+}
+
+.checkout h4 {
+    margin: 0;
+}
+
+
+.added_item_container {
+    width: 100%;
+    height: 160px;
+    background: var(--bg-color);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.added_item {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.added_item_img {
+    height: 100%;
+    width: 40%;
+}
+
+.added_item_description {
+    width: 55%;
+}
+
+.added_item_description h1,
+.added_item_description h4,
+.added_item_description h5 {
+    margin: 0;
+    line-height: 1;
+}
+
+.added_item_description h1 {
+    font-size: 1.5em;
+}
+
+.added_item_description h4 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.delivers_every_bag {
+    margin-bottom: 10px;
+    display: flex;
+}
+
+.added_item_description a {
+    text-decoration: none;
+}
+
+.bag_counter {
+    width: 100px;
+    height: 28px;
+    border: 1px solid lightgray;
+    background: white;
+}
+
+.bag_counter_flex {
+    display: flex;
+}
+
+.bag_counter_item {
+    width: calc(100% / 3);
+    display: grid;
+    place-items: center;
+}
+
+.counter_and_total {
+    display: flex;
+    align-items: top;
+    justify-content: space-between;
+}
+
+.bag_total h4 {
+    font-size: 1.1em;
+    margin: 0;
+    padding: 0;
+    margin-right: 20px;
 }
