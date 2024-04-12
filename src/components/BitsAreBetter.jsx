@@ -1,4 +1,4 @@
-export default function BitsAreBetter() {
+export function BitsAreBetter() {
     return (
         <section className='BitsAreBetter'>
             <h1>Why Bits are Better</h1>
@@ -42,7 +42,48 @@ export default function BitsAreBetter() {
                                     strokeWidth="1.5"
                                 />
                             </svg>
+                            
                             <h2>PERFECTLY PORTIONED</h2>
+
+                            <p className="bits_are_better_content">
+                                Stop wasting money by using more toothpaste than you need.
+                            </p>
+                        </div>
+
+                        <div className='FirstSecElement'>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width={50}
+                                height={50}
+                                fill="none"
+                                viewBox="-1 -1 50 50"
+                                id="hotel-class"
+                                y={3682}
+                            >
+                                <mask
+                                    id="cta"
+                                    style={{ maskType: "alpha" }}
+                                    maskUnits="userSpaceOnUse"
+                                    x={0}
+                                    y={0}
+                                    width={48}
+                                    height={48}
+                                >
+                                    <path fill="#D9D9D9" d="M0 0h48v48H0z" />
+                                </mask>
+                                <g mask="url(#cta)">
+                                    <path
+                                        d="m31.016 30.23 7.407-6.4 2.096.197-7.796 6.638 2.312 10.223-1.777-1.096-2.242-9.561Zm-3.804-11.719-2.273-5.43.792-1.966 3.177 7.543-1.696-.147ZM13.996 36.635 21 32.396l7.004 4.288-1.83-8.015 6.169-5.346-8.139-.723L21 15.084l-3.204 7.466-8.138.723 6.17 5.385-1.832 7.977Zm-2.346 3.211 2.48-10.627-8.245-7.142 10.861-.943L21 11.115l4.254 10.02 10.862.942-8.247 7.142 2.481 10.627L21 34.204l-9.35 5.642Z"
+                                        fill="#131313"
+                                    />
+                                </g>
+                            </svg>
+
+                            <h2>BETTER-FOR-YOU FORMULATIONS</h2>
+
+                            <p className="bits_are_better_content">
+                                A dry tablet means we can use less-harmful ingredients and still protect your teeth.
+                            </p>
                         </div>
 
                         <div className='FirstSecElement'>
@@ -75,6 +116,48 @@ export default function BitsAreBetter() {
                             </svg>
 
                             <h2>SINK-FRIENDLY</h2>
+
+                            <p className="bits_are_better_content">
+                                Our tablets leave less mess in your sink because no glycerine – what makes most toothpaste, paste – means no sticky goop.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className='FirstSecColumn'>
+                        <div className='FirstSecElement'>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width={50}
+                                height={50}
+                                fill="none"
+                                viewBox="-1 -1 50 50"
+                                id="luggage"
+                                y={3816}
+                            >
+                                <mask
+                                    id="cwa"
+                                    style={{ maskType: "alpha" }}
+                                    maskUnits="userSpaceOnUse"
+                                    x={0}
+                                    y={0}
+                                    width={48}
+                                    height={48}
+                                >
+                                    <path fill="#D9D9D9" d="M0 0h48v48H0z" />
+                                </mask>
+                                <g mask="url(#cwa)">
+                                    <path
+                                        d="M14.77 40c-.742 0-1.39-.276-1.942-.828-.552-.553-.828-1.2-.828-1.941V15.615c0-.78.267-1.436.8-1.97.532-.532 1.19-.799 1.97-.799H19V7.385c0-.364.14-.685.42-.965.28-.28.601-.42.965-.42h7.23c.364 0 .685.14.965.42.28.28.42.601.42.965v5.461h4.23c.742 0 1.39.276 1.942.829.552.552.828 1.199.828 1.94v21.616c0 .741-.276 1.388-.828 1.94-.553.553-1.2.829-1.941.829v.462c0 .412-.153.772-.46 1.078-.306.307-.666.46-1.079.46-.413 0-.772-.153-1.079-.46a1.477 1.477 0 0 1-.46-1.078V40H17.847v.462c0 .412-.153.772-.46 1.078-.306.307-.665.46-1.078.46-.413 0-.773-.153-1.08-.46a1.477 1.477 0 0 1-.459-1.078V40Zm0-1.538h18.46c.36 0 .655-.116.885-.347.231-.23.347-.525.347-.884V15.615c0-.359-.116-.654-.347-.884-.23-.231-.525-.346-.884-.346H14.769c-.359 0-.654.115-.884.346-.231.23-.346.525-.346.884v21.616c0 .359.115.654.346.884.23.231.525.347.884.347Zm2.153-4h1.308V18.384h-1.308V34.46Zm6.423 0h1.308V18.384h-1.308V34.46Zm6.423 0h1.308V18.384h-1.308V34.46Zm-9.461-21.616h7.384V7.308h-7.384v5.538Z"
+                                        fill="#131313"
+                                    />
+                                </g>
+                            </svg>
+
+                            <h2>BETTER-FOR-YOU FORMULATIONS</h2>
+
+                            <p className="bits_are_better_content">
+                                No more toothpaste explosions in your bag. Just throw a few Bits in your pack and you’re good to go
+                            </p>
                         </div>
 
                         <div className='FirstSecElement'>
@@ -106,73 +189,11 @@ export default function BitsAreBetter() {
                                 </g>
                             </svg>
 
-                            <h2>SINK-FRIENDLY</h2>
-                        </div>
-                    </div>
-
-                    <div className='FirstSecColumn'>
-                        <div className='FirstSecElement'>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width={50}
-                                height={50}
-                                fill="none"
-                                viewBox="-1 -1 50 50"
-                                id="hotel-class"
-                                y={3682}
-                            >
-                                <mask
-                                    id="cta"
-                                    style={{ maskType: "alpha" }}
-                                    maskUnits="userSpaceOnUse"
-                                    x={0}
-                                    y={0}
-                                    width={48}
-                                    height={48}
-                                >
-                                    <path fill="#D9D9D9" d="M0 0h48v48H0z" />
-                                </mask>
-                                <g mask="url(#cta)">
-                                    <path
-                                        d="m31.016 30.23 7.407-6.4 2.096.197-7.796 6.638 2.312 10.223-1.777-1.096-2.242-9.561Zm-3.804-11.719-2.273-5.43.792-1.966 3.177 7.543-1.696-.147ZM13.996 36.635 21 32.396l7.004 4.288-1.83-8.015 6.169-5.346-8.139-.723L21 15.084l-3.204 7.466-8.138.723 6.17 5.385-1.832 7.977Zm-2.346 3.211 2.48-10.627-8.245-7.142 10.861-.943L21 11.115l4.254 10.02 10.862.942-8.247 7.142 2.481 10.627L21 34.204l-9.35 5.642Z"
-                                        fill="#131313"
-                                    />
-                                </g>
-                            </svg>
-
-                            <h2>BETTER-FOR-YOU FORMULATIONS</h2>
-                        </div>
-
-                        <div className='FirstSecElement'>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width={50}
-                                height={50}
-                                fill="none"
-                                viewBox="-1 -1 50 50"
-                                id="luggage"
-                                y={3816}
-                            >
-                                <mask
-                                    id="cwa"
-                                    style={{ maskType: "alpha" }}
-                                    maskUnits="userSpaceOnUse"
-                                    x={0}
-                                    y={0}
-                                    width={48}
-                                    height={48}
-                                >
-                                    <path fill="#D9D9D9" d="M0 0h48v48H0z" />
-                                </mask>
-                                <g mask="url(#cwa)">
-                                    <path
-                                        d="M14.77 40c-.742 0-1.39-.276-1.942-.828-.552-.553-.828-1.2-.828-1.941V15.615c0-.78.267-1.436.8-1.97.532-.532 1.19-.799 1.97-.799H19V7.385c0-.364.14-.685.42-.965.28-.28.601-.42.965-.42h7.23c.364 0 .685.14.965.42.28.28.42.601.42.965v5.461h4.23c.742 0 1.39.276 1.942.829.552.552.828 1.199.828 1.94v21.616c0 .741-.276 1.388-.828 1.94-.553.553-1.2.829-1.941.829v.462c0 .412-.153.772-.46 1.078-.306.307-.666.46-1.079.46-.413 0-.772-.153-1.079-.46a1.477 1.477 0 0 1-.46-1.078V40H17.847v.462c0 .412-.153.772-.46 1.078-.306.307-.665.46-1.078.46-.413 0-.773-.153-1.08-.46a1.477 1.477 0 0 1-.459-1.078V40Zm0-1.538h18.46c.36 0 .655-.116.885-.347.231-.23.347-.525.347-.884V15.615c0-.359-.116-.654-.347-.884-.23-.231-.525-.346-.884-.346H14.769c-.359 0-.654.115-.884.346-.231.23-.346.525-.346.884v21.616c0 .359.115.654.346.884.23.231.525.347.884.347Zm2.153-4h1.308V18.384h-1.308V34.46Zm6.423 0h1.308V18.384h-1.308V34.46Zm6.423 0h1.308V18.384h-1.308V34.46Zm-9.461-21.616h7.384V7.308h-7.384v5.538Z"
-                                        fill="#131313"
-                                    />
-                                </g>
-                            </svg>
-
                             <h2>SUITCASE-SAFE</h2>
+
+                            <p className="bits_are_better_content">
+                                Infinitely refillable with no plastic toothpaste tubes, our Bits are better for our earth and oceans.
+                            </p>
                         </div>
 
                         <div className='FirstSecElement'>
@@ -222,6 +243,10 @@ export default function BitsAreBetter() {
                             </svg>
 
                             <h2>STOPS THE SPREAD OF BACTERIA</h2>
+
+                            <p className="bits_are_better_content">
+                                The top of a toothpaste tube can transfer bacteria from your partners brush to your mouth. Our Bits can stop the spread.
+                            </p>
                         </div>
                     </div>
                 </div>

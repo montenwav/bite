@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-export default function FAQs() {
+export function FAQs() {
     const [toggleId, setToggleId] = useState(null) // selected Item
 
     return (

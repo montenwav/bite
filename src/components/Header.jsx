@@ -1,16 +1,21 @@
 import { motion, useScroll, useMotionValueEvent, useAnimation } from 'framer-motion'
-import { useContext, useEffect, useState } from 'react'
-import { hamburgerContext, setHamburgerContext } from '../HamburgerContext.jsx'
+import { useContext, useEffect, useState, useRef } from 'react'
+import { setIsBagOpenCtx, isAdaptiveCtx, setIsAdaptiveCtx } from '../hooks/Context.jsx'
+import { Bag } from './Bag.jsx'
+import { Adaptive } from './Adaptive.jsx'
 
-export default function Header() {
+export function Header() {
     const [isAdaptive, setIsAdaptive] = useState(false)
-    const [hamburger, setHamburger] = useState(false)
+
+    const bagRef = useRef(null)
+    const [isBagOpen, setIsBagOpen] = useState(false)
 
     // Header scroll animation
     const controls = useAnimation()
     const { scrollY } = useScroll()
 
-    useMotionValueEvent(scrollY, "change", (latest) => { // Changes depends on scroll
+    // Changes depends on scroll
+    useMotionValueEvent(scrollY, "change", (latest) => {
         if (latest >= 100) {
             controls.start('visible')
         } else if (latest <= 100) {
@@ -18,47 +23,57 @@ export default function Header() {
         }
     })
 
-    useEffect(() => { // Changes depends on page load
-        if(scrollY.current >= 100) {
+    useEffect(() => {
+        if (scrollY.current >= 100 || isAdaptive) {
             controls.start('visible')
         }
     })
 
     return (
-        <hamburgerContext.Provider value={hamburger}>
-            <setHamburgerContext.Provider value={setHamburger}>
-                <motion.div
-                    variants={
-                        {
-                            hidden: { background: 'transparent' },
-                            visible: { background: 'white' }
-                        }}
-                    initial='hidden'
-                    animate={controls}
-                    className='headerBg'>
-                    <HeaderMain isAdaptive={isAdaptive} setIsAdaptive={setIsAdaptive}/>
-                </motion.div>
-            </setHamburgerContext.Provider>
-        </hamburgerContext.Provider>
+            <setIsBagOpenCtx.Provider value={setIsBagOpen}>
+                <isAdaptiveCtx.Provider value={isAdaptive}>
+                    <setIsAdaptiveCtx.Provider value={setIsAdaptive}>
+                        <section className='header_sec'>
+                            <motion.div
+                                variants={
+                                    {
+                                        hidden: { background: 'transparent' },
+                                        visible: { background: 'white' }
+                                    }}
+                                initial='hidden'
+                                animate={controls}
+                                className='headerBg'>
+                                <HeaderMain />
+                            </motion.div>
+                        </section>
+
+                        <Adaptive />
+                        {isBagOpen && <Bag isBagOpen={isBagOpen} bagRef={bagRef} />}
+
+                    </setIsAdaptiveCtx.Provider>
+                </isAdaptiveCtx.Provider>
+            </setIsBagOpenCtx.Provider>
     )
 }
 
-const HeaderMain = ({isAdaptive, setIsAdaptive}) => {
+const HeaderMain = () => {
     return (
         <div className='headerMain'>
-            <LeftHeader isAdaptive={isAdaptive} setIsAdaptive={setIsAdaptive}/>
+            <LeftHeader />
             <HeaderLinks />
             <RightHeader />
         </div>
     )
 }
 
-const LeftHeader = ({isAdaptive, setIsAdaptive}) => {
+const LeftHeader = () => {
+    const isAdaptive = useContext(isAdaptiveCtx)
+
     return (
         <div className='leftHeader'>
-            <Hamburger isAdaptive={isAdaptive} setIsAdaptive={setIsAdaptive}/>
+            <Hamburger />
             <div className='logo_visible'>
-                <div style={{transform: isAdaptive ? 'translateY(-35px)' : ''}}
+                <div style={{ transform: isAdaptive ? 'translateY(-35px)' : '' }}
                     className='logo_container'>
                     <svg className='logo'
                         xmlns="http://www.w3.org/2000/svg"
@@ -98,19 +113,103 @@ const LeftHeader = ({isAdaptive, setIsAdaptive}) => {
     )
 }
 
-const Hamburger = ({isAdaptive, setIsAdaptive}) => {
-    const hamburger = useContext(hamburgerContext)
-    const setHamburger = useContext(setHamburgerContext)
+const RightHeader = () => {
+    const setIsBagOpen = useContext(setIsBagOpenCtx)
+
+    return (
+        <div className='right_header'>
+            <svg className='account_icon'
+                xmlns="http://www.w3.org/2000/svg"
+                width={50}
+                height={50}
+                fill="none"
+                viewBox="-1 -1 32 32"
+                id="person-black"
+                y={4345}
+            >
+                <mask
+                    id="dha"
+                    style={{ maskType: "alpha" }}
+                    maskUnits="userSpaceOnUse"
+                    x={0}
+                    y={0}
+                    width={30}
+                    height={30}
+                >
+                    <path fill="#131313" d="M0 0h30v30H0z" />
+                </mask>
+                <g mask="url(#dha)">
+                    <path
+                        d="M15 14.231c-1.031 0-1.914-.367-2.648-1.102-.735-.734-1.102-1.617-1.102-2.648 0-1.031.367-1.914 1.102-2.648.734-.735 1.617-1.102 2.648-1.102 1.031 0 1.914.367 2.648 1.102.735.734 1.102 1.617 1.102 2.648 0 1.031-.367 1.914-1.102 2.648-.734.735-1.617 1.102-2.648 1.102ZM6.25 23.27v-2.058c0-.516.15-1 .45-1.449.301-.45.705-.798 1.213-1.046 1.18-.566 2.36-.99 3.541-1.273A15.18 15.18 0 0 1 15 17.019c1.183 0 2.365.142 3.546.425 1.18.283 2.361.707 3.54 1.273.509.248.913.597 1.213 1.046.3.45.451.933.451 1.449v2.058H6.25Zm1.25-1.25h15v-.808c0-.277-.09-.538-.268-.782a2.157 2.157 0 0 0-.742-.617 15.863 15.863 0 0 0-3.182-1.146 13.973 13.973 0 0 0-6.616 0 15.864 15.864 0 0 0-3.182 1.146 2.157 2.157 0 0 0-.742.617 1.297 1.297 0 0 0-.268.782v.807ZM15 12.98c.688 0 1.276-.245 1.766-.734.49-.49.734-1.079.734-1.766 0-.688-.245-1.276-.734-1.766A2.407 2.407 0 0 0 15 7.981c-.688 0-1.276.245-1.766.734a2.407 2.407 0 0 0-.734 1.766c0 .688.245 1.276.734 1.766.49.49 1.079.734 1.766.734Z"
+                        fill="#131313"
+                    />
+                </g>
+            </svg>
+            <svg
+                onClick={() => setIsBagOpen(true)}
+                className='bag_icon'
+                xmlns="http://www.w3.org/2000/svg"
+                width={48}
+                height={48}
+                fill="none"
+                viewBox="-1 -1 32 32"
+                id="bag-black"
+                y={923}
+            >
+                <mask
+                    id="aua"
+                    style={{ maskType: "alpha" }}
+                    maskUnits="userSpaceOnUse"
+                    x={0}
+                    y={0}
+                    width={30}
+                    height={30}
+                >
+                    <path fill="#131313" d="M0 0h30v30H0z" />
+                </mask>
+                <g mask="url(#aua)">
+                    <path
+                        d="M8.27 26.25c-.576 0-1.056-.193-1.442-.578-.385-.386-.578-.866-.578-1.441V10.769c0-.575.193-1.055.578-1.44.386-.386.866-.579 1.441-.579h2.356v-.625c0-1.215.425-2.248 1.276-3.099.851-.85 1.884-1.276 3.099-1.276 1.215 0 2.248.425 3.099 1.276.85.851 1.276 1.884 1.276 3.099v.625h2.356c.575 0 1.055.193 1.44.578.386.386.579.866.579 1.441v13.462c0 .575-.193 1.055-.578 1.44-.386.386-.866.579-1.441.579H8.269Zm0-1.25h13.46c.193 0 .37-.08.53-.24.16-.16.24-.337.24-.53V10.77c0-.193-.08-.37-.24-.53-.16-.16-.337-.24-.53-.24h-2.355v3.125c0 .178-.06.326-.18.446a.605.605 0 0 1-.445.179.605.605 0 0 1-.446-.18.605.605 0 0 1-.179-.445V10h-6.25v3.125c0 .178-.06.326-.18.446a.605.605 0 0 1-.445.179.605.605 0 0 1-.446-.18.605.605 0 0 1-.179-.445V10H8.269c-.192 0-.368.08-.529.24-.16.16-.24.337-.24.53v13.46c0 .193.08.37.24.53.16.16.337.24.53.24Zm3.605-16.25h6.25v-.625c0-.88-.3-1.62-.903-2.222C16.621 5.3 15.88 5 15 5c-.88 0-1.62.3-2.222.903-.602.601-.903 1.342-.903 2.222v.625Z"
+                        fill="#131313"
+                    />
+                </g>
+            </svg>
+        </div>
+    )
+}
+
+const HeaderLinks = () => {
+    return (
+        <div className='headerLinks'>
+            <HeaderLink>SHOP</HeaderLink>
+            <HeaderLink>ABOUT</HeaderLink>
+            <HeaderLink>OUR IMPACT</HeaderLink>
+        </div>
+    )
+}
+
+const HeaderLink = ({ children }) => {
+    return (
+        <div className='HeaderLink'>
+            <a href="">{children}</a>
+            <div className='headerLinkHoverLine'></div>
+        </div>
+    )
+}
+
+const Hamburger = () => {
+    const isAdaptive = useContext(isAdaptiveCtx)
+    const setIsAdaptive = useContext(setIsAdaptiveCtx)
+
     return (
         <div className='hamburger' onClick={() => {
-            setHamburger(!hamburger)
             setIsAdaptive(!isAdaptive)
-            }}>
-            {hamburger ?
+        }}>
+            {isAdaptive ?
                 <svg className='close'
                     xmlns="http://www.w3.org/2000/svg"
-                    width={50}
-                    height={50}
+                    width={40}
+                    height={40}
                     fill="none"
                     viewBox="-1 -1 50 50"
                     id="close-black"
@@ -176,86 +275,6 @@ const Hamburger = ({isAdaptive, setIsAdaptive}) => {
                     </g>
                 </svg>
             }
-        </div>
-    )
-}
-
-const RightHeader = () => {
-    return (
-        <div className='right_header'>
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={50}
-                height={50}
-                fill="none"
-                viewBox="-1 -1 32 32"
-                id="person-black"
-                y={4345}
-            >
-                <mask
-                    id="dha"
-                    style={{ maskType: "alpha" }}
-                    maskUnits="userSpaceOnUse"
-                    x={0}
-                    y={0}
-                    width={30}
-                    height={30}
-                >
-                    <path fill="#131313" d="M0 0h30v30H0z" />
-                </mask>
-                <g mask="url(#dha)">
-                    <path
-                        d="M15 14.231c-1.031 0-1.914-.367-2.648-1.102-.735-.734-1.102-1.617-1.102-2.648 0-1.031.367-1.914 1.102-2.648.734-.735 1.617-1.102 2.648-1.102 1.031 0 1.914.367 2.648 1.102.735.734 1.102 1.617 1.102 2.648 0 1.031-.367 1.914-1.102 2.648-.734.735-1.617 1.102-2.648 1.102ZM6.25 23.27v-2.058c0-.516.15-1 .45-1.449.301-.45.705-.798 1.213-1.046 1.18-.566 2.36-.99 3.541-1.273A15.18 15.18 0 0 1 15 17.019c1.183 0 2.365.142 3.546.425 1.18.283 2.361.707 3.54 1.273.509.248.913.597 1.213 1.046.3.45.451.933.451 1.449v2.058H6.25Zm1.25-1.25h15v-.808c0-.277-.09-.538-.268-.782a2.157 2.157 0 0 0-.742-.617 15.863 15.863 0 0 0-3.182-1.146 13.973 13.973 0 0 0-6.616 0 15.864 15.864 0 0 0-3.182 1.146 2.157 2.157 0 0 0-.742.617 1.297 1.297 0 0 0-.268.782v.807ZM15 12.98c.688 0 1.276-.245 1.766-.734.49-.49.734-1.079.734-1.766 0-.688-.245-1.276-.734-1.766A2.407 2.407 0 0 0 15 7.981c-.688 0-1.276.245-1.766.734a2.407 2.407 0 0 0-.734 1.766c0 .688.245 1.276.734 1.766.49.49 1.079.734 1.766.734Z"
-                        fill="#131313"
-                    />
-                </g>
-            </svg>
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width={48}
-                height={48}
-                fill="none"
-                viewBox="-1 -1 32 32"
-                id="bag-black"
-                y={923}
-            >
-                <mask
-                    id="aua"
-                    style={{ maskType: "alpha" }}
-                    maskUnits="userSpaceOnUse"
-                    x={0}
-                    y={0}
-                    width={30}
-                    height={30}
-                >
-                    <path fill="#131313" d="M0 0h30v30H0z" />
-                </mask>
-                <g mask="url(#aua)">
-                    <path
-                        d="M8.27 26.25c-.576 0-1.056-.193-1.442-.578-.385-.386-.578-.866-.578-1.441V10.769c0-.575.193-1.055.578-1.44.386-.386.866-.579 1.441-.579h2.356v-.625c0-1.215.425-2.248 1.276-3.099.851-.85 1.884-1.276 3.099-1.276 1.215 0 2.248.425 3.099 1.276.85.851 1.276 1.884 1.276 3.099v.625h2.356c.575 0 1.055.193 1.44.578.386.386.579.866.579 1.441v13.462c0 .575-.193 1.055-.578 1.44-.386.386-.866.579-1.441.579H8.269Zm0-1.25h13.46c.193 0 .37-.08.53-.24.16-.16.24-.337.24-.53V10.77c0-.193-.08-.37-.24-.53-.16-.16-.337-.24-.53-.24h-2.355v3.125c0 .178-.06.326-.18.446a.605.605 0 0 1-.445.179.605.605 0 0 1-.446-.18.605.605 0 0 1-.179-.445V10h-6.25v3.125c0 .178-.06.326-.18.446a.605.605 0 0 1-.445.179.605.605 0 0 1-.446-.18.605.605 0 0 1-.179-.445V10H8.269c-.192 0-.368.08-.529.24-.16.16-.24.337-.24.53v13.46c0 .193.08.37.24.53.16.16.337.24.53.24Zm3.605-16.25h6.25v-.625c0-.88-.3-1.62-.903-2.222C16.621 5.3 15.88 5 15 5c-.88 0-1.62.3-2.222.903-.602.601-.903 1.342-.903 2.222v.625Z"
-                        fill="#131313"
-                    />
-                </g>
-            </svg>
-        </div>
-    )
-}
-
-const HeaderLinks = () => {
-    return (
-        <div className='headerLinks'>
-            <HeaderLink>SHOP</HeaderLink>
-            <HeaderLink>ABOUT</HeaderLink>
-            <HeaderLink>OUR IMPACT</HeaderLink>
-        </div>
-    )
-}
-
-const HeaderLink = ({ children }) => {
-    return (
-        <div className='HeaderLink'>
-            <a href="">{children}</a>
-            <div className='headerLinkHoverLine'></div>
         </div>
     )
 }

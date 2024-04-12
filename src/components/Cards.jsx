@@ -1,23 +1,94 @@
 import { useState } from "react"
+import { useSize } from '../hooks/useSize.jsx'
 
-export default function Cards() {
+export function Cards() {
     const [cards, setCards] = useState(cardsArr)
+    const windowsize = useSize() // Add dynamic width
 
     return (
-        <div className='cardsMain'>
+        <section className='cards_main'>
             <h1>Shop Best Sellers</h1>
-            <AdaptiveCards cards={cards} setCards={setCards} />
-        </div>
+            <div className='cards-div'>
+                {windowsize < 1000 ?
+                    <AdaptiveCards cards={cards} setCards={setCards} />
+                    :
+                    <FullCards cards={cards} setCards={setCards} />}
+            </div>
+        </section>
+    )
+}
+
+const FullCards = ({ cards, setCards }) => {
+    return (
+        <>
+            {cards.map(card =>
+                <div
+                    key={card.id}
+                    className='cards'>
+                    <div className='preview' >
+                        <div className="preview_title">
+                            <h4>{card.title}</h4>
+                            <p>{card.id == 0 ? `From $${card.price}/month` : `$${card.price}/month`}</p>
+                        </div>
+                        <img style={{ background: card.bgPrevirew }} src={card.imgURL} />
+
+                        <div className="full_cards_hover">
+                            <div className="full_cards_container">
+                                <div className="cards_hover_colors">
+                                    <ColorPicker cardID={card.id} card={card} setCards={setCards} cards={cards} />
+                                    <p>{card.type}</p>
+                                </div>
+
+                                <div style={{ background: 'black', height: '1px' }}></div>
+
+                                <div className="delivers_every">
+                                    <div className="delivers_every_left">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            height={26}
+                                            width={26}
+                                            viewBox="-1 -1 26 26"
+                                            id="radio-on"
+                                            y={4605}
+                                        >
+                                            <mask id="dpa" height={24} maskUnits="userSpaceOnUse" width={24} x={0} y={0}>
+                                                <path d="M0 0h24v24H0z" fill="#d9d9d9" />
+                                            </mask>
+                                            <g mask="url(#dpa)">
+                                                <path
+                                                    d="M12 16c1.114 0 2.06-.388 2.836-1.164S16 13.114 16 12s-.388-2.06-1.164-2.836C14.059 8.388 13.114 8 12 8s-2.06.388-2.836 1.164C8.388 9.941 8 10.886 8 12s.388 2.06 1.164 2.836C9.941 15.612 10.886 16 12 16zm.003 5c-1.244 0-2.414-.236-3.51-.709s-2.049-1.113-2.859-1.923-1.452-1.761-1.925-2.856S3 13.248 3 12.003c0-1.244.236-2.414.708-3.51a9.094 9.094 0 0 1 1.924-2.859 9.085 9.085 0 0 1 2.856-1.925A8.753 8.753 0 0 1 11.997 3c1.244 0 2.414.236 3.51.708a9.094 9.094 0 0 1 2.859 1.924 9.083 9.083 0 0 1 1.925 2.856A8.753 8.753 0 0 1 21 11.997c0 1.244-.236 2.414-.709 3.51s-1.113 2.049-1.923 2.859a9.083 9.083 0 0 1-2.856 1.925 8.753 8.753 0 0 1-3.509.709zM12 20c2.233 0 4.125-.775 5.675-2.325S20 14.233 20 12c0-2.233-.775-4.125-2.325-5.675S14.233 4 12 4c-2.233 0-4.125.775-5.675 2.325S4 9.767 4 12c0 2.233.775 4.125 2.325 5.675S9.767 20 12 20z"
+                                                    fill="#1c1b1f"
+                                                />
+                                            </g>
+                                        </svg>
+                                        <p>Delivers Every 4 Months</p>
+                                    </div>
+
+                                    {card.id <= 1 ?
+                                        <div className="delivers_every_save">
+                                            <p>Save 33%</p>
+                                        </div> : ''}
+
+                                    <p>{`$${card.price}/month`}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button className="button cardBtn">ADD TO BAG</button>
+                </div>
+            )}
+        </>
     )
 }
 
 const AdaptiveCards = ({ cards, setCards }) => {
     return (
-        <div className='cardsDiv'>
+        <>
             {cards.map(card =>
-                <div key={card.id} className={`cards card-${card.id}`}>
-                    <div className='preview' style={{background: card.bgPrevirew}}>
-                        <img style={{ width: '100%'}} src={card.imgURL} />
+                <div key={card.id} className='cards'>
+                    <div className='preview'>
+                        <img style={{ background: card.bgPrevirew }} src={card.imgURL} />
                     </div>
                     <h4>{card.title}</h4>
                     <p>{card.type}</p>
@@ -27,7 +98,7 @@ const AdaptiveCards = ({ cards, setCards }) => {
                     <button className="button cardBtn">ADD TO BAG</button>
                 </div>
             )}
-        </div>
+        </>
     )
 }
 
@@ -55,7 +126,6 @@ const ColorPicker = ({ cardID, card, cards, setCards }) => {
         {/*Change cards*/ }
 
         setCards(cards.map(card => {
-
             {/*First Card*/ }
             if (card.id == 0 && card.id == cardID) {
                 switch (colID) {
@@ -86,11 +156,11 @@ const ColorPicker = ({ cardID, card, cards, setCards }) => {
                 }
             }
 
-            {/*Second Card*/ }
+            {/*Third Card*/ }
             if (card.id == 2 && card.id == cardID) {
                 switch (colID) {
                     case 0: return {
-                        ...card, bgPrevirew: '#f0f0f0', type: 'Fragrance-Free', colors: card.colors.map(item => {
+                        ...card, bgPrevirew: 'transparent', type: 'Fragrance-Free', colors: card.colors.map(item => {
                             if (item.colorId == colID) {
                                 return { ...item, clicked: true }
                             }
@@ -135,7 +205,7 @@ const ColorPicker = ({ cardID, card, cards, setCards }) => {
                     onClick={() => handleColorPicker(item.colorId)}
                     style={{
                         background: item.color,
-                        border: item.clicked && '3px solid black',
+                        border: item.clicked && '1px solid black',
                         cursor: 'pointer'
                     }}
                 >

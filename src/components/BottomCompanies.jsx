@@ -1,7 +1,7 @@
 import { motion, useMotionValue } from 'framer-motion'
 import { useEffect, useState } from 'react'
 
-export default function BottomCompanies() {
+export function BottomCompanies() {
     const [imgIndex, setImgIndex] = useState(52)
 
     // Drag effect 
@@ -27,16 +27,16 @@ export default function BottomCompanies() {
 
     //Autoplay effect
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            updateIndex(imgIndex + 1);
-        }, 3000);
-        return () => {
-            if (interval) {
-                clearInterval(interval);
-            }
-        };
-    });
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         updateIndex(imgIndex + 1);
+    //     }, 3000);
+    //     return () => {
+    //         if (interval) {
+    //             clearInterval(interval);
+    //         }
+    //     };
+    // });
 
     const updateIndex = (newIndex) => {
         if (newIndex >= companiesList.length) {

@@ -1,6 +1,6 @@
-import Header from './Header.jsx'
+import { Header } from './Header.jsx'
 
-export default function Main() {
+export function Main() {
     return (
         <main>
             <Header />
@@ -11,7 +11,7 @@ export default function Main() {
 
 const Wallpaper = () => {
     return (
-        <div className='main_wallpaper'>
+        <section className='main_wallpaper'>
             <div className='main_content_container'>
                 <div className='main_content'>
                     <h1>A better way to brush your teeth.</h1>
@@ -19,6 +19,6 @@ const Wallpaper = () => {
                     <button className='button'>SHOP NOW</button>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }

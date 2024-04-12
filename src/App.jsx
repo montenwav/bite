@@ -1,12 +1,12 @@
-import Main from './components/Main.jsx'
-import Cards from './components/Cards.jsx'
-import TopCompanies from './components/TopCompanies.jsx'
-import BitsAreBetter from './components/BitsAreBetter.jsx'
-import Reviews from './components/Reviews.jsx'
-import ShopByCategory from './components/ShopByCategory.jsx'
-import BottomCompanies from './components/BottomCompanies.jsx'
-import FAQs from './components/FAQs.jsx'
-import Footer from './components/Footer.jsx'
+import { Main } from './components/Main.jsx'
+import { Cards } from './components/Cards.jsx'
+import { TopCompanies } from './components/TopCompanies.jsx'
+import { BitsAreBetter } from './components/BitsAreBetter.jsx'
+import { Reviews } from './components/Reviews.jsx'
+import { ShopByCategory } from './components/ShopByCategory.jsx'
+import { BottomCompanies } from './components/BottomCompanies.jsx'
+import { FAQs } from './components/FAQs.jsx'
+import { Footer } from './components/Footer.jsx'
 
 export default function App() {
   return (
@@ -15,7 +15,7 @@ export default function App() {
       <TopCompanies />
       <Cards/>
       <BitsAreBetter/>
-      <Reviews/>
+      {/* <Reviews/> */}
       <ShopByCategory/>
       <BottomCompanies/>
       <FAQs/>

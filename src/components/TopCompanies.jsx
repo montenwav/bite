@@ -1,22 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSize } from '../hooks/useSize.jsx'
 
-export default function TopCompanies() {
+export function TopCompanies() {
     const [imgId, setImgId] = useState(0)
-    // const [isAdaptive, setIsAdaptive] = useState(false)
-
-    // Add dynamic width
-    const [windowSize, setWindowSize] = useState(window.innerWidth);
-
-    useEffect(() => {
-        const windowSizeHandler = () => {
-            setWindowSize(window.innerWidth);
-        };
-        window.addEventListener("resize", windowSizeHandler);
-
-        return () => {
-            window.removeEventListener("resize", windowSizeHandler);
-        };
-    }, []);
+    const windowsize = useSize() // Add dynamic width
 
     const updateIndex = (newIndex) => {
         if (newIndex >= companiesList.length - 3) {
@@ -26,18 +13,10 @@ export default function TopCompanies() {
     };
 
     useEffect(() => {
-        if (windowSize < 1000) {
-            // setIsAdaptive(true)
-
-            // for (let j = 0; j < 5; j++) { //Push duplicates
-            //     for (let i = 1; i < 9; i++) {
-            //         companiesList.push({ src: `/src/images/companies/${i}.png` });
-            //     }
-            // }
-
+        if (windowsize < 1000) {
             const interval = setInterval(() => {
                 updateIndex(imgId + 1);
-            }, 1000);
+            }, 3000);
 
 
             return () => {
@@ -45,29 +24,21 @@ export default function TopCompanies() {
                     clearInterval(interval);
                 }
             };
-        }
-
-        if (windowSize > 1000) {
+        } else {
             setImgId(0)
-            // for (let j = 0; j < 5; j++) { // Remove duplicates
-            //     for (let i = 1; i < 9; i++) {
-            //         companiesList.pop();
-            //     }
-            // }
-            // setIsAdaptive(false)
         }
     })
 
     return (
         <>
             <Hr />
-            <div className='companies_list'>
+            <section className='companies_list'>
                 <div className='as_seen_in'>
                     <h4>AS SEEN IN</h4>
                 </div>
 
                 <div
-                    style={{ transform: `translateX(-${imgId * 188}px)` }}
+                    style={{ transform: `translateX(-${imgId * 188.5}px)` }}
                     className='companies_container'>
                     <>
                         {companiesList.map((company, idx) => (
@@ -81,7 +52,7 @@ export default function TopCompanies() {
                         ))}
                     </>
                 </div>
-            </div>
+            </section>
             <Hr />
         </>
     )

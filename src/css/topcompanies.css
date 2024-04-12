@@ -1,10 +1,9 @@
 .companies_list {
     padding-top: 10px;
     padding-bottom: 10px;
-    max-width: 95%;
-    margin: auto;
+    overflow-x: hidden;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
 }
 
@@ -31,7 +30,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 27px;
+    height: 30px;
 }
 
 .top_copm_item img {

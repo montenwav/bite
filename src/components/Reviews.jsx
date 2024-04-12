@@ -1,21 +1,21 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-export default function Reviews() {
+export function Reviews() {
     const [activeIndex, setActiveIndex] = useState(0);
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            updateIndex(activeIndex + 1);
-        }, 3000);
-        return () => {
-            if (interval) {
-                clearInterval(interval);
-            }
-        };
-    });
+    // useEffect(() => {
+    //     const interval = setInterval(() => {
+    //         updateIndex(activeIndex + 1);
+    //     }, 3000);
+    //     return () => {
+    //         if (interval) {
+    //             clearInterval(interval);
+    //         }
+    //     };
+    // });
 
     const updateIndex = (newIndex) => {
-        if (newIndex >= reviews.length - 2) {
+        if (newIndex >= reviews.length - 3) {
             newIndex = 0;
         }
         setActiveIndex(newIndex);
@@ -24,10 +24,12 @@ export default function Reviews() {
     return (
         <section className="reviews">
             <h1>20,000+ Reviews For A Reason</h1>
+
             <div
                 className="review_container"
                 style={{
                     transform: `translateX(calc(-${activeIndex} * 100% / 3 + ${activeIndex} * -10px))`, //card width + gap
+                    // transform: `translateX(calc(-${activeIndex} * 700px + ${activeIndex} * -16px))`, //card width + gap
                 }}
             >
                 <ReviewCards />

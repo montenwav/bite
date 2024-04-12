@@ -1,8 +1,11 @@
 import { motion, useMotionValue } from 'framer-motion'
-import { useRef, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSize } from '../hooks/useSize.jsx'
 
-export default function ShopByCategory() {
-    const [imgIndex, setImgIndex] = useState(39)
+export function ShopByCategory() {
+    const [imgIndex, setImgIndex] = useState(0)
+
+    const windowsize = useSize()
 
     // Drag effect 
     const [isDragging, setIsDragging] = useState(false)
@@ -26,14 +29,16 @@ export default function ShopByCategory() {
 
     //Autoplay effect
     useEffect(() => {
-        const interval = setInterval(() => {
-            updateIndex(imgIndex + 1);
-        }, 3000);
-        return () => {
-            if (interval) {
-                clearInterval(interval);
-            }
-        };
+        if (windowsize <= 1000) {
+            const interval = setInterval(() => {
+                updateIndex(imgIndex + 1);
+            }, 3000);
+            return () => {
+                if (interval) {
+                    clearInterval(interval);
+                }
+            };
+        }
     });
 
     const updateIndex = (newIndex) => {
@@ -46,36 +51,44 @@ export default function ShopByCategory() {
     return (
         <section className="shop_by_category">
             <h1>Shop By Category</h1>
-            <motion.div
-                style={{
-                    transform: `translateX(calc(-${imgIndex * 85}vw - ${imgIndex} * 16px))`, //card width + padding 
-                    x: dragLenght,
-                }}
-                drag="x"
-                dragConstraints={{ right: 0, left: 0 }}
-                animate={{ translateX: `calc(-${imgIndex * 85}vw - ${imgIndex} * 16px)` }} // translate by img size
-                onDragStart={onDragStart}
-                onDragEnd={onDragEnd}
-                className="carousel">
-                <Images />
-            </motion.div>
+            {windowsize <= 1000 ?
+                <motion.div
+                    style={{
+                        transform: `translateX(calc(-${imgIndex * 85}vw - ${imgIndex} * 16px))`, //card width + padding 
+                        x: dragLenght,
+                    }}
+                    drag="x"
+                    dragConstraints={{ right: 0, left: 0 }}
+                    animate={{ translateX: `calc(-${imgIndex * 85}vw - ${imgIndex} * 16px)` }} // translate by img size
+                    onDragStart={onDragStart}
+                    onDragEnd={onDragEnd}
+                    className="carousel">
+                    <Images />
+                </motion.div>
+                :
+                <div
+                    className="carousel">
+                    <Images windowsize={windowsize} />
+                </div>
+            }
         </section>
     )
 }
 
-const Images = () => {
+const Images = ({ windowsize }) => {
     return (
         <>
             {imgs.map((img, idx) => (
                 <motion.div
                     key={idx}
-                    whileTap={{ cursor: 'grabbing' }}
+                    whileTap={{ cursor: windowsize <= 1000 && 'grabbing' }}
                     className='inner_carousel'>
-                    <div className="card_image">
+                    <motion.div
+                        className="card_image">
                         <h4>{img.name}</h4>
                         <img src={img.src} alt={img.name} />
-                    </div>
-                    <button className="shop_by_btn">SHOP NOW</button>
+                        <button className="shop_by_btn">SHOP NOW</button>
+                    </motion.div>
                 </motion.div>
             ))}
         </>
@@ -83,10 +96,18 @@ const Images = () => {
 }
 
 const imgs = []
-for (let i = 0; i < 30; i++) {
-    imgs.push(
-        { name: 'ORAL CARE', src: '/src/images/shopby/hp-shop-by-category-oral-care.webp' },
-        { name: 'SETS', src: '/src/images/shopby/hp-shop-by-category-sets.webp' },
-        { name: 'BODY CARE', src: '/src/images/shopby/hp-shop-by-category-body-care.webp' },
-    )
-}
+imgs.push(
+    { name: 'ORAL CARE', src: '/src/images/shopby/hp-shop-by-category-oral-care.webp' },
+    { name: 'SETS', src: '/src/images/shopby/hp-shop-by-category-sets.png' },
+    { name: 'BODY CARE', src: '/src/images/shopby/hp-shop-by-category-body-care.webp' },
+)
+
+// if (windowsize < 1000) {
+//     for (let i = 0; i < 30; i++) {
+//         imgs.push(
+//             { name: 'ORAL CARE', src: '/src/images/shopby/hp-shop-by-category-oral-care.webp' },
+//             { name: 'SETS', src: '/src/images/shopby/hp-shop-by-category-sets.png' },
+//             { name: 'BODY CARE', src: '/src/images/shopby/hp-shop-by-category-body-care.webp' },
+//         )
+//     }
+// }
