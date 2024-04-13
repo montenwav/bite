@@ -1,24 +1,28 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { useSize } from '../hooks/useSize.jsx'
+import { dispacthCtx } from "../hooks/Provider.jsx"
 
 export function Cards() {
     const [cards, setCards] = useState(cardsArr)
     const windowsize = useSize() // Add dynamic width
 
     return (
-        <section className='cards_main'>
-            <h1>Shop Best Sellers</h1>
-            <div className='cards-div'>
-                {windowsize < 1000 ?
-                    <AdaptiveCards cards={cards} setCards={setCards} />
-                    :
-                    <FullCards cards={cards} setCards={setCards} />}
-            </div>
-        </section>
+        <>
+            <section className='cards_main'>
+                <h1>Shop Best Sellers</h1>
+                <div className='cards-div'>
+                    {windowsize < 1000 ?
+                        <AdaptiveCards cards={cards} setCards={setCards} />
+                        :
+                        <FullCards cards={cards} setCards={setCards} />}
+                </div>
+            </section>
+        </>
     )
 }
 
 const FullCards = ({ cards, setCards }) => {
+    const dispatch = useContext(dispacthCtx)
     return (
         <>
             {cards.map(card =>
@@ -27,15 +31,19 @@ const FullCards = ({ cards, setCards }) => {
                     className='cards'>
                     <div className='preview' >
                         <div className="preview_title">
-                            <h4>{card.title}</h4>
+                            <h4>{card.display_title}</h4>
                             <p>{card.id == 0 ? `From $${card.price}/month` : `$${card.price}/month`}</p>
                         </div>
-                        <img style={{ background: card.bgPrevirew }} src={card.imgURL} />
+                        <img style={{ background: card.bgPrevirew }} src={card.src} />
 
                         <div className="full_cards_hover">
                             <div className="full_cards_container">
                                 <div className="cards_hover_colors">
-                                    <ColorPicker cardID={card.id} card={card} setCards={setCards} cards={cards} />
+                                    <ColorPicker
+                                        cardID={card.id}
+                                        card={card}
+                                        setCards={setCards}
+                                        cards={cards} />
                                     <p>{card.type}</p>
                                 </div>
 
@@ -75,7 +83,9 @@ const FullCards = ({ cards, setCards }) => {
                             </div>
                         </div>
                     </div>
-                    <button className="button cardBtn">ADD TO BAG</button>
+                    <button
+                        onClick={() => dispatch({ type: 'add_item', card: card })}
+                        className="button cardBtn">ADD TO BAG</button>
                 </div>
             )}
         </>
@@ -88,9 +98,9 @@ const AdaptiveCards = ({ cards, setCards }) => {
             {cards.map(card =>
                 <div key={card.id} className='cards'>
                     <div className='preview'>
-                        <img style={{ background: card.bgPrevirew }} src={card.imgURL} />
+                        <img style={{ background: card.bgPrevirew }} src={card.src} />
                     </div>
-                    <h4>{card.title}</h4>
+                    <h4>{card.display_title}</h4>
                     <p>{card.type}</p>
                     <ColorPicker cardID={card.id} card={card} setCards={setCards} cards={cards} />
                     <p>{card.id == 0 ? `From $${card.price}/month` : `$${card.price}/month`}</p>
@@ -130,7 +140,7 @@ const ColorPicker = ({ cardID, card, cards, setCards }) => {
             if (card.id == 0 && card.id == cardID) {
                 switch (colID) {
                     case 0: return {
-                        ...card, imgURL: '/src/images/products/1/pc-tpb-ff-4oz-mint-no-bg.webp', type: 'Mint', colors: card.colors.map(item => {
+                        ...card, src: '/src/images/products/1/pc-tpb-ff-4oz-mint-no-bg.webp', type: 'Mint', colors: card.colors.map(item => {
                             if (item.colorId == colID) {
                                 return { ...item, clicked: true }
                             }
@@ -138,7 +148,7 @@ const ColorPicker = ({ cardID, card, cards, setCards }) => {
                         })
                     }
                     case 1: return {
-                        ...card, imgURL: '/src/images/products/1/pdp-product-card-tpb-ff-4oz-mint-charcoal.webp', type: 'Mint Charcoal', colors: card.colors.map(item => {
+                        ...card, src: '/src/images/products/1/pdp-product-card-tpb-ff-4oz-mint-charcoal.webp', type: 'Mint Charcoal', colors: card.colors.map(item => {
                             if (item.colorId == colID) {
                                 return { ...item, clicked: true }
                             }
@@ -146,7 +156,7 @@ const ColorPicker = ({ cardID, card, cards, setCards }) => {
                         })
                     }
                     case 2: return {
-                        ...card, imgURL: '/src/images/products/1/pdp-product-card-tpb-ff-4oz-berry-twist-no-bg-012524.webp', type: 'Berry Twist', colors: card.colors.map(item => {
+                        ...card, src: '/src/images/products/1/pdp-product-card-tpb-ff-4oz-berry-twist-no-bg-012524.webp', type: 'Berry Twist', colors: card.colors.map(item => {
                             if (item.colorId == colID) {
                                 return { ...item, clicked: true }
                             }
@@ -218,8 +228,8 @@ const ColorPicker = ({ cardID, card, cards, setCards }) => {
 const cardsArr = [
     {
         id: 0,
-        title: 'TOOTHPASTE BITS FLUORIDE-FREE',
-        imgURL: '/src/images/products/1/pc-tpb-ff-4oz-mint-no-bg.webp',
+        display_title: 'TOOTHPASTE BITS FLUORIDE-FREE',
+        src: '/src/images/products/1/pc-tpb-ff-4oz-mint-no-bg.webp',
         colors: [
             { colorId: 0, color: '#c7f6e6', clicked: true },
             { colorId: 1, color: '#4d4c4c', clicked: false },
@@ -227,21 +237,33 @@ const cardsArr = [
         ],
         type: 'Mint',
         reviews: '21,266',
-        price: 8
+        month_price: 8,
+
+        title: 'Toothpaste Bits',
+        fluoride: false,
+        count: 1,
+        price: 32,
+        old_price: 48,
     },
     {
         id: 1,
-        title: 'TOOTHPASTE BITS WITH FLUORIDE',
-        imgURL: '/src/images/products/2/pc-tpb-wf-2oz-mint-fluoride-no-bg.webp',
+        display_title: 'TOOTHPASTE BITS WITH FLUORIDE',
+        src: '/src/images/products/2/pc-tpb-wf-2oz-mint-fluoride-no-bg.webp',
         colors: [{ colorId: 0, color: '#c7f6e6', clicked: true }],
         type: 'Mint',
         reviews: '21,266',
-        price: 8
+        month_price: 8,
+
+        title: 'Toothpaste Bits',
+        fluoride: true,
+        count: 1,
+        price: 32,
+        old_price: 48,
     },
     {
         id: 2,
-        title: 'DEODORANT SET',
-        imgURL: '/src/images/products/3/pdp-product-card-desktop-silver-case-open-no-bg.webp',
+        display_title: 'DEODORANT SET',
+        src: '/src/images/products/3/pdp-product-card-desktop-silver-case-open-no-bg.webp',
         colors: [
             { colorId: 0, color: '#f0f0f0', clicked: true },
             { colorId: 1, color: '#f27c2d', clicked: false },
@@ -250,15 +272,24 @@ const cardsArr = [
         ],
         type: 'Fragrance-Free',
         reviews: '644',
-        price: 8
+        month_price: 8,
+
+        title: 'Deodorant set',
+        count: 1,
+        price: 32,
     },
     {
         id: 3,
-        title: 'MOUTHWASH BITS',
-        imgURL: '/src/images/products/4/pc-mouthwash-no-bg.webp',
+        display_title: 'MOUTHWASH BITS',
+        src: '/src/images/products/4/pc-mouthwash-no-bg.webp',
         colors: [{ colorId: 0, color: '#c7f6e6', clicked: true }],
         type: 'Mint',
         reviews: '834',
-        price: 5
+        month_price: 5,
+
+        title: 'Mouthwash Bits',
+        description: 'Mouthwash',
+        count: 1,
+        price: 20,
     },
 ]

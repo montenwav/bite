@@ -1,14 +1,20 @@
 import { motion, useScroll, useMotionValueEvent, useAnimation } from 'framer-motion'
-import { useContext, useEffect, useState, useRef } from 'react'
-import { setIsBagOpenCtx, isAdaptiveCtx, setIsAdaptiveCtx } from '../hooks/Contexts.jsx'
+import { useContext, useEffect, useRef } from 'react'
+import { isEmptyCtx, addedItemsCtx, isBagOpenCtx, setIsBagOpenCtx, isAdaptiveCtx, setIsAdaptiveCtx } from '../hooks/Provider.jsx'
 import { Bag } from './Bag.jsx'
 import { Adaptive } from './Adaptive.jsx'
 
 export function Header() {
-    const [isAdaptive, setIsAdaptive] = useState(false)
-
     const bagRef = useRef(null)
-    const [isBagOpen, setIsBagOpen] = useState(false)
+
+    useEffect(() => {
+        if (scrollY.current >= 100 || isAdaptive) {
+            controls.start('visible')
+        }
+    })
+
+    const isAdaptive = useContext(isAdaptiveCtx) 
+    const isBagOpen  = useContext(isBagOpenCtx) 
 
     // Header scroll animation
     const controls = useAnimation()
@@ -30,29 +36,25 @@ export function Header() {
     })
 
     return (
-            <setIsBagOpenCtx.Provider value={setIsBagOpen}>
-                <isAdaptiveCtx.Provider value={isAdaptive}>
-                    <setIsAdaptiveCtx.Provider value={setIsAdaptive}>
-                        <section className='header_sec'>
-                            <motion.div
-                                variants={
-                                    {
-                                        hidden: { background: 'transparent' },
-                                        visible: { background: 'white' }
-                                    }}
-                                initial='hidden'
-                                animate={controls}
-                                className='headerBg'>
-                                <HeaderMain />
-                            </motion.div>
-                        </section>
+        <>
+            <section className='header_sec'>
+                <motion.div
+                    variants={
+                        {
+                            hidden: { background: 'transparent' },
+                            visible: { background: 'white' }
+                        }}
+                    initial='hidden'
+                    animate={controls}
+                    className='headerBg'>
+                    <HeaderMain />
+                </motion.div>
+            </section>
 
-                        <Adaptive />
-                        {isBagOpen && <Bag isBagOpen={isBagOpen} bagRef={bagRef} />}
+            <Adaptive />
+            {isBagOpen && <Bag bagRef={bagRef} />}
 
-                    </setIsAdaptiveCtx.Provider>
-                </isAdaptiveCtx.Provider>
-            </setIsBagOpenCtx.Provider>
+        </>
     )
 }
 
@@ -115,6 +117,8 @@ const LeftHeader = () => {
 
 const RightHeader = () => {
     const setIsBagOpen = useContext(setIsBagOpenCtx)
+    const addedItems = useContext(addedItemsCtx)
+    const isEmpty = useContext(isEmptyCtx)
 
     return (
         <div className='right_header'>
@@ -145,35 +149,41 @@ const RightHeader = () => {
                     />
                 </g>
             </svg>
-            <svg
-                onClick={() => setIsBagOpen(true)}
-                className='bag_icon'
-                xmlns="http://www.w3.org/2000/svg"
-                width={48}
-                height={48}
-                fill="none"
-                viewBox="-1 -1 32 32"
-                id="bag-black"
-                y={923}
-            >
-                <mask
-                    id="aua"
-                    style={{ maskType: "alpha" }}
-                    maskUnits="userSpaceOnUse"
-                    x={0}
-                    y={0}
-                    width={30}
-                    height={30}
+
+            <div className='bag_icon_container'>
+                <svg
+                    onClick={() => setIsBagOpen(true)}
+                    className='bag_icon'
+                    xmlns="http://www.w3.org/2000/svg"
+                    width={48}
+                    height={48}
+                    fill="none"
+                    viewBox="-1 -1 32 32"
+                    id="bag-black"
+                    y={923}
                 >
-                    <path fill="#131313" d="M0 0h30v30H0z" />
-                </mask>
-                <g mask="url(#aua)">
-                    <path
-                        d="M8.27 26.25c-.576 0-1.056-.193-1.442-.578-.385-.386-.578-.866-.578-1.441V10.769c0-.575.193-1.055.578-1.44.386-.386.866-.579 1.441-.579h2.356v-.625c0-1.215.425-2.248 1.276-3.099.851-.85 1.884-1.276 3.099-1.276 1.215 0 2.248.425 3.099 1.276.85.851 1.276 1.884 1.276 3.099v.625h2.356c.575 0 1.055.193 1.44.578.386.386.579.866.579 1.441v13.462c0 .575-.193 1.055-.578 1.44-.386.386-.866.579-1.441.579H8.269Zm0-1.25h13.46c.193 0 .37-.08.53-.24.16-.16.24-.337.24-.53V10.77c0-.193-.08-.37-.24-.53-.16-.16-.337-.24-.53-.24h-2.355v3.125c0 .178-.06.326-.18.446a.605.605 0 0 1-.445.179.605.605 0 0 1-.446-.18.605.605 0 0 1-.179-.445V10h-6.25v3.125c0 .178-.06.326-.18.446a.605.605 0 0 1-.445.179.605.605 0 0 1-.446-.18.605.605 0 0 1-.179-.445V10H8.269c-.192 0-.368.08-.529.24-.16.16-.24.337-.24.53v13.46c0 .193.08.37.24.53.16.16.337.24.53.24Zm3.605-16.25h6.25v-.625c0-.88-.3-1.62-.903-2.222C16.621 5.3 15.88 5 15 5c-.88 0-1.62.3-2.222.903-.602.601-.903 1.342-.903 2.222v.625Z"
-                        fill="#131313"
-                    />
-                </g>
-            </svg>
+                    <mask
+                        id="aua"
+                        style={{ maskType: "alpha" }}
+                        maskUnits="userSpaceOnUse"
+                        x={0}
+                        y={0}
+                        width={30}
+                        height={30}
+                    >
+                        <path fill="#131313" d="M0 0h30v30H0z" />
+                    </mask>
+                    <g mask="url(#aua)">
+                        <path
+                            d="M8.27 26.25c-.576 0-1.056-.193-1.442-.578-.385-.386-.578-.866-.578-1.441V10.769c0-.575.193-1.055.578-1.44.386-.386.866-.579 1.441-.579h2.356v-.625c0-1.215.425-2.248 1.276-3.099.851-.85 1.884-1.276 3.099-1.276 1.215 0 2.248.425 3.099 1.276.85.851 1.276 1.884 1.276 3.099v.625h2.356c.575 0 1.055.193 1.44.578.386.386.579.866.579 1.441v13.462c0 .575-.193 1.055-.578 1.44-.386.386-.866.579-1.441.579H8.269Zm0-1.25h13.46c.193 0 .37-.08.53-.24.16-.16.24-.337.24-.53V10.77c0-.193-.08-.37-.24-.53-.16-.16-.337-.24-.53-.24h-2.355v3.125c0 .178-.06.326-.18.446a.605.605 0 0 1-.445.179.605.605 0 0 1-.446-.18.605.605 0 0 1-.179-.445V10h-6.25v3.125c0 .178-.06.326-.18.446a.605.605 0 0 1-.445.179.605.605 0 0 1-.446-.18.605.605 0 0 1-.179-.445V10H8.269c-.192 0-.368.08-.529.24-.16.16-.24.337-.24.53v13.46c0 .193.08.37.24.53.16.16.337.24.53.24Zm3.605-16.25h6.25v-.625c0-.88-.3-1.62-.903-2.222C16.621 5.3 15.88 5 15 5c-.88 0-1.62.3-2.222.903-.602.601-.903 1.342-.903 2.222v.625Z"
+                            fill="#131313"
+                        />
+                    </g>
+                </svg>
+                {!isEmpty && <div className='how_many_items'>
+                    <p>{addedItems.length}</p>
+                </div>}
+            </div>
         </div>
     )
 }

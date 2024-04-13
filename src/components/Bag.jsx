@@ -1,23 +1,23 @@
-import { useEffect, useContext, useState, useReducer } from "react"
-import { addedItemsCtx, dispacthCtx, whyNotCardsCtx, setWhyNotCardsCtx, setIsBagOpenCtx } from '../hooks/Contexts.jsx'
-import { BagReducerFunc } from '../hooks/Reducers.jsx'
+import { useEffect, useContext } from "react"
+import { isBagOpenCtx, isEmptyCtx, dispacthCtx, addedItemsCtx, whyNotCardsCtx, setWhyNotCardsCtx, setIsBagOpenCtx } from '../hooks/Provider.jsx'
 
-export function Bag({ bagRef, isBagOpen }) {
-    const [isEmpty, setIsEmpty] = useState(true)
+export function Bag({ bagRef }) {
     const setIsBagOpen = useContext(setIsBagOpenCtx)
+    const isBagOpen = useContext(isBagOpenCtx)
+    const addedItems = useContext(addedItemsCtx)
 
     // Add button state
-    const [whyNotCards, setWhyNotCards] = useState(whyNotToAddArr)
 
-    //Add item to bag
-    const addedItemsArr = []
-    const [addedItems, dispacth] = useReducer(BagReducerFunc, addedItemsArr)
+    let freeShipping = 32;
 
-    const freeShipping = 32;
+    let allPrices = addedItems.map(item =>
+        item.count * item.price
+    )
+    
+    if(addedItems.length > 0) allPrices = allPrices.reduce((accum, items) => accum + items)
 
-    useEffect(() => {
-        setIsEmpty(addedItems.length === 0)
-    }, [addedItems])
+    freeShipping - allPrices
+
 
     useEffect(() => {
         if (isBagOpen) {
@@ -30,32 +30,28 @@ export function Bag({ bagRef, isBagOpen }) {
     })
 
     return (
-        <addedItemsCtx.Provider value={addedItems}>
-            <dispacthCtx.Provider value={dispacth}>
-                <whyNotCardsCtx.Provider value={whyNotCards}>
-                    <setWhyNotCardsCtx.Provider value={setWhyNotCards}>
-                        <div className="bag">
-                            <div
-                                onClick={() => setIsBagOpen(false)}
-                                className="bag_bg"></div>
-                            <BagContainer
-                                freeShipping={freeShipping}
-                                bagRef={bagRef}
-                                isEmpty={isEmpty} />
-                        </div>
-                    </setWhyNotCardsCtx.Provider>
-                </whyNotCardsCtx.Provider>
-            </dispacthCtx.Provider>
-        </addedItemsCtx.Provider>
+        <>
+            <div className="bag">
+                <div
+                    onClick={() => setIsBagOpen(false)}
+                    className="bag_bg"></div>
+                <BagContainer
+                    freeShipping={freeShipping}
+                    bagRef={bagRef}
+
+                />
+            </div>
+        </>
     )
 }
 
-const BagContainer = ({ isEmpty, bagRef, freeShipping }) => {
+const BagContainer = ({ bagRef, freeShipping }) => {
     return (
-        <div ref={bagRef}
+        <div
+            ref={bagRef}
             className="bag_container">
             <BagTop freeShipping={freeShipping} />
-            <BagMiddle isEmpty={isEmpty} />
+            <BagMiddle />
             <WhyNotToAdd />
         </div>
     )
@@ -110,7 +106,8 @@ const BagTop = ({ freeShipping }) => {
     )
 }
 
-const BagMiddle = ({ isEmpty }) => {
+const BagMiddle = () => {
+    const isEmpty = useContext(isEmptyCtx)
     return (
         <div className="bag_middle">
             {isEmpty ?
@@ -146,7 +143,7 @@ const MiddleBagCard = () => {
                             <div className="added_item_description">
                                 <h1>{item.title}</h1>
                                 <h4>{item.description}</h4>
-                                <h5>{item.fluoride ? 'with Flouride' : 'flouride-Free'}</h5>
+                                <h5>{item.fluoride ? 'with Flouride' : 'Flouride-Free'}</h5>
 
                                 <div className="delivers_every_bag">
                                     <svg
@@ -307,11 +304,11 @@ const EmptyMiddleBagCard = () => {
 }
 
 const WhyNotToAdd = () => {
+    const isEmpty = useContext(isEmptyCtx)
     return (
         <>
             <div className="why_not_to_add">
-                <div className="hr"></div>
-                <Checkout />
+                {!isEmpty && <Checkout />}
                 <div className="hr"></div>
 
                 <h4 className="why_not_to_add_h4">WHY NOT ADD?</h4>
@@ -325,10 +322,18 @@ const WhyNotToAdd = () => {
 }
 
 const Checkout = () => {
-    const total = 0;
+    const addedItems = useContext(addedItemsCtx)
+
+    let total = 0;
+
+    total = addedItems.map(item =>
+        item.count * item.price
+    )
+    total = addedItems.length > 0 && total.reduce((accum, items) => accum + items)
 
     return (
         <>
+            <div className="hr"></div>
             <div className="checkout_container">
                 <div className="checkout">
                     <h4>CHECKOUT</h4>
@@ -346,6 +351,7 @@ const WhyNotToAddCard = () => {
     const addedItems = useContext(addedItemsCtx)
     const dispacth = useContext(dispacthCtx)
 
+
     const addingItem = (card) => {
 
         // Add item
@@ -357,13 +363,13 @@ const WhyNotToAddCard = () => {
         }
 
         // Adding state to the button to prevent multipe clicks
-        setWhyNotCards(whyNotToAddArr.map((item) => {
+        setWhyNotCards(whyNotCards.map((item) => {
             if (item.id === card.id) return { ...item, added: true }
             return item
         }))
 
         setTimeout(() => {
-            setWhyNotCards(whyNotToAddArr.map((item) => {
+            setWhyNotCards(whyNotCards.map((item) => {
                 if (item.id === card.id) return { ...item, added: false }
                 return item
             }))
@@ -412,50 +418,5 @@ const middleBagArr = [
         src: 'https://bite-bits.myshopify.com/cdn/shop/files/pdp-product-card-desktop-silver-case-open_400x400.png?v=1700091811',
         title: 'Deodorant',
         description: 'Forever refillable and clinically-proven to keep you smelling as good as it looks.'
-    },
-]
-
-const whyNotToAddArr = [
-    {
-        id: 0,
-        added: false,
-        title: 'Bamboo Toothbrush Subscription',
-        src: 'https://cdn.shopify.com/s/files/1/1864/2187/files/pdp-hero-carousel-desktop-toothbrush_49ff32a7-1a50-4b23-98bf-58bdaca21188_400x400.jpg?v=1704393857',
-        description: 'Toothbrush',
-        count: 1,
-        price: 5,
-        old_price: 6,
-    },
-    {
-        id: 1,
-        added: false,
-        title: 'Fluoride-Free Toothpaste Subscriptio',
-        src: 'https://cdn.shopify.com/s/files/1/1864/2187/files/pdp-hero-carousel-tpb-ff--4oz-mint_047543a9-2601-4cf1-a1c3-05686dd8f622_400x400.jpg?v=1702510991',
-        description: 'Mint',
-        fluoride: false,
-        count: 1,
-        price: 32,
-        old_price: 48,
-    },
-    {
-        id: 2,
-        added: false,
-        title: 'Whitening Gel',
-        src: 'https://cdn.shopify.com/s/files/1/1864/2187/files/pdp-hero-carousel-desktop-whitening-gel_0bce5c88-7fe3-4fc0-b155-e98c92d12186_240x240.jpg?v=1700148140',
-        description: 'Whitening Gel Kit',
-        count: 1,
-        price: 20,
-        old_price: 24,
-    },
-    {
-        id: 3,
-        added: false,
-        title: 'Fluoride Toothpaste Subscription',
-        src: 'https://cdn.shopify.com/s/files/1/1864/2187/products/pdp-hero-carousel-tpb-wf-2oz-mint-fluoride_1cdc3501-5ff2-4aed-9d5b-514ed12dd018_240x240.jpg?v=1704922746',
-        description: 'Mint',
-        fluoride: true,
-        count: 1,
-        price: 32,
-        old_price: 48,
     },
 ]
