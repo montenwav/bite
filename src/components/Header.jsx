@@ -1,6 +1,6 @@
 import { motion, useScroll, useMotionValueEvent, useAnimation } from 'framer-motion'
 import { useContext, useEffect, useState, useRef } from 'react'
-import { setIsBagOpenCtx, isAdaptiveCtx, setIsAdaptiveCtx } from '../hooks/Context.jsx'
+import { setIsBagOpenCtx, isAdaptiveCtx, setIsAdaptiveCtx } from '../hooks/Contexts.jsx'
 import { Bag } from './Bag.jsx'
 import { Adaptive } from './Adaptive.jsx'
 

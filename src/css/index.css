@@ -19,7 +19,6 @@
 }
 
 body {
-    overflow: hidden;
     margin: 0px;
     padding: 0px;
     background: var(--bg-color);
@@ -81,7 +80,6 @@ ul {
 }
 
 h1 {
-    line-height: 60px;
     font-size: 3em;
     font-family: 'Queens';
 }

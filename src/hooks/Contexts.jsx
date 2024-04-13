@@ -8,3 +8,6 @@ export const setIsAdaptiveCtx = createContext(null)
 
 export const whyNotCardsCtx = createContext(null)
 export const setWhyNotCardsCtx = createContext(null)
+
+export const addedItemsCtx = createContext(null)
+export const dispacthCtx = createContext(null)

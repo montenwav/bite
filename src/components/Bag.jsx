@@ -1,15 +1,23 @@
-import { useEffect, useContext, useState } from "react"
-import { whyNotCardsCtx, setWhyNotCardsCtx, setIsBagOpenCtx } from '../hooks/Context.jsx'
+import { useEffect, useContext, useState, useReducer } from "react"
+import { addedItemsCtx, dispacthCtx, whyNotCardsCtx, setWhyNotCardsCtx, setIsBagOpenCtx } from '../hooks/Contexts.jsx'
+import { BagReducerFunc } from '../hooks/Reducers.jsx'
 
 export function Bag({ bagRef, isBagOpen }) {
-    const [isEmpty, setIsEmpty] = useState(false)
+    const [isEmpty, setIsEmpty] = useState(true)
     const setIsBagOpen = useContext(setIsBagOpenCtx)
 
     // Add button state
-    // const [addState, setAddState] = useState('none') // 'none', 'adding'
     const [whyNotCards, setWhyNotCards] = useState(whyNotToAddArr)
 
+    //Add item to bag
+    const addedItemsArr = []
+    const [addedItems, dispacth] = useReducer(BagReducerFunc, addedItemsArr)
+
     const freeShipping = 32;
+
+    useEffect(() => {
+        setIsEmpty(addedItems.length === 0)
+    }, [addedItems])
 
     useEffect(() => {
         if (isBagOpen) {
@@ -22,16 +30,23 @@ export function Bag({ bagRef, isBagOpen }) {
     })
 
     return (
-        <whyNotCardsCtx.Provider value={whyNotCards}>
-            <setWhyNotCardsCtx.Provider value={setWhyNotCards}>
-                <div className="bag">
-                    <div
-                        onClick={() => setIsBagOpen(false)}
-                        className="bag_bg"></div>
-                    <BagContainer freeShipping={freeShipping} bagRef={bagRef} isEmpty={isEmpty} />
-                </div>
-            </setWhyNotCardsCtx.Provider>
-        </whyNotCardsCtx.Provider>
+        <addedItemsCtx.Provider value={addedItems}>
+            <dispacthCtx.Provider value={dispacth}>
+                <whyNotCardsCtx.Provider value={whyNotCards}>
+                    <setWhyNotCardsCtx.Provider value={setWhyNotCards}>
+                        <div className="bag">
+                            <div
+                                onClick={() => setIsBagOpen(false)}
+                                className="bag_bg"></div>
+                            <BagContainer
+                                freeShipping={freeShipping}
+                                bagRef={bagRef}
+                                isEmpty={isEmpty} />
+                        </div>
+                    </setWhyNotCardsCtx.Provider>
+                </whyNotCardsCtx.Provider>
+            </dispacthCtx.Provider>
+        </addedItemsCtx.Provider>
     )
 }
 
@@ -116,24 +131,11 @@ const BagMiddle = ({ isEmpty }) => {
 }
 
 const MiddleBagCard = () => {
-    const addedItemsArr = [
-        {
-            src: 'https://cdn.shopify.com/s/files/1/1864/2187/files/pdp-hero-carousel-tpb-ff--4oz-mint_047543a9-2601-4cf1-a1c3-05686dd8f622_240x240.jpg?v=1702510991',
-            title: 'Toothpaste Bits',
-            color: 'Mint',
-            fluoride_free: true,
-            count: 1,
-            price: 32,
-            old_price: 48,
-        },
-    ]
-
-    const [addedItems, setAddedItems] = useState(addedItemsArr)
-
+    const addedItems = useContext(addedItemsCtx)
     return (
         <>
-            {addedItems.map((item, index) => (
-                <div key={index}>
+            {addedItems.map(item => (
+                <div key={item.id}>
                     <div
                         className="added_item_container">
                         <div className="added_item">
@@ -143,7 +145,8 @@ const MiddleBagCard = () => {
 
                             <div className="added_item_description">
                                 <h1>{item.title}</h1>
-                                <h4>{item.color}</h4>
+                                <h4>{item.description}</h4>
+                                <h5>{item.fluoride ? 'with Flouride' : 'flouride-Free'}</h5>
 
                                 <div className="delivers_every_bag">
                                     <svg
@@ -196,10 +199,25 @@ const MiddleBagCard = () => {
 }
 
 const BagCounter = ({ item }) => {
+    const addedItems = useContext(addedItemsCtx)
+    const dispacth = useContext(dispacthCtx)
+
+    const handleDecrement = (itemId) => {
+        let decrementArr = addedItems.map(card => {
+            if (card.id === itemId) return { ...card, count: card.count - 1 }
+            return card
+        })
+        decrementArr = decrementArr.filter(c => c.count > 0)
+
+        dispacth({ type: 'decrement_button', decrementArr: decrementArr })
+    }
+
     return (
         <div className="bag_counter">
             <div className="bag_counter_flex">
-                <div className="bag_counter_item">
+                <div
+                    onClick={() => handleDecrement(item.id)}
+                    className="bag_counter_item">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width={18}
@@ -223,12 +241,13 @@ const BagCounter = ({ item }) => {
                         </g>
                     </svg>
                 </div>
-
-                <div className="bag_counter_item">
+                <div
+                    className="bag_counter_item">
                     <h4>{item.count}</h4>
                 </div>
-
-                <div className="bag_counter_item">
+                <div
+                    onClick={() => dispacth({ type: 'increment_button', itemId: item.id })}
+                    className="bag_counter_item">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width={18}
@@ -257,7 +276,10 @@ const BagCounter = ({ item }) => {
                 </div>
             </div>
 
-            <a href="">Remove</a>
+            <p
+                style={{ cursor: 'pointer' }}
+                onClick={() => dispacth({ type: 'remove_button', itemId: item.id })}
+            >Remove</p>
         </div>
     )
 }
@@ -321,34 +343,38 @@ const WhyNotToAddCard = () => {
     const whyNotCards = useContext(whyNotCardsCtx)
     const setWhyNotCards = useContext(setWhyNotCardsCtx)
 
-    const addingItem = (idx) => {
+    const addedItems = useContext(addedItemsCtx)
+    const dispacth = useContext(dispacthCtx)
 
-        //Adding to the list
+    const addingItem = (card) => {
 
+        // Add item
+        let existingItem = addedItems.find(item => item.id === card.id);
+        if (existingItem) {
+            dispacth({ type: 'if_exist', cardId: card.id })
+        } else {
+            dispacth({ type: 'if_not_exist', card: card })
+        }
 
-        // Adding state
-        setWhyNotCards(whyNotToAddArr.map((card, index) => {
-            if (index === idx) {
-                return { ...card, added: true }
-            }
-            return card
+        // Adding state to the button to prevent multipe clicks
+        setWhyNotCards(whyNotToAddArr.map((item) => {
+            if (item.id === card.id) return { ...item, added: true }
+            return item
         }))
 
         setTimeout(() => {
-            setWhyNotCards(whyNotToAddArr.map((card, index) => {
-                if (index == idx) {
-                    return { ...card, added: false }
-                }
-                return card
+            setWhyNotCards(whyNotToAddArr.map((item) => {
+                if (item.id === card.id) return { ...item, added: false }
+                return item
             }))
         }, 1000)
     }
 
     return (
         <>
-            {whyNotCards.map((card, idx) => (
+            {whyNotCards.map(card => (
                 <div
-                    key={idx}
+                    key={card.id}
                     className="why_not_to_add_card"
                 >
                     <div style={{ height: '70px' }}>
@@ -360,7 +386,7 @@ const WhyNotToAddCard = () => {
                     </div>
 
                     <button
-                        onClick={() => addingItem(idx)}
+                        onClick={() => addingItem(card)}
                         disabled={card.added}
                         style={{ background: card.added && 'gray' }}
                         className="why_not_to_add_button"
@@ -395,23 +421,41 @@ const whyNotToAddArr = [
         added: false,
         title: 'Bamboo Toothbrush Subscription',
         src: 'https://cdn.shopify.com/s/files/1/1864/2187/files/pdp-hero-carousel-desktop-toothbrush_49ff32a7-1a50-4b23-98bf-58bdaca21188_400x400.jpg?v=1704393857',
+        description: 'Toothbrush',
+        count: 1,
+        price: 5,
+        old_price: 6,
     },
     {
         id: 1,
         added: false,
         title: 'Fluoride-Free Toothpaste Subscriptio',
-        src: 'https://cdn.shopify.com/s/files/1/1864/2187/files/pdp-hero-carousel-tpb-ff--4oz-mint_047543a9-2601-4cf1-a1c3-05686dd8f622_400x400.jpg?v=1702510991'
+        src: 'https://cdn.shopify.com/s/files/1/1864/2187/files/pdp-hero-carousel-tpb-ff--4oz-mint_047543a9-2601-4cf1-a1c3-05686dd8f622_400x400.jpg?v=1702510991',
+        description: 'Mint',
+        fluoride: false,
+        count: 1,
+        price: 32,
+        old_price: 48,
     },
     {
         id: 2,
         added: false,
         title: 'Whitening Gel',
-        src: 'https://cdn.shopify.com/s/files/1/1864/2187/files/pdp-hero-carousel-desktop-whitening-gel_400x400.jpg?v=1700142723',
+        src: 'https://cdn.shopify.com/s/files/1/1864/2187/files/pdp-hero-carousel-desktop-whitening-gel_0bce5c88-7fe3-4fc0-b155-e98c92d12186_240x240.jpg?v=1700148140',
+        description: 'Whitening Gel Kit',
+        count: 1,
+        price: 20,
+        old_price: 24,
     },
     {
         id: 3,
         added: false,
         title: 'Fluoride Toothpaste Subscription',
-        src: 'https://cdn.shopify.com/s/files/1/1864/2187/files/pdp-hero-carousel-tpb-wf-2oz-mint-fluoride_1cdc3501-5ff2-4aed-9d5b-514ed12dd018_400x400.jpg?v=1704318283',
+        src: 'https://cdn.shopify.com/s/files/1/1864/2187/products/pdp-hero-carousel-tpb-wf-2oz-mint-fluoride_1cdc3501-5ff2-4aed-9d5b-514ed12dd018_240x240.jpg?v=1704922746',
+        description: 'Mint',
+        fluoride: true,
+        count: 1,
+        price: 32,
+        old_price: 48,
     },
 ]

@@ -1,6 +1,6 @@
 import { useRef, useContext, useEffect} from 'react'
 import { useSize } from '../hooks/useSize.jsx'
-import { isAdaptiveCtx, setIsAdaptiveCtx } from '../hooks/Context.jsx'
+import { isAdaptiveCtx, setIsAdaptiveCtx } from '../hooks/Contexts.jsx'
 
 export const Adaptive = () => {
     const isAdaptive = useContext(isAdaptiveCtx)
