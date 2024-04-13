@@ -10,7 +10,7 @@ export const whyNotCardsCtx = createContext(null)
 export const setWhyNotCardsCtx = createContext(null)
 
 export const addedItemsCtx = createContext(null)
-export const dispacthCtx = createContext(null)
+export const dispatchCtx = createContext(null)
 
 export const isEmptyCtx = createContext(null)
 export const setIsEmptyCtx = createContext(null)
@@ -26,8 +26,8 @@ export function Provider({ children }) {
 
     //Add new item to bag
     const addedItemsArr = []
-    const [addedItems, dispacth] = useReducer(BagReducerFunc, addedItemsArr)
-        
+    const [addedItems, dispatch] = useReducer(BagReducerFunc, addedItemsArr)
+
     useEffect(() => {
         setIsEmpty(addedItems.length === 0)
     }, [addedItems])
@@ -40,13 +40,13 @@ export function Provider({ children }) {
                         <whyNotCardsCtx.Provider value={whyNotCards}>
                             <setWhyNotCardsCtx.Provider value={setWhyNotCards}>
                                 <addedItemsCtx.Provider value={addedItems}>
-                                    <dispacthCtx.Provider value={dispacth}>
+                                    <dispatchCtx.Provider value={dispatch}>
                                         <isAdaptiveCtx.Provider value={isAdaptive}>
                                             <setIsAdaptiveCtx.Provider value={setIsAdaptive}>
                                                 {children}
                                             </setIsAdaptiveCtx.Provider>
                                         </isAdaptiveCtx.Provider>
-                                    </dispacthCtx.Provider>
+                                    </dispatchCtx.Provider>
                                 </addedItemsCtx.Provider>
                             </setWhyNotCardsCtx.Provider>
                         </whyNotCardsCtx.Provider>

@@ -160,8 +160,6 @@
     cursor: pointer;
 }
 
-/* Other cards styling */
-
 @media (max-width: 1300px) {
     .cards-div {
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -178,6 +176,7 @@
     }
     
     .cardBtn {
+        z-index: 999;
         margin-top: 10px;
     }
 
