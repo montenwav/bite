@@ -21,7 +21,6 @@ export function Cards() {
             dispatch({ type: 'if_exist', cardId: card.id })
         } else {
             dispatch({ type: 'if_not_exist', card: card })
-            console.log(card)
         }
     }
 

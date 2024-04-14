@@ -24,13 +24,25 @@ export function Provider({ children }) {
     // Add button state
     const [whyNotCards, setWhyNotCards] = useState(whyNotToAddArr)
 
-    //Add new item to bag
     const addedItemsArr = []
-    const [addedItems, dispatch] = useReducer(BagReducerFunc, addedItemsArr)
+
+    //Get storage
+    // const getBagStorageState = () => {
+    //     const getStorage = sessionStorage.getItem('bag_storage')
+    //     return getStorage ? JSON.parse(getStorage) : addedItemsArr
+    // }
+
+    //Add new item to bag
+    let [addedItems, dispatch] = useReducer(BagReducerFunc, addedItemsArr)
 
     useEffect(() => {
+        //Set storage
+        // sessionStorage.setItem('bag_storage', JSON.stringify(addedItems))
+
+        //IsEmpty Check
         setIsEmpty(addedItems.length === 0)
     }, [addedItems])
+
 
     return (
         <isEmptyCtx.Provider value={isEmpty}>

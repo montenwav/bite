@@ -7,17 +7,28 @@ export function Bag({ bagRef }) {
     const addedItems = useContext(addedItemsCtx)
 
     // Add button state
+    // let freeShipping = 32;
+
+    // if(addedItems.length > 0) {
+    //     let allPrices = addedItems.map(item =>
+    //         item.count * item.price
+    //     )
+    //     allPrices = allPrices.reduce((accum, items) => accum + items)
+    //     freeShipping - allPrices
+    // }
 
     let freeShipping = 32;
+    useEffect(() => {
+        console.log(addedItems)
+        if(addedItems != []) {
 
-    let allPrices = addedItems.map(item =>
-        item.count * item.price
-    )
-    
-    if(addedItems.length > 0) allPrices = allPrices.reduce((accum, items) => accum + items)
-
-    freeShipping - allPrices
-
+            let allPrices = addedItems.map(item =>
+                item.count * item.price
+            )
+            allPrices = allPrices.reduce((accum, items) => accum + items)
+            freeShipping - allPrices
+        }
+    }, [addedItems])
 
     useEffect(() => {
         if (isBagOpen) {
@@ -27,6 +38,8 @@ export function Bag({ bagRef }) {
             bagRef.current.style.right = '100%'
             document.body.style.overflow = 'visible';
         }
+
+        console.log(addedItems.length)
     })
 
     return (
@@ -38,7 +51,6 @@ export function Bag({ bagRef }) {
                 <BagContainer
                     freeShipping={freeShipping}
                     bagRef={bagRef}
-
                 />
             </div>
         </>
@@ -128,7 +140,8 @@ const BagMiddle = () => {
 }
 
 const MiddleBagCard = () => {
-    const addedItems = useContext(addedItemsCtx)
+    let addedItems = useContext(addedItemsCtx)
+
     return (
         <>
             {addedItems.map(item => (
@@ -363,15 +376,14 @@ const WhyNotToAddCard = () => {
         }
 
         // Adding state to the button to prevent multipe clicks
-        setWhyNotCards(whyNotCards.map((item) => {
+        setWhyNotCards(whyNotCards.map(item => {
             if (item.id === card.id) return { ...item, added: true }
             return item
         }))
 
         setTimeout(() => {
-            setWhyNotCards(whyNotCards.map((item) => {
-                if (item.id === card.id) return { ...item, added: false }
-                return item
+            setWhyNotCards(whyNotCards.map(item => {
+                return { ...item, added: false }
             }))
         }, 1000)
     }
