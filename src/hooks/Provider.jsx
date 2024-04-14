@@ -25,15 +25,9 @@ export function Provider({ children }) {
     const [whyNotCards, setWhyNotCards] = useState(whyNotToAddArr)
 
     const addedItemsArr = []
-
-    //Get storage
-    // const getBagStorageState = () => {
-    //     const getStorage = sessionStorage.getItem('bag_storage')
-    //     return getStorage ? JSON.parse(getStorage) : addedItemsArr
-    // }
-
     //Add new item to bag
-    let [addedItems, dispatch] = useReducer(BagReducerFunc, addedItemsArr)
+    const [addedItems, dispatch] = useReducer(BagReducerFunc, addedItemsArr)
+
 
     useEffect(() => {
         //Set storage

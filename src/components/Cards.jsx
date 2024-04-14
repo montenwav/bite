@@ -1,11 +1,9 @@
 import { useContext, useState } from "react"
 import { useSize } from '../hooks/useSize.jsx'
-import { dispatchCtx, addedItemsCtx, setIsBagOpenCtx } from '../hooks/Provider.jsx'
-
+import { addedItemsCtx, setIsBagOpenCtx, dispatchCtx } from "../hooks/Provider.jsx"
 
 export function Cards() {
     const [cards, setCards] = useState(cardsArr)
-
     const windowsize = useSize() // Add dynamic width
 
     const dispatch = useContext(dispatchCtx)
@@ -29,17 +27,18 @@ export function Cards() {
             <section className='cards_main'>
                 <h1>Shop Best Sellers</h1>
                 <div className='cards-div'>
-                    {windowsize <= 1000 ?
-                        <AdaptiveCards addItem={addItem} cards={cards} setCards={setCards} />
+                    {windowsize < 1000 ?
+                        <AdaptiveCards cards={cards} setCards={setCards} />
                         :
-                        <FullCards addItem={addItem} cards={cards} setCards={setCards} />}
+                        <FullCards cards={cards} setCards={setCards} />}
                 </div>
             </section>
         </>
     )
 }
 
-const FullCards = ({ cards, setCards, addItem }) => {
+const FullCards = ({ cards, setCards }) => {
+    const dispatch = useContext(dispacthCtx)
     return (
         <>
             {cards.map(card =>
@@ -101,16 +100,15 @@ const FullCards = ({ cards, setCards, addItem }) => {
                         </div>
                     </div>
                     <button
-                        onClick={() => addItem(card)}
-                        className="button cardBtn"
-                    >ADD TO BAG</button>
+                        onClick={() => dispatch({ type: 'add_item', card: card })}
+                        className="button cardBtn">ADD TO BAG</button>
                 </div>
             )}
         </>
     )
 }
 
-const AdaptiveCards = ({ cards, setCards, addItem }) => {
+const AdaptiveCards = ({ cards, setCards }) => {
     return (
         <>
             {cards.map(card =>
@@ -123,10 +121,7 @@ const AdaptiveCards = ({ cards, setCards, addItem }) => {
                     <ColorPicker cardID={card.id} card={card} setCards={setCards} cards={cards} />
                     <p>{card.id == 0 ? `From $${card.price}/month` : `$${card.price}/month`}</p>
                     <Stars style={{ width: '10px' }} card={card} />
-                    <button
-                        onClick={() => addItem(card)}
-                        className="button cardBtn"
-                    >ADD TO BAG</button>
+                    <button className="button cardBtn">ADD TO BAG</button>
                 </div>
             )}
         </>
@@ -158,23 +153,29 @@ const ColorPicker = ({ cardID, card, cards, setCards }) => {
 
         setCards(cards.map(card => {
             {/*First Card*/ }
-            if (card.id == 4 && card.id == cardID) {
+            if (card.id == 0 && card.id == cardID) {
                 switch (colID) {
                     case 0: return {
                         ...card, src: '/src/images/products/1/pc-tpb-ff-4oz-mint-no-bg.webp', type: 'Mint', colors: card.colors.map(item => {
-                            if (item.colorId == colID) return { ...item, clicked: true }
+                            if (item.colorId == colID) {
+                                return { ...item, clicked: true }
+                            }
                             return { ...item, clicked: false }
                         })
                     }
                     case 1: return {
                         ...card, src: '/src/images/products/1/pdp-product-card-tpb-ff-4oz-mint-charcoal.webp', type: 'Mint Charcoal', colors: card.colors.map(item => {
-                            if (item.colorId == colID) return { ...item, clicked: true }
+                            if (item.colorId == colID) {
+                                return { ...item, clicked: true }
+                            }
                             return { ...item, clicked: false }
                         })
                     }
                     case 2: return {
                         ...card, src: '/src/images/products/1/pdp-product-card-tpb-ff-4oz-berry-twist-no-bg-012524.webp', type: 'Berry Twist', colors: card.colors.map(item => {
-                            if (item.colorId == colID) return { ...item, clicked: true }
+                            if (item.colorId == colID) {
+                                return { ...item, clicked: true }
+                            }
                             return { ...item, clicked: false }
                         })
                     }
@@ -182,29 +183,37 @@ const ColorPicker = ({ cardID, card, cards, setCards }) => {
             }
 
             {/*Third Card*/ }
-            if (card.id == 6 && card.id == cardID) {
+            if (card.id == 2 && card.id == cardID) {
                 switch (colID) {
                     case 0: return {
                         ...card, bgPrevirew: 'transparent', type: 'Fragrance-Free', colors: card.colors.map(item => {
-                            if (item.colorId == colID) return { ...item, clicked: true }
+                            if (item.colorId == colID) {
+                                return { ...item, clicked: true }
+                            }
                             return { ...item, clicked: false }
                         })
                     }
                     case 1: return {
                         ...card, bgPrevirew: '#f27c2d', type: 'Neroli', colors: card.colors.map(item => {
-                            if (item.colorId == colID) return { ...item, clicked: true }
+                            if (item.colorId == colID) {
+                                return { ...item, clicked: true }
+                            }
                             return { ...item, clicked: false }
                         })
                     }
                     case 2: return {
                         ...card, bgPrevirew: '#e5497a', type: 'Rose Vert', colors: card.colors.map(item => {
-                            if (item.colorId == colID) return { ...item, clicked: true }
+                            if (item.colorId == colID) {
+                                return { ...item, clicked: true }
+                            }
                             return { ...item, clicked: false }
                         })
                     }
                     case 3: return {
                         ...card, bgPrevirew: '#51511a', type: 'Santal', colors: card.colors.map(item => {
-                            if (item.colorId == colID) return { ...item, clicked: true }
+                            if (item.colorId == colID) {
+                                return { ...item, clicked: true }
+                            }
                             return { ...item, clicked: false }
                         })
                     }
@@ -234,7 +243,7 @@ const ColorPicker = ({ cardID, card, cards, setCards }) => {
 
 const cardsArr = [
     {
-        id: 4,
+        id: 0,
         display_title: 'TOOTHPASTE BITS FLUORIDE-FREE',
         src: '/src/images/products/1/pc-tpb-ff-4oz-mint-no-bg.webp',
         colors: [
@@ -253,7 +262,7 @@ const cardsArr = [
         old_price: 48,
     },
     {
-        id: 5,
+        id: 1,
         display_title: 'TOOTHPASTE BITS WITH FLUORIDE',
         src: '/src/images/products/2/pc-tpb-wf-2oz-mint-fluoride-no-bg.webp',
         colors: [{ colorId: 0, color: '#c7f6e6', clicked: true }],
@@ -268,7 +277,7 @@ const cardsArr = [
         old_price: 48,
     },
     {
-        id: 6,
+        id: 2,
         display_title: 'DEODORANT SET',
         src: '/src/images/products/3/pdp-product-card-desktop-silver-case-open-no-bg.webp',
         colors: [
@@ -286,7 +295,7 @@ const cardsArr = [
         price: 32,
     },
     {
-        id: 7,
+        id: 3,
         display_title: 'MOUTHWASH BITS',
         src: '/src/images/products/4/pc-mouthwash-no-bg.webp',
         colors: [{ colorId: 0, color: '#c7f6e6', clicked: true }],
