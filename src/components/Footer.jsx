@@ -5,7 +5,7 @@ export function Footer() {
 
     return (
         <section className="footer">
-            {windowsize <= 1000 ? <MoblieFooter /> : <FullFooter />}
+            {windowsize < 1000 ? <MoblieFooter /> : <FullFooter />}
         </section>
     )
 }

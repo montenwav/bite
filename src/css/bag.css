@@ -138,8 +138,9 @@
 }
 
 .why_not_to_add {
-    position: absolute;
-    bottom: 0;
+    /* position: absolute;
+    bottom: 0; */
+    height: 325px;
     background: white;
     width: 100%;
     z-index: 4
@@ -188,6 +189,7 @@
 }
 
 .checkout_container {
+    cursor: pointer;
     height: 65px;
     background: var(--lightblue);
     display: flex;
@@ -288,4 +290,22 @@
     margin: 0;
     padding: 0;
     margin-right: 20px;
+}
+
+.bag_middle {
+    height: calc(100% - 415px);
+    overflow-y: scroll;
+}
+
+.bag_middle::-webkit-scrollbar {
+    width: 10px
+}
+
+.bag_middle::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.bag_middle::-webkit-scrollbar-thumb { 
+    background: black;
+    border-radius: 5px;
 }

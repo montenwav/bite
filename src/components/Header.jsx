@@ -29,12 +29,6 @@ export function Header() {
         }
     })
 
-    useEffect(() => {
-        if (scrollY.current >= 100 || isAdaptive) {
-            controls.start('visible')
-        }
-    })
-
     return (
         <>
             <section className='header_sec'>
@@ -150,7 +144,9 @@ const RightHeader = () => {
                 </g>
             </svg>
 
-            <div className='bag_icon_container'>
+            <div 
+            onClick={() => setIsBagOpen(true)}
+            className='bag_icon_container'>
                 <svg
                     onClick={() => setIsBagOpen(true)}
                     className='bag_icon'

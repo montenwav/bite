@@ -18,7 +18,7 @@ export const Adaptive = () => {
             document.body.style.overflow = 'visible';
         }
 
-        if (windowsize >= 1000) {
+        if (windowsize > 1000) {
             setIsAdaptive(false)
             adaptiveRef.current.style.right = '-100%';
             document.body.style.overflow = 'visible';

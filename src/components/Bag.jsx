@@ -1,19 +1,9 @@
 import { useEffect, useContext } from "react"
-import { isBagOpenCtx, isEmptyCtx, dispacthCtx, addedItemsCtx, whyNotCardsCtx, setWhyNotCardsCtx, setIsBagOpenCtx } from '../hooks/Provider.jsx'
+import { isBagOpenCtx, isEmptyCtx, dispatchCtx, addedItemsCtx, whyNotCardsCtx, setWhyNotCardsCtx, setIsBagOpenCtx } from '../hooks/Provider.jsx'
 
 export function Bag({ bagRef }) {
     const setIsBagOpen = useContext(setIsBagOpenCtx)
     const isBagOpen = useContext(isBagOpenCtx)
-    const addedItems = useContext(addedItemsCtx)
-
-    // Add button state
-    let freeShipping = 32;
-        let allPrices = addedItems.map(item =>
-            item.count * item.price
-        )
-        allPrices = allPrices.reduce((accum, items) => accum + items)
-        freeShipping - allPrices
-
 
     useEffect(() => {
         if (isBagOpen) {
@@ -23,7 +13,6 @@ export function Bag({ bagRef }) {
             bagRef.current.style.right = '100%'
             document.body.style.overflow = 'visible';
         }
-
     })
 
     return (
@@ -33,7 +22,6 @@ export function Bag({ bagRef }) {
                     onClick={() => setIsBagOpen(false)}
                     className="bag_bg"></div>
                 <BagContainer
-                    freeShipping={freeShipping}
                     bagRef={bagRef}
                 />
             </div>
@@ -41,20 +29,30 @@ export function Bag({ bagRef }) {
     )
 }
 
-const BagContainer = ({ bagRef, freeShipping }) => {
+const BagContainer = ({ bagRef }) => {
     return (
         <div
             ref={bagRef}
             className="bag_container">
-            <BagTop freeShipping={freeShipping} />
+            <BagTop />
             <BagMiddle />
             <WhyNotToAdd />
         </div>
     )
 }
 
-const BagTop = ({ freeShipping }) => {
+const BagTop = () => {
     const setIsBagOpen = useContext(setIsBagOpenCtx)
+    const addedItems = useContext(addedItemsCtx)
+
+    let freeShipping = 32;
+
+    // Update freeShipping 
+    if (addedItems.length > 0) {
+        let allPrices = addedItems.map(item => item.count * item.price)
+            .reduce((accum, item) => accum + item, 0);
+        freeShipping -= allPrices;
+    }
 
     return (
         <>
@@ -107,17 +105,15 @@ const BagMiddle = () => {
     return (
         <div className="bag_middle">
             {isEmpty ?
-                <div className="empty_bag">
+                <>
                     <div className="middle_bag_text">
                         <h5>OOPS. YOUR BAG IS EMPTY.</h5>
                         <p>Here's what's trending:</p>
                     </div>
                     <EmptyMiddleBagCard />
-                </div>
+                </>
                 :
-                <div className="not_empty_bag">
-                    <MiddleBagCard />
-                </div>
+                <MiddleBagCard />
             }
         </div>
     )
@@ -194,7 +190,7 @@ const MiddleBagCard = () => {
 
 const BagCounter = ({ item }) => {
     const addedItems = useContext(addedItemsCtx)
-    const dispacth = useContext(dispacthCtx)
+    const dispatch = useContext(dispatchCtx)
 
     const handleDecrement = (itemId) => {
         let decrementArr = addedItems.map(card => {
@@ -203,7 +199,7 @@ const BagCounter = ({ item }) => {
         })
         decrementArr = decrementArr.filter(c => c.count > 0)
 
-        dispacth({ type: 'decrement_button', decrementArr: decrementArr })
+        dispatch({ type: 'decrement_button', decrementArr: decrementArr })
     }
 
     return (
@@ -240,7 +236,7 @@ const BagCounter = ({ item }) => {
                     <h4>{item.count}</h4>
                 </div>
                 <div
-                    onClick={() => dispacth({ type: 'increment_button', itemId: item.id })}
+                    onClick={() => dispatch({ type: 'increment_button', itemId: item.id })}
                     className="bag_counter_item">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -272,7 +268,7 @@ const BagCounter = ({ item }) => {
 
             <p
                 style={{ cursor: 'pointer' }}
-                onClick={() => dispacth({ type: 'remove_button', itemId: item.id })}
+                onClick={() => dispatch({ type: 'remove_button', itemId: item.id })}
             >Remove</p>
         </div>
     )
@@ -346,17 +342,15 @@ const WhyNotToAddCard = () => {
     const setWhyNotCards = useContext(setWhyNotCardsCtx)
 
     const addedItems = useContext(addedItemsCtx)
-    const dispacth = useContext(dispacthCtx)
-
+    const dispatch = useContext(dispatchCtx)
 
     const addingItem = (card) => {
 
-        // Add item
         let existingItem = addedItems.find(item => item.id === card.id);
         if (existingItem) {
-            dispacth({ type: 'if_exist', cardId: card.id })
+            dispatch({ type: 'if_exist', cardId: card.id })
         } else {
-            dispacth({ type: 'if_not_exist', card: card })
+            dispatch({ type: 'if_not_exist', card: card })
         }
 
         // Adding state to the button to prevent multipe clicks

@@ -24,6 +24,11 @@ body {
     background: var(--bg-color);
 }
 
+::selection {
+    background: black;
+    color: white;
+}
+
 section:not(.main_wallpaper, .BitsAreBetter, .footer) {
     width: min(1500px, 95%);
     margin: auto;
@@ -34,7 +39,6 @@ section:not(.main_wallpaper, .BitsAreBetter, .footer) {
     height: 1px;
     background: black;
 }
-
 
 /* Icons */
 

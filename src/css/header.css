@@ -118,6 +118,7 @@
 }
 
 .how_many_items {
+    cursor: pointer;
     position: absolute;
     display: grid;
     place-items: center;

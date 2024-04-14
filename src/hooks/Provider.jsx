@@ -24,19 +24,16 @@ export function Provider({ children }) {
     // Add button state
     const [whyNotCards, setWhyNotCards] = useState(whyNotToAddArr)
 
-    const addedItemsArr = []
     //Add new item to bag
-    const [addedItems, dispatch] = useReducer(BagReducerFunc, addedItemsArr)
-
+    const getBagSrotage = JSON.parse(sessionStorage.getItem('bag')) || []
+    const [addedItems, dispatch] = useReducer(BagReducerFunc, getBagSrotage)
 
     useEffect(() => {
         //Set storage
-        // sessionStorage.setItem('bag_storage', JSON.stringify(addedItems))
-
+        sessionStorage.setItem('bag', JSON.stringify(addedItems))
         //IsEmpty Check
         setIsEmpty(addedItems.length === 0)
     }, [addedItems])
-
 
     return (
         <isEmptyCtx.Provider value={isEmpty}>
@@ -71,7 +68,7 @@ export const BagReducerFunc = (addedItems, action) => {
             )
         }
         case 'if_not_exist': {
-            return [{ ...action.card }, ...addedItems]
+            return [{...action.card}, ...addedItems]
         }
         case 'increment_button': {
             return addedItems.map(card => {
