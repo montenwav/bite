@@ -10,7 +10,7 @@ export const whyNotCardsCtx = createContext(null)
 export const setWhyNotCardsCtx = createContext(null)
 
 export const addedItemsCtx = createContext(null)
-export const dispatchCtx = createContext(null)
+export const dispacthCtx = createContext(null)
 
 export const isEmptyCtx = createContext(null)
 export const setIsEmptyCtx = createContext(null)
@@ -25,6 +25,7 @@ export function Provider({ children }) {
     const [whyNotCards, setWhyNotCards] = useState(whyNotToAddArr)
 
     const addedItemsArr = []
+<<<<<<< HEAD
 
     //Get storage
     // const getBagStorageState = () => {
@@ -35,6 +36,10 @@ export function Provider({ children }) {
     //Add new item to bag
     let [addedItems, dispatch] = useReducer(BagReducerFunc, addedItemsArr)
 
+=======
+    const [addedItems, dispacth] = useReducer(BagReducerFunc, addedItemsArr)
+        
+>>>>>>> parent of 1d3fd16 (bag without scroll and storage)
     useEffect(() => {
         //Set storage
         // sessionStorage.setItem('bag_storage', JSON.stringify(addedItems))
@@ -52,13 +57,13 @@ export function Provider({ children }) {
                         <whyNotCardsCtx.Provider value={whyNotCards}>
                             <setWhyNotCardsCtx.Provider value={setWhyNotCards}>
                                 <addedItemsCtx.Provider value={addedItems}>
-                                    <dispatchCtx.Provider value={dispatch}>
+                                    <dispacthCtx.Provider value={dispacth}>
                                         <isAdaptiveCtx.Provider value={isAdaptive}>
                                             <setIsAdaptiveCtx.Provider value={setIsAdaptive}>
                                                 {children}
                                             </setIsAdaptiveCtx.Provider>
                                         </isAdaptiveCtx.Provider>
-                                    </dispatchCtx.Provider>
+                                    </dispacthCtx.Provider>
                                 </addedItemsCtx.Provider>
                             </setWhyNotCardsCtx.Provider>
                         </whyNotCardsCtx.Provider>
