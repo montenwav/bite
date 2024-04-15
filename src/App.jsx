@@ -16,7 +16,7 @@ export default function App() {
       <TopCompanies />
       <Cards/>
       <BitsAreBetter/>
-      {/* <Reviews/> */}
+      <Reviews/>
       <ShopByCategory/>
       <BottomCompanies/>
       <FAQs/>

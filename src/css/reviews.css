@@ -1,0 +1,126 @@
+.reviews {
+    background: var(--bg-reviews);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: white;
+    min-width: 100%;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.review_card p {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.reviews h1 {
+    margin: 0;
+}
+
+.AuthorAndStars {
+    position: absolute;
+    bottom: 20px;
+    left: 40px;
+}
+
+.review_container {
+    margin-left: 30%;
+    text-align: left;
+    display: flex;
+    width: 100%;
+    transition: .3s;
+    padding-top: 30px;
+    padding-bottom: 50px;
+    gap: 20px;
+}
+
+.review_card {
+    min-width: 70%;
+    height: 400px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid white;
+}
+
+.ReviewTitle {
+    position: relative;
+    padding-top: 30px;
+    padding-left: 40px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.review_card_img {
+    width: 50%;
+}
+
+.review_card_img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.reviews-stars {
+    width: 120px;
+}
+
+@media (max-width: 1001px) {
+    .review_card {
+        min-width: 25%;
+        flex-direction: column;
+        height: 550px;
+    }
+    .review_container {
+        margin-left: 75%;
+    }
+    .review_card_img {
+        width: 100%;
+        height: 50%;
+    }
+
+    .ReviewTitle {
+        width: 90%;
+        height: 50%;
+        padding-left: 30px;
+    }
+    .reviews-stars {
+        width: 80px;
+    }
+    .AuthorAndStars {
+        left: 30px;
+        bottom: 10px;
+    }
+}
+
+@media (min-width: 1001px) {
+    .review_card {
+        min-width: 70%;
+    }
+    .review_container {
+        margin-left: 30%;
+    }
+}
+
+@media (min-width: 2000px) {
+    .review_card {
+        min-width: 30%;
+    }
+    .review_container {
+        margin-left: 70%;
+    }
+}
+
+@media (min-width: 2800px) {
+    .review_card {
+        min-width: 15%;
+    }
+    .review_container {
+        margin-left: 85%;
+    }
+}

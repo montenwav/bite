@@ -27,16 +27,16 @@ export function BottomCompanies() {
 
     //Autoplay effect
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         updateIndex(imgIndex + 1);
-    //     }, 3000);
-    //     return () => {
-    //         if (interval) {
-    //             clearInterval(interval);
-    //         }
-    //     };
-    // });
+    useEffect(() => {
+        const interval = setInterval(() => {
+            updateIndex(imgIndex + 1);
+        }, 3000);
+        return () => {
+            if (interval) {
+                clearInterval(interval);
+            }
+        };
+    });
 
     const updateIndex = (newIndex) => {
         if (newIndex >= companiesList.length) {

@@ -1,5 +1,6 @@
 import { useEffect, useContext } from "react"
 import { isBagOpenCtx, isEmptyCtx, dispatchCtx, addedItemsCtx, whyNotCardsCtx, setWhyNotCardsCtx, setIsBagOpenCtx } from '../hooks/Provider.jsx'
+import {useSize} from '../hooks/useSize.jsx'
 
 export function Bag({ bagRef }) {
     const setIsBagOpen = useContext(setIsBagOpenCtx)
@@ -101,21 +102,52 @@ const BagTop = () => {
 }
 
 const BagMiddle = () => {
+
     const isEmpty = useContext(isEmptyCtx)
     return (
-        <div className="bag_middle">
+        <div 
+        style={{height: isEmpty ? `calc(100% - 345px)` : `calc(100% - 415px)`}}
+        className="bag_middle">
             {isEmpty ?
-                <>
-                    <div className="middle_bag_text">
-                        <h5>OOPS. YOUR BAG IS EMPTY.</h5>
-                        <p>Here's what's trending:</p>
-                    </div>
-                    <EmptyMiddleBagCard />
-                </>
+                <EmptyBag />
                 :
                 <MiddleBagCard />
             }
         </div>
+    )
+}
+
+const EmptyBag = () => {
+    return (
+        <>
+            <div className="middle_bag_text">
+                <h5>OOPS. YOUR BAG IS EMPTY.</h5>
+                <p>Here's what's trending:</p>
+            </div>
+            <EmptyMiddleBagCard />
+        </>
+    )
+}
+
+const EmptyMiddleBagCard = () => {
+    return (
+        <>
+            {middleBagArr.map((card, idx) => (
+                <div key={idx} className="middle_bag_card">
+                    <div className="middle_bag_card_img">
+                        <img
+                            src={card.src}
+                            alt={card.title} />
+                    </div>
+
+                    <div className="middle_bag_card_desc">
+                        <h1>{card.title}</h1>
+                        <h6>{card.description}</h6>
+                        <a href="#">Shop Now</a>
+                    </div>
+                </div>
+            ))}
+        </>
     )
 }
 
@@ -173,7 +205,7 @@ const MiddleBagCard = () => {
                                     <div className="bag_total">
                                         <h4>${item.price}.00</h4>
                                         <s style={{ color: 'gray' }}>
-                                            <h4>${item.old_price}.00</h4>
+                                            {item.old_price != 0 && <h4>${item.old_price}.00</h4>}
                                         </s>
                                     </div>
                                 </div>
@@ -271,28 +303,6 @@ const BagCounter = ({ item }) => {
                 onClick={() => dispatch({ type: 'remove_button', itemId: item.id })}
             >Remove</p>
         </div>
-    )
-}
-
-const EmptyMiddleBagCard = () => {
-    return (
-        <>
-            {middleBagArr.map((card, idx) => (
-                <div key={idx} className="middle_bag_card">
-                    <div className="middle_bag_card_img">
-                        <img
-                            src={card.src}
-                            alt={card.title} />
-                    </div>
-
-                    <div className="middle_bag_card_desc">
-                        <h1>{card.title}</h1>
-                        <h6>{card.description}</h6>
-                        <a href="#">Shop Now</a>
-                    </div>
-                </div>
-            ))}
-        </>
     )
 }
 

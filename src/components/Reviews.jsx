@@ -1,18 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import {useSize} from '../hooks/useSize.jsx'
 
 export function Reviews() {
     const [activeIndex, setActiveIndex] = useState(0);
 
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //         updateIndex(activeIndex + 1);
-    //     }, 3000);
-    //     return () => {
-    //         if (interval) {
-    //             clearInterval(interval);
-    //         }
-    //     };
-    // });
+    const windowsize = useSize()
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            updateIndex(activeIndex + 1);
+        }, 3000);
+        return () => {
+            if (interval) {
+                clearInterval(interval);
+            }
+        };
+    });
 
     const updateIndex = (newIndex) => {
         if (newIndex >= reviews.length - 3) {
@@ -28,9 +31,18 @@ export function Reviews() {
             <div
                 className="review_container"
                 style={{
-                    transform: `translateX(calc(-${activeIndex} * 100% / 3 + ${activeIndex} * -10px))`, //card width + gap
-                    // transform: `translateX(calc(-${activeIndex} * 700px + ${activeIndex} * -16px))`, //card width + gap
+                    transform:
+                        windowsize < 1000 ? 
+                            `translateX(calc(-${activeIndex} * 25% + ${activeIndex} * -20px))` :
+                        windowsize < 2000 ? 
+                            `translateX(calc(-${activeIndex} * 70% + ${activeIndex} * -20px))` :
+                        windowsize < 2800 ? 
+                            `translateX(calc(-${activeIndex} * 30% + ${activeIndex} * -20px))` :
+                        windowsize > 2800 ? 
+                            `translateX(calc(-${activeIndex} * 15% + ${activeIndex} * -20px))` :
+                            undefined, // Use undefined to remove the style if none of the conditions match
                 }}
+                
             >
                 <ReviewCards />
             </div>
@@ -54,10 +66,12 @@ const ReviewCards = () => {
                             <Stars />
                         </div>
                     </div>
-                    <img
-                        className='review_card_img'
-                        src={review.src}
-                        alt={review.author} />
+
+                    <div className='review_card_img'>
+                        <img
+                            src={review.src}
+                            alt={review.author} />
+                    </div>
                 </div>
             )}
         </>

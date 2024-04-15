@@ -29,6 +29,19 @@ body {
     color: white;
 }
 
+::-webkit-scrollbar {
+    width: 10px
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb { 
+    background: black;
+    border-radius: 5px;
+}
+
 section:not(.main_wallpaper, .BitsAreBetter, .footer) {
     width: min(1500px, 95%);
     margin: auto;

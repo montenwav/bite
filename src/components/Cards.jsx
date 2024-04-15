@@ -280,6 +280,7 @@ const cardsArr = [
         title: 'Deodorant set',
         count: 1,
         price: 32,
+        old_price: 0,
     },
     {
         id: 7,
@@ -294,5 +295,6 @@ const cardsArr = [
         description: 'Mouthwash',
         count: 1,
         price: 20,
+        old_price: 0,
     },
 ]
