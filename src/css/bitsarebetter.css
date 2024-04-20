@@ -1,6 +1,6 @@
 .FirstSecBg {
     background: url(/src/images/section1_bg.png) no-repeat center;
-    height: 800px;
+    /* height: 800px; */
     padding-top: 50px;
     padding-bottom: 50px;
     overflow: hidden;
@@ -14,6 +14,7 @@
 }
 
 .BitsAreBetter {
+    margin-top: 50px;
     background-color: #fafafa;
 }
 
@@ -24,10 +25,13 @@
     flex-direction: column;
 }
 
+.FirstSecElement h4 {
+    margin-bottom: 16px;
+}
+
 .BitsAreBetter h1 {
     padding-top: 25px;
     text-align: center;
-    /* font-size: 3em; */
 }
 
 .FirstSecMain {
@@ -37,10 +41,9 @@
     text-align: center;
 }
 
-.FirstSecMain h2 {
-    font-weight: normal;
-    font-family: sans-serif;
-}
+/* .FirstSecMain h2 {
+    font-family: var(--sans-serif-font)
+} */
 
 .FirstSecColumn > div {
     padding: 30px;
@@ -50,11 +53,11 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 20%
+    width: 25%
 }
 
 .bits_are_better_content {
-    font-family: sans-serif;
+    font-family: var(--sans-serif-font);
     width: 220px;
 }
 

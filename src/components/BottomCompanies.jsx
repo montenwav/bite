@@ -73,8 +73,11 @@ const Companies = () => {
                     whileTap={{ cursor: 'grabbing' }}
                     className='bottom_comp_item'
                 >
-                    <h4>{company.title}</h4>
-                    <img height='25px' src={company.src} />
+                    <h2>{company.title}</h2>
+
+                    <div className='btm_companies_img'>
+                        <img height='25px' src={company.src} />
+                    </div>
                 </motion.div>
             ))}
         </>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import {useSize} from '../hooks/useSize.jsx'
+import { useSize } from '../hooks/useSize.jsx'
 
 export function Reviews() {
     const [activeIndex, setActiveIndex] = useState(0);
@@ -32,17 +32,19 @@ export function Reviews() {
                 className="review_container"
                 style={{
                     transform:
-                        windowsize < 1000 ? 
-                            `translateX(calc(-${activeIndex} * 25% + ${activeIndex} * -20px))` :
-                        windowsize < 2000 ? 
+                        windowsize < 600 ?
                             `translateX(calc(-${activeIndex} * 70% + ${activeIndex} * -20px))` :
-                        windowsize < 2800 ? 
-                            `translateX(calc(-${activeIndex} * 30% + ${activeIndex} * -20px))` :
-                        windowsize > 2800 ? 
-                            `translateX(calc(-${activeIndex} * 15% + ${activeIndex} * -20px))` :
-                            undefined, // Use undefined to remove the style if none of the conditions match
+                            windowsize < 1000 ?
+                                `translateX(calc(-${activeIndex} * 50% + ${activeIndex} * -20px))` :
+                                windowsize < 2000 ?
+                                    `translateX(calc(-${activeIndex} * 70% + ${activeIndex} * -20px))` :
+                                    windowsize < 2800 ?
+                                        `translateX(calc(-${activeIndex} * 30% + ${activeIndex} * -20px))` :
+                                        windowsize > 2800 ?
+                                            `translateX(calc(-${activeIndex} * 15% + ${activeIndex} * -20px))` :
+                                            undefined, // Use undefined to remove the style if none of the conditions match
                 }}
-                
+
             >
                 <ReviewCards />
             </div>

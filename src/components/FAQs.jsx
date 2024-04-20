@@ -24,7 +24,7 @@ export function FAQs() {
                         title={`How do subscriptions work?`}
                         p_1={`With subscriptions, we send you all 4 months of Toothpaste Bits at once in our refillable glass jar for $32. Shipments after that will be sent every 4 months for $32 after your initial purchase, so you don't have to worry about running out of Bits. Those orders will come in our compostable refill pouches that are meant to be transferred into your glass jar as soon as you receive them.`}
                         p_2={`Our refill pouch will disintegrate in home compost within 12-16 weeks. Or if you don't have a home compost, they can be dropped in the compost bin in a number of stores—Starbucks and Whole Foods are the most common.`}
-                        p3={`We will send you an email reminder before your order is processed so you can cancel, postpone or even change the flavor of your upcoming Bits before they ship. You can always update the frequency or flavor of your upcoming Bits by logging into your account and making changes there.`} />
+                        p_3={`We will send you an email reminder before your order is processed so you can cancel, postpone or even change the flavor of your upcoming Bits before they ship. You can always update the frequency or flavor of your upcoming Bits by logging into your account and making changes there.`} />
                     <SecondTypeQuestion
                         setToggleId={setToggleId}
                         toggleId={toggleId}

@@ -68,7 +68,7 @@ const Email = () => {
     return (
         <div className='footer_email'>
             <h4>STAY IN THE KNOW</h4>
-            <h1>Sign up for 10% off your first order.</h1>
+            <h3>Sign up for 10% off your first order.</h3>
             <div className="email_container">
                 <input type="email" placeholder='Entar email address' />
                 <div className="hr" style={{ background: 'white', width: '95%' }}></div>
@@ -97,7 +97,7 @@ const FullFooterLinks = () => {
         <div className="footer_links full_links">
             <div className="footer_links_container">
                 <div className="footer_links_header">
-                    <h1>SHOP</h1>
+                    <h4>SHOP</h4>
                 </div>
                 <div className="footer_links_content">
                     <a href="#"><h4>All Products</h4></a>
@@ -108,7 +108,7 @@ const FullFooterLinks = () => {
             </div>
             <div className="footer_links_container">
                 <div className="footer_links_header">
-                    <h1>LEARN</h1>
+                    <h4>LEARN</h4>
                 </div>
                 <div className="footer_links_content">
                     <a href="#"><h4>Ingredients</h4></a>
@@ -118,7 +118,7 @@ const FullFooterLinks = () => {
             </div>
             <div className="footer_links_container">
                 <div className="footer_links_header">
-                    <h1>HELP</h1>
+                    <h4>HELP</h4>
                 </div>
                 <div className="footer_links_content">
                     <a href="#">
@@ -135,7 +135,7 @@ const FullFooterLinks = () => {
             </div>
             <div className="footer_links_container">
                 <div className="footer_links_header">
-                    <h1>FOLLOW</h1>
+                    <h4>FOLLOW</h4>
                 </div>
                 <div className="footer_links_content">
                     <a href="#">
@@ -167,7 +167,7 @@ const MoblieFooterLinks = () => {
         <div className="footer_links">
             <div className="footer_links_container">
                 <div className="footer_links_header">
-                    <h1>LEARN</h1>
+                    <h4>LEARN</h4>
                 </div>
                 <div className="footer_links_content">
                     <a href="#"><h4>Ingredients</h4></a>
@@ -178,7 +178,7 @@ const MoblieFooterLinks = () => {
             <FooterHr />
             <div className="footer_links_container">
                 <div className="footer_links_header">
-                    <h1>HELP</h1>
+                    <h4>HELP</h4>
                 </div>
                 <div className="footer_links_content">
                     <a href="#"><h4>Account</h4></a>
@@ -193,7 +193,7 @@ const MoblieFooterLinks = () => {
             <FooterHr />
             <div className="footer_links_container">
                 <div className="footer_links_header">
-                    <h1>FOLLOW</h1>
+                    <h4>FOLLOW</h4>
                 </div>
                 <div className="footer_links_content">
                     <a href="#">

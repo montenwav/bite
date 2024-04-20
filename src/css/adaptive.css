@@ -11,6 +11,7 @@
 }
 
 .adaptive_open_item {
+    padding-top: 20px;
     width: 95%;
     margin: auto;
 }
@@ -18,11 +19,9 @@
 .adaptive_item {
     width: 95%;
     margin: auto;
-    /* padding-left: 30px; */
     display: flex;
     align-items: center;
     height: 60px;
-    /* box-shadow: 0px 1px black; */
 }
 
 .adaptive_item a:hover {
@@ -47,18 +46,4 @@
 
 .adaptive_flex_elem:hover {
     text-decoration: underline;
-}
-
-.adaptive_flex_elem h1 {
-    font-size: 1.5em;
-    line-height: 1;
-}
-
-.adaptive_open_item h5 {
-    padding-top: 20px;
-}
-
-.adaptive_flex_elem p, .adaptive_flex_elem h1, h5  {
-    padding: 0;
-    margin: 0;
 }

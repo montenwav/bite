@@ -177,7 +177,7 @@ const RightHeader = () => {
                     </g>
                 </svg>
                 {!isEmpty && <div className='how_many_items'>
-                    <p>{addedItems.length}</p>
+                    <h6 style={{fontSize: '.7em'}}>{addedItems.length}</h6>
                 </div>}
             </div>
         </div>

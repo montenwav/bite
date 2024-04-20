@@ -1,11 +1,5 @@
-/* * {
-    border: 1px solid red;
-} */
-
 .bottom_companies {
     cursor: grab;
-    /* margin: auto; */
-    /* width: 100%; */
     margin-top: 100px;
     border: 1px solid lightgray;
     overflow: hidden;
@@ -23,21 +17,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* padding-top: 60px;
-    padding-bottom: 60px; */
     padding: 60px;
 }
 
-.bottom_comp_item h4 {
-    width: 50%;
-    margin: auto;
-    font-family: 'Queens';
-    line-height: 20px;
-    font-size: 2em;
-}
 
 .bottom_comp_item img {
     margin-top: 10px;
+}
+
+.btm_companies_img {
+    height: 40px;
 }
 
 @media (max-width: 1000px) {

@@ -89,7 +89,6 @@
     justify-content: center;
     align-items: center;
     padding: 15px;
-    font-size: 14px;
 }
 
 .leftHeader {
@@ -131,9 +130,7 @@
 }
 
 .how_many_items p {
-    font-size: .7em;
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
+    font-family: var(--sans-serif-font);
 }
 
 @media (max-width: 1000px) {

@@ -8,10 +8,19 @@
     --sans-serif-font: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     --cards-bg: #e9e9eb;
     --lightblue: #72f2c7;
-    --bg-reviews: #131313
+    --bg-reviews: #131313;
+    --h1: clamp(1.5rem, 8vw, 3.5rem);
+    --h2: clamp(16px, 5vw, 40px);
+    --h3: clamp(16px, 6vw, 30px);
+    --h4: clamp(16px, 2.5vw, 24px);
+    --h5: clamp(14px, 2vw, 16px);
+    --h6: 12px;
+    --p: clamp(14px, 3vw, 20px);
 }
 
 * {
+    margin: 0px;
+    padding: 0px;
     box-sizing: border-box;
     font-size: 16px;
     font-weight: normal;
@@ -19,8 +28,6 @@
 }
 
 body {
-    margin: 0px;
-    padding: 0px;
     background: var(--bg-color);
 }
 
@@ -51,6 +58,63 @@ section:not(.main_wallpaper, .BitsAreBetter, .footer) {
     width: 100%;
     height: 1px;
     background: black;
+}
+
+ul {
+    list-style-type: none;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+p {
+    font-size: var(--p)
+}
+
+h1 {
+    line-height: .8em;
+    font-size: var(--h1);
+    font-family: 'Queens';
+}
+
+h2 {
+    font-size: var(--h2);
+    font-family: var(--sans-serif-font)
+}
+
+h3 {
+    font-size: var(--h3);
+    font-family: var(--sans-serif-font)
+}
+
+h4 {
+    font-size: var(--h4);
+    letter-spacing: -.4px;
+    word-spacing: 1px;
+    font-family: var(--sans-serif-font);
+}
+
+h5 {
+    font-size: var(--h5);
+    font-family: var(--sans-serif-font);
+}
+
+h6 {
+    font-size: var(--h6);
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    font-family: var(--sans-serif-font)
+}
+
+b {
+    font-family: var(--sans-serif-font);
+    font-weight: bold;
 }
 
 /* Icons */
@@ -90,33 +154,6 @@ section:not(.main_wallpaper, .BitsAreBetter, .footer) {
     content: "";
     display: block;
     font-size: 1em;
-}
-
-ul {
-    list-style-type: none;
-}
-
-h1 {
-    font-size: 3em;
-    font-family: 'Queens';
-}
-
-h4 {
-    font-size: 1.3em;
-    letter-spacing: -.4px;
-    word-spacing: 1px;
-    font-family: var(--sans-serif-font);
-}
-
-h5 {
-    font-size: 1em;
-    font-family: var(--sans-serif-font);
-}
-
-a {
-    text-decoration: none;
-    color: black;
-    font-family: var(--sans-serif-font)
 }
 
 button {
@@ -165,6 +202,10 @@ button {
     display: flex;
 }
 
+.main_content_container p {
+    padding: 16px;
+}
+
 .main_content {
     height: 300px;
     display: flex;
@@ -176,8 +217,6 @@ button {
 
 .main_content h1 {
     max-width: 350px;
-    padding: 0;
-    margin: 0;
 }
 
 .main_content p {
@@ -189,13 +228,14 @@ button {
         justify-content: center;
         align-items: top;
     }
+    
     .main_wallpaper {
         background-image: url(//bitetoothpastebits.com/cdn/shop/files/v2-home-hero-mobile.jpg?v=1700002377&width=780);
         min-height: 80vh;
     }
 
     .main_content {
-        padding-top: 50px;
+        margin-top: 50px;
     }
 }
 

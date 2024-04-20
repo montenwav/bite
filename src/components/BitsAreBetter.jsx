@@ -43,7 +43,7 @@ export function BitsAreBetter() {
                                 />
                             </svg>
                             
-                            <h2>PERFECTLY PORTIONED</h2>
+                            <h4>PERFECTLY PORTIONED</h4>
 
                             <p className="bits_are_better_content">
                                 Stop wasting money by using more toothpaste than you need.
@@ -79,7 +79,7 @@ export function BitsAreBetter() {
                                 </g>
                             </svg>
 
-                            <h2>BETTER-FOR-YOU FORMULATIONS</h2>
+                            <h4>BETTER-FOR-YOU FORMULATIONS</h4>
 
                             <p className="bits_are_better_content">
                                 A dry tablet means we can use less-harmful ingredients and still protect your teeth.
@@ -115,7 +115,7 @@ export function BitsAreBetter() {
                                 </g>
                             </svg>
 
-                            <h2>SINK-FRIENDLY</h2>
+                            <h4>SINK-FRIENDLY</h4>
 
                             <p className="bits_are_better_content">
                                 Our tablets leave less mess in your sink because no glycerine – what makes most toothpaste, paste – means no sticky goop.
@@ -153,7 +153,7 @@ export function BitsAreBetter() {
                                 </g>
                             </svg>
 
-                            <h2>BETTER-FOR-YOU FORMULATIONS</h2>
+                            <h4>BETTER-FOR-YOU FORMULATIONS</h4>
 
                             <p className="bits_are_better_content">
                                 No more toothpaste explosions in your bag. Just throw a few Bits in your pack and you’re good to go
@@ -189,7 +189,7 @@ export function BitsAreBetter() {
                                 </g>
                             </svg>
 
-                            <h2>SUITCASE-SAFE</h2>
+                            <h4>SUITCASE-SAFE</h4>
 
                             <p className="bits_are_better_content">
                                 Infinitely refillable with no plastic toothpaste tubes, our Bits are better for our earth and oceans.
@@ -242,7 +242,7 @@ export function BitsAreBetter() {
                                 </g>
                             </svg>
 
-                            <h2>STOPS THE SPREAD OF BACTERIA</h2>
+                            <h4>STOPS THE SPREAD OF BACTERIA</h4>
 
                             <p className="bits_are_better_content">
                                 The top of a toothpaste tube can transfer bacteria from your partners brush to your mouth. Our Bits can stop the spread.

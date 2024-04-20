@@ -60,7 +60,7 @@ const BagTop = () => {
             <div className="bag_top_bg">
                 <div className="bag_top">
                     <div className="bag_top_text">
-                        <h4>YOUR BAG</h4>
+                        <h5>YOUR BAG</h5>
                         {freeShipping <= 0 ? <h5>🎉 Congrats! You've Unlocked <b>FREE SHIPPING!</b></h5> : <h5>You Are ${freeShipping} Away From Free Shipping</h5>}
                     </div>
 
@@ -141,7 +141,7 @@ const EmptyMiddleBagCard = () => {
                     </div>
 
                     <div className="middle_bag_card_desc">
-                        <h1>{card.title}</h1>
+                        <h5>{card.title}</h5>
                         <h6>{card.description}</h6>
                         <a href="#">Shop Now</a>
                     </div>
@@ -203,9 +203,9 @@ const MiddleBagCard = () => {
                                     <BagCounter item={item} />
 
                                     <div className="bag_total">
-                                        <h4>${item.price}.00</h4>
+                                        <h5>${item.price}.00</h5>
                                         <s style={{ color: 'gray' }}>
-                                            {item.old_price != 0 && <h4>${item.old_price}.00</h4>}
+                                            {item.old_price != 0 && <h5>${item.old_price}.00</h5>}
                                         </s>
                                     </div>
                                 </div>
@@ -265,7 +265,7 @@ const BagCounter = ({ item }) => {
                 </div>
                 <div
                     className="bag_counter_item">
-                    <h4>{item.count}</h4>
+                    <h5>{item.count}</h5>
                 </div>
                 <div
                     onClick={() => dispatch({ type: 'increment_button', itemId: item.id })}
@@ -298,10 +298,10 @@ const BagCounter = ({ item }) => {
                 </div>
             </div>
 
-            <p
-                style={{ cursor: 'pointer' }}
+            <h5
+                className="bag_remove_btn"
                 onClick={() => dispatch({ type: 'remove_button', itemId: item.id })}
-            >Remove</p>
+            >Remove</h5>
         </div>
     )
 }
@@ -314,7 +314,7 @@ const WhyNotToAdd = () => {
                 {!isEmpty && <Checkout />}
                 <div className="hr"></div>
 
-                <h4 className="why_not_to_add_h4">WHY NOT ADD?</h4>
+                <h5 className="why_not_to_add_h5">WHY NOT ADD?</h5>
                 <div className="why_not_to_add_flex">
                     <WhyNotToAddCard />
                 </div>
@@ -339,8 +339,8 @@ const Checkout = () => {
             <div className="hr"></div>
             <div className="checkout_container">
                 <div className="checkout">
-                    <h4>CHECKOUT</h4>
-                    <h4 className="bag_total">{`$${total}.00`}</h4>
+                    <h5>CHECKOUT</h5>
+                    <h5 className="bag_total">{`$${total}.00`}</h5>
                 </div>
             </div>
         </>
@@ -383,12 +383,12 @@ const WhyNotToAddCard = () => {
                     key={card.id}
                     className="why_not_to_add_card"
                 >
-                    <div style={{ height: '70px' }}>
+                    <div style={{ height: '90px' }}>
                         <img src={card.src} alt={card.title} />
                     </div>
 
                     <div style={{ height: '50px' }}>
-                        <h2>{card.title}</h2>
+                        <h6>{card.title || card.why_not_title}</h6>
                     </div>
 
                     <button

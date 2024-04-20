@@ -13,12 +13,7 @@
 }
 
 .review_card p {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.reviews h1 {
-    margin: 0;
+    font-family: var(--sans-serif-font);
 }
 
 .AuthorAndStars {
@@ -56,14 +51,13 @@
     justify-content: space-between;
 }
 
-.review_card_img {
-    width: 50%;
+.ReviewTitle p {
+    max-width: 90%;
+
 }
 
-.review_card_img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.review_card_img {
+    width: 50%;
 }
 
 .reviews-stars {
@@ -72,12 +66,12 @@
 
 @media (max-width: 1001px) {
     .review_card {
-        min-width: 25%;
+        min-width: 50%;
         flex-direction: column;
         height: 550px;
     }
     .review_container {
-        margin-left: 75%;
+        margin-left: 50%;
     }
     .review_card_img {
         width: 100%;
@@ -98,7 +92,7 @@
     }
 }
 
-@media (min-width: 1001px) {
+@media (max-width: 600px) {
     .review_card {
         min-width: 70%;
     }
@@ -106,6 +100,15 @@
         margin-left: 30%;
     }
 }
+
+/* @media (min-width: 1500px) {
+    .review_card {
+        min-width: 70%;
+    }
+    .review_container {
+        margin-left: 30%;
+    }
+} */
 
 @media (min-width: 2000px) {
     .review_card {
