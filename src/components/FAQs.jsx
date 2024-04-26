@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 
 export function FAQs() {
     const [toggleId, setToggleId] = useState(null) // selected Item
@@ -56,9 +56,9 @@ export function FAQs() {
     )
 }
 
-const FirstTypeQuestion = ({toggleId, setToggleId, title, p_1, p_2, p_3, id }) => {
+const FirstTypeQuestion = ({ toggleId, setToggleId, title, p_1, p_2, p_3, id }) => {
     return (
-        <div className="first_type">
+        <div className="toggle_item">
             <div
                 onClick={() => setToggleId(id)}
                 className="header_container">
@@ -93,7 +93,7 @@ const FirstTypeQuestion = ({toggleId, setToggleId, title, p_1, p_2, p_3, id }) =
             </div>
 
             <div
-                className={`content_container ${toggleId == id ? 'active' : ''}`}>
+                className={`content_container ${toggleId === id && 'active'}`}>
                 <p>{p_1}</p>
                 <p>{p_2}</p>
                 <p>{p_3}</p>
@@ -103,9 +103,9 @@ const FirstTypeQuestion = ({toggleId, setToggleId, title, p_1, p_2, p_3, id }) =
     )
 }
 
-const SecondTypeQuestion = ({toggleId, setToggleId, title, p_1, p_2, p_3, p_4, id }) => {
+const SecondTypeQuestion = ({ toggleId, setToggleId, title, p_1, p_2, p_3, p_4, id }) => {
     return (
-        <div className="first_type">
+        <div className="toggle_item">
             <div
                 onClick={() => setToggleId(id)}
                 className="header_container">
@@ -151,9 +151,9 @@ const SecondTypeQuestion = ({toggleId, setToggleId, title, p_1, p_2, p_3, p_4, i
     )
 }
 
-const ThirdTypeQuestion = ({toggleId, setToggleId, title, p_1, id }) => {
+const ThirdTypeQuestion = ({ toggleId, setToggleId, title, p_1, id }) => {
     return (
-        <div className="first_type">
+        <div className="toggle_item">
             <div
                 onClick={() => setToggleId(id)}
                 className="header_container">
@@ -196,9 +196,9 @@ const ThirdTypeQuestion = ({toggleId, setToggleId, title, p_1, id }) => {
     )
 }
 
-const ForthTypeQuestion = ({toggleId, setToggleId, title, p_1, li_1, li_2, li_3, id }) => {
+const ForthTypeQuestion = ({ toggleId, setToggleId, title, p_1, li_1, li_2, li_3, id }) => {
     return (
-        <div className="first_type">
+        <div className="toggle_item">
             <div
                 onClick={() => setToggleId(id)}
                 className="header_container">

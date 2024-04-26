@@ -28,7 +28,10 @@
 
 .content_container {
     margin-bottom: 16px;
+    /* height: 0px; */
+    transition: .5s;
     display: none;
+    overflow: hidden;
 }
 
 .content_container ol {
