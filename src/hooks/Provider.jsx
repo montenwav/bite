@@ -25,12 +25,12 @@ export function Provider({ children }) {
     const [whyNotCards, setWhyNotCards] = useState(whyNotToAddArr)
 
     //Add new item to bag
-    const getBagSrotage = JSON.parse(sessionStorage.getItem('bag')) || []
+    const getBagSrotage = JSON.parse(localStorage.getItem('bag')) || []
     const [addedItems, dispatch] = useReducer(BagReducerFunc, getBagSrotage)
 
     useEffect(() => {
         //Set storage
-        sessionStorage.setItem('bag', JSON.stringify(addedItems))
+        localStorage.setItem('bag', JSON.stringify(addedItems))
         //IsEmpty Check
         setIsEmpty(addedItems.length === 0)
     }, [addedItems])
@@ -114,7 +114,7 @@ const whyNotToAddArr = [
         id: 2,
         added: false,
         title: 'Whitening Gel',
-        src: 'https://cdn.shopify.com/s/files/1/1864/2187/files/pdp-hero-carousel-desktop-whitening-gel_0bce5c88-7fe3-4fc0-b155-e98c92d12186_240x240.jpg?v=1700148140',
+        src: 'https://cdn.shopify.com/s/files/1/1864/2187/files/pdp-hero-carousel-desktop-whitening-gel_400x400.jpg?v=1700142723',
         description: 'Whitening Gel Kit',
         count: 1,
         price: 20,
@@ -125,7 +125,7 @@ const whyNotToAddArr = [
         added: false,
         title: 'Toothpaste Bits',
         why_not_title: 'Fluoride Toothpaste',
-        src: 'https://cdn.shopify.com/s/files/1/1864/2187/products/pdp-hero-carousel-tpb-wf-2oz-mint-fluoride_1cdc3501-5ff2-4aed-9d5b-514ed12dd018_240x240.jpg?v=1704922746',
+        src: 'https://cdn.shopify.com/s/files/1/1864/2187/files/pdp-hero-carousel-tpb-wf-2oz-mint-fluoride_1cdc3501-5ff2-4aed-9d5b-514ed12dd018_400x400.jpg?v=1704318283',
         description: 'Mint',
         fluoride: true,
         count: 1,
