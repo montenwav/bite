@@ -1,49 +1,45 @@
-import { useEffect, useContext } from "react"
+import { useContext } from "react"
 import { isBagOpenCtx, isEmptyCtx, dispatchCtx, addedItemsCtx, whyNotCardsCtx, setWhyNotCardsCtx, setIsBagOpenCtx } from '../hooks/Provider.jsx'
-import {useSize} from '../hooks/useSize.jsx'
 
 export function Bag({ bagRef }) {
     const setIsBagOpen = useContext(setIsBagOpenCtx)
-    const isBagOpen = useContext(isBagOpenCtx)
+    // const isBagOpen = useContext(isBagOpenCtx)
 
-    useEffect(() => {
-        if (isBagOpen) {
-            bagRef.current.style.right = '0%'
-            document.body.style.overflow = 'hidden';
-        } else {
-            bagRef.current.style.right = '100%'
-            document.body.style.overflow = 'visible';
-        }
-    })
+    const handleExitBtn = () => {
+        setIsBagOpen(false)
+        bagRef.current.style.right = '100%'
+        document.body.style.overflow = 'visible';
+    }
 
     return (
         <>
             <div className="bag">
                 <div
-                    onClick={() => setIsBagOpen(false)}
+                    onClick={handleExitBtn}
                     className="bag_bg"></div>
                 <BagContainer
                     bagRef={bagRef}
+                    handleExitBtn={handleExitBtn}
                 />
             </div>
         </>
     )
 }
 
-const BagContainer = ({ bagRef }) => {
+const BagContainer = ({ bagRef, handleExitBtn }) => {
     return (
         <div
             ref={bagRef}
             className="bag_container">
-            <BagTop />
+            <BagTop bagRef={bagRef} handleExitBtn={handleExitBtn} />
             <BagMiddle />
             <WhyNotToAdd />
         </div>
     )
 }
 
-const BagTop = () => {
-    const setIsBagOpen = useContext(setIsBagOpenCtx)
+const BagTop = ({ handleExitBtn }) => {
+    // const setIsBagOpen = useContext(setIsBagOpenCtx)
     const addedItems = useContext(addedItemsCtx)
 
     let freeShipping = 32;
@@ -65,7 +61,7 @@ const BagTop = () => {
                     </div>
 
                     <div className="bag_top_exit"
-                        onClick={() => setIsBagOpen(false)}
+                        onClick={handleExitBtn}
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -102,12 +98,11 @@ const BagTop = () => {
 }
 
 const BagMiddle = () => {
-
     const isEmpty = useContext(isEmptyCtx)
     return (
-        <div 
-        style={{height: isEmpty ? `calc(100% - 345px)` : `calc(100% - 415px)`}}
-        className="bag_middle">
+        <div
+            style={{ height: isEmpty ? `calc(100% - 345px)` : `calc(100% - 415px)` }}
+            className="bag_middle">
             {isEmpty ?
                 <EmptyBag />
                 :

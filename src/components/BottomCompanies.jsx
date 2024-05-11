@@ -1,5 +1,5 @@
 import { motion, useMotionValue } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 
 export function BottomCompanies() {
     const [imgIndex, setImgIndex] = useState(52)
@@ -36,7 +36,7 @@ export function BottomCompanies() {
                 clearInterval(interval);
             }
         };
-    });
+    }, []);
 
     const updateIndex = (newIndex) => {
         if (newIndex >= companiesList.length) {
@@ -64,7 +64,7 @@ export function BottomCompanies() {
     )
 }
 
-const Companies = () => {
+const Companies = memo(() => {
     return (
         <>
             {companiesList.map((company, index) => (
@@ -82,10 +82,10 @@ const Companies = () => {
             ))}
         </>
     )
-}
+})
 
 const companiesList = []
-for (let i = 0; i < 25; i++) {
+for (let i = 0; i < 10; i++) {
     companiesList.push(
         { title: '“Just what your toiletry bag didn’t know it was missing.”', src: '/src/images/companies/1.png' },
         { title: '“These have changed my life.”', src: '/src/images/companies/4.png' },

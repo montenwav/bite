@@ -7,14 +7,8 @@ import { Adaptive } from './Adaptive.jsx'
 export function Header() {
     const bagRef = useRef(null)
 
-    useEffect(() => {
-        if (scrollY.current >= 100 || isAdaptive) {
-            controls.start('visible')
-        }
-    })
-
-    const isAdaptive = useContext(isAdaptiveCtx) 
-    const isBagOpen  = useContext(isBagOpenCtx) 
+    const isAdaptive = useContext(isAdaptiveCtx)
+    const isBagOpen = useContext(isBagOpenCtx)
 
     // Header scroll animation
     const controls = useAnimation()
@@ -28,6 +22,12 @@ export function Header() {
             controls.start('hidden')
         }
     })
+
+    useEffect(() => {
+        if (scrollY.current >= 100 || isAdaptive) {
+            controls.start('visible')
+        }
+    }, [scrollY, isAdaptive])
 
     return (
         <>
@@ -114,6 +114,11 @@ const RightHeader = () => {
     const addedItems = useContext(addedItemsCtx)
     const isEmpty = useContext(isEmptyCtx)
 
+    const handleOpenBtn = () => {
+        setIsBagOpen(true)
+        document.body.style.overflow = 'hidden';
+    }
+
     return (
         <div className='right_header'>
             <svg className='account_icon'
@@ -144,11 +149,10 @@ const RightHeader = () => {
                 </g>
             </svg>
 
-            <div 
-            onClick={() => setIsBagOpen(true)}
-            className='bag_icon_container'>
+            <div
+                className='bag_icon_container'>
                 <svg
-                    onClick={() => setIsBagOpen(true)}
+                    onClick={handleOpenBtn}
                     className='bag_icon'
                     xmlns="http://www.w3.org/2000/svg"
                     width={48}
@@ -177,7 +181,7 @@ const RightHeader = () => {
                     </g>
                 </svg>
                 {!isEmpty && <div className='how_many_items'>
-                    <h6 style={{fontSize: '.7em'}}>{addedItems.length}</h6>
+                    <h6 style={{ fontSize: '.7em' }}>{addedItems.length}</h6>
                 </div>}
             </div>
         </div>
@@ -206,7 +210,7 @@ const HeaderLink = ({ children }) => {
 const Hamburger = () => {
     const isAdaptive = useContext(isAdaptiveCtx)
     const setIsAdaptive = useContext(setIsAdaptiveCtx)
-
+    
     return (
         <div className='hamburger' onClick={() => {
             setIsAdaptive(!isAdaptive)

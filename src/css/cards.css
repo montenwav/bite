@@ -29,7 +29,7 @@
     text-align: center;
 }
 
-.cards-div {
+.cards_div {
     display: grid;
     width: 100%;
     margin: auto;
@@ -73,6 +73,11 @@
     margin: auto;
 }
 
+.cards_hover_colors {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .delivers_every_left {
     display: flex;
     justify-content: left;
@@ -88,6 +93,10 @@
 .delivers_every {
     padding-top: 16px;
     padding-bottom: 16px;
+}
+
+.delivers_every h5 {
+    color: black
 }
 
 .full_cards_hover p {
@@ -120,15 +129,11 @@
     gap: 10px;
 }
 
-/* .cards-div h4 {
-    max-width: 200px;
-} */
-
-.cards-div p {
+.cards_div p {
     font-family: var(--sans-serif-font);
 }
 
-.cards-div h4:hover {
+.cards_div h4:hover {
     text-decoration: underline;
     cursor: pointer;
 }
@@ -136,7 +141,7 @@
 /* Other cards styling */
 
 @media (max-width: 1300px) {
-    .cards-div {
+    .cards_div {
         grid-template-columns: repeat(3, minmax(0, 1fr));
     } 
     .preview {
@@ -154,7 +159,7 @@
         margin-top: 10px;
     }
 
-    .cards-div {
+    .cards_div {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
@@ -162,7 +167,7 @@
         height: 450px;
     }
 
-    .cards-div h4 {
+    .cards_div h4 {
         max-width: none;
         padding-top: 10px;
         padding-bottom: 20px;

@@ -1,8 +1,8 @@
-import { useRef, useContext, useEffect} from 'react'
+import { useRef, useContext, memo, useEffect } from 'react'
 import { useSize } from '../hooks/useSize.jsx'
 import { isAdaptiveCtx, setIsAdaptiveCtx } from '../hooks/Provider.jsx'
 
-export const Adaptive = () => {
+export const Adaptive = memo(() => {
     const isAdaptive = useContext(isAdaptiveCtx)
     const setIsAdaptive = useContext(setIsAdaptiveCtx)
 
@@ -10,6 +10,15 @@ export const Adaptive = () => {
     const windowsize = useSize()
 
     useEffect(() => {
+        if (windowsize > 1000) {
+            setIsAdaptive(false)
+            adaptiveRef.current.style.right = '-100%';
+            document.body.style.overflow = 'visible';
+        }
+    }, [windowsize])
+
+    useEffect(() => {
+
         if (isAdaptive) {
             adaptiveRef.current.style.right = '0%';
             document.body.style.overflow = 'hidden';
@@ -17,13 +26,7 @@ export const Adaptive = () => {
             adaptiveRef.current.style.right = '-100%';
             document.body.style.overflow = 'visible';
         }
-
-        if (windowsize > 1000) {
-            setIsAdaptive(false)
-            adaptiveRef.current.style.right = '-100%';
-            document.body.style.overflow = 'visible';
-        }
-    })
+    }, [isAdaptive])
 
     return (
         <div
@@ -57,7 +60,7 @@ export const Adaptive = () => {
             <AdaptiveItem title='ABOUT US' />
         </div>
     )
-}
+})
 
 const AdaptiveItem = ({ title }) => {
     return (

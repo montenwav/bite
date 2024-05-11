@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, memo } from 'react';
 import { useSize } from '../hooks/useSize.jsx'
 
-export function TopCompanies() {
+export const TopCompanies = memo(() => {
     const [imgId, setImgId] = useState(0)
     const windowsize = useSize() // Add dynamic width
 
@@ -18,16 +18,11 @@ export function TopCompanies() {
                 updateIndex(imgId + 1);
             }, 3000);
 
-
-            return () => {
-                if (interval) {
-                    clearInterval(interval);
-                }
-            };
+            return () => clearInterval(interval);
         } else {
             setImgId(0)
         }
-    })
+    }, [windowsize])
 
     return (
         <>
@@ -56,7 +51,7 @@ export function TopCompanies() {
             <Hr />
         </>
     )
-}
+})
 
 const Hr = () => <div style={{ width: '100%', height: '1px', background: 'black' }}></div>
 

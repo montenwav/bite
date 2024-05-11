@@ -28,25 +28,21 @@ export function ShopByCategory() {
     }
 
     //Autoplay effect
-    useEffect(() => {
-        if (windowsize <= 1000) {
-            const interval = setInterval(() => {
-                updateIndex(imgIndex + 1);
-            }, 3000);
-            return () => {
-                if (interval) {
-                    clearInterval(interval);
-                }
-            };
-        }
-    });
-
     const updateIndex = (newIndex) => {
         if (newIndex >= imgs.length) {
             newIndex = 0;
         }
         setImgIndex(newIndex);
     };
+
+    useEffect(() => {
+        if (windowsize <= 1000) {
+            const interval = setInterval(() => {
+                updateIndex(imgIndex + 1);
+            }, 3000);
+            return () => clearInterval(interval);
+        }
+    }, [windowsize]);
 
     return (
         <section className="shop_by_category">

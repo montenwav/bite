@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react"
+import { useState } from "react"
 
 export function FAQs() {
     const [toggleId, setToggleId] = useState(null) // selected Item

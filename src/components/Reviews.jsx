@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { useSize } from '../hooks/useSize.jsx'
 
 export function Reviews() {
@@ -6,23 +6,20 @@ export function Reviews() {
 
     const windowsize = useSize()
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            updateIndex(activeIndex + 1);
-        }, 3000);
-        return () => {
-            if (interval) {
-                clearInterval(interval);
-            }
-        };
-    });
-
     const updateIndex = (newIndex) => {
         if (newIndex >= reviews.length - 3) {
             newIndex = 0;
         }
         setActiveIndex(newIndex);
     };
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            updateIndex(activeIndex + 1);
+        }, 3000);
+        return () => clearInterval(interval)
+    }, []);
+
 
     return (
         <section className="reviews">
@@ -53,7 +50,7 @@ export function Reviews() {
     )
 }
 
-const ReviewCards = () => {
+const ReviewCards = memo(() => {
     return (
         <>
             {reviews.map((review, idx) =>
@@ -78,9 +75,9 @@ const ReviewCards = () => {
             )}
         </>
     )
-}
+})
 
-const Stars = () => {
+const Stars = memo(() => {
     return (
         <div className='cardStars reviews-stars'>
             <svg
@@ -155,10 +152,10 @@ const Stars = () => {
             </svg>
         </div>
     )
-}
+})
 
 const reviews = [];
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 10; i++) {
     reviews.push(
         {
             title: 'No mess, cleans and whitens beautifully, and no plastic or repeat containers!',
