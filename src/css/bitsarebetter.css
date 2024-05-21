@@ -1,44 +1,44 @@
 .FirstSecBg {
-    background: url(/src/images/section1_bg.png) no-repeat center;
-    /* height: 800px; */
-    padding-top: 50px;
-    padding-bottom: 50px;
-    overflow: hidden;
+  background: url(/src/images/section1_bg.png) no-repeat center;
+  /* height: 800px; */
+  padding-top: 50px;
+  padding-bottom: 50px;
+  overflow: hidden;
 }
 
 .FirstSecMain {
-    width: 100%;
-    max-width: 1500px;
-    height: 100%;
-    margin: auto;
+  width: 100%;
+  max-width: 1500px;
+  height: 100%;
+  margin: auto;
 }
 
 .BitsAreBetter {
-    margin-top: 50px;
-    background-color: #fafafa;
+  margin-top: 50px;
+  background-color: #fafafa;
 }
 
 .FirstSecElement {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .FirstSecElement h4 {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .BitsAreBetter h1 {
-    padding-top: 25px;
-    text-align: center;
+  padding-top: 25px;
+  text-align: center;
 }
 
 .FirstSecMain {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    text-align: center;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  text-align: center;
 }
 
 /* .FirstSecMain h2 {
@@ -46,23 +46,23 @@
 } */
 
 .FirstSecColumn > div {
-    padding: 30px;
+  padding: 30px;
 }
 
 .FirstSecColumn {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 25%
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 25%;
 }
 
 .bits_are_better_content {
-    font-family: var(--sans-serif-font);
-    width: 220px;
+  font-family: var(--sans-serif-font);
+  width: 220px;
 }
 
 @media (max-width: 1200px) {
-    .bits_are_better_content {
-        display: none;
-    }
+  .bits_are_better_content {
+    display: none;
+  }
 }

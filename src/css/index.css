@@ -1,247 +1,247 @@
 @font-face {
-    font-family: 'Queens';
-    src: url(/src/fonts/QueensCondensedTrial-Regular.ttf);
+  font-family: "Queens";
+  src: url(/src/fonts/QueensCondensedTrial-Regular.ttf);
 }
 
 :root {
-    --bg-color: #f8f8f8;
-    --sans-serif-font: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    --cards-bg: #e9e9eb;
-    --lightblue: #72f2c7;
-    --bg-reviews: #131313;
-    --h1: clamp(1.5rem, 8vw, 3.5rem);
-    --h2: clamp(16px, 5vw, 40px);
-    --h3: clamp(16px, 6vw, 30px);
-    --h4: clamp(16px, 2.5vw, 24px);
-    --h5: clamp(14px, 2vw, 16px);
-    --h6: 12px;
-    --p: clamp(14px, 3vw, 20px);
+  --bg-color: #f8f8f8;
+  --sans-serif-font: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+    sans-serif;
+  --cards-bg: #e9e9eb;
+  --lightblue: #72f2c7;
+  --bg-reviews: #131313;
+  --h1: clamp(1.5rem, 8vw, 3.5rem);
+  --h2: clamp(16px, 5vw, 40px);
+  --h3: clamp(16px, 6vw, 30px);
+  --h4: clamp(16px, 2.5vw, 24px);
+  --h5: clamp(14px, 2vw, 16px);
+  --h6: 12px;
+  --p: clamp(14px, 3vw, 20px);
 }
 
 * {
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
-    font-size: 16px;
-    font-weight: normal;
-    font-family: 'Times New Roman', Times, serif;
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: normal;
+  font-family: "Times New Roman", Times, serif;
 }
 
 body {
-    background: var(--bg-color);
+  background: var(--bg-color);
 }
 
 ::selection {
-    background: black;
-    color: white;
+  background: black;
+  color: white;
 }
 
 ::-webkit-scrollbar {
-    width: 10px
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background: transparent;
+  background: transparent;
 }
 
-::-webkit-scrollbar-thumb { 
-    background: black;
-    border-radius: 5px;
+::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 5px;
 }
 
 section:not(.main_wallpaper, .BitsAreBetter, .footer) {
-    width: min(1500px, 95%);
-    margin: auto;
+  width: min(1500px, 95%);
+  margin: auto;
 }
 
 .hr {
-    width: 100%;
-    height: 1px;
-    background: black;
+  width: 100%;
+  height: 1px;
+  background: black;
 }
 
 ul {
-    list-style-type: none;
+  list-style-type: none;
 }
 
 img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 p {
-    font-size: var(--p)
+  font-size: var(--p);
 }
 
 h1 {
-    line-height: .8em;
-    font-size: var(--h1);
-    font-family: 'Queens';
+  line-height: 0.8em;
+  font-size: var(--h1);
+  font-family: "Queens";
 }
 
 h2 {
-    font-size: var(--h2);
-    font-family: var(--sans-serif-font)
+  font-size: var(--h2);
+  font-family: var(--sans-serif-font);
 }
 
 h3 {
-    font-size: var(--h3);
-    font-family: var(--sans-serif-font)
+  font-size: var(--h3);
+  font-family: var(--sans-serif-font);
 }
 
 h4 {
-    font-size: var(--h4);
-    letter-spacing: -.4px;
-    word-spacing: 1px;
-    font-family: var(--sans-serif-font);
+  font-size: var(--h4);
+  letter-spacing: -0.4px;
+  word-spacing: 1px;
+  font-family: var(--sans-serif-font);
 }
 
 h5 {
-    font-size: var(--h5);
-    font-family: var(--sans-serif-font);
+  font-size: var(--h5);
+  font-family: var(--sans-serif-font);
 }
 
 h6 {
-    font-size: var(--h6);
+  font-size: var(--h6);
 }
 
 a {
-    text-decoration: none;
-    color: black;
-    font-family: var(--sans-serif-font)
+  text-decoration: none;
+  color: black;
+  font-family: var(--sans-serif-font);
 }
 
 b {
-    font-family: var(--sans-serif-font);
-    font-weight: bold;
+  font-family: var(--sans-serif-font);
+  font-weight: bold;
 }
 
 /* Icons */
 
 .icon {
-    display: inline-block;
+  display: inline-block;
 }
 
 .icon--b-corp:before {
-    background-position: 0 -42.25em;
-    width: 2.625em;
-    height: 4.375em;
+  background-position: 0 -42.25em;
+  width: 2.625em;
+  height: 4.375em;
 }
 
 .icon--cruelty-free-badge-footer:before {
-    background-position: 0 -174.875em;
-    width: 3.4375em;
-    height: 4.5em;
+  background-position: 0 -174.875em;
+  width: 3.4375em;
+  height: 4.5em;
 }
 
 .icon--oa-badge:before {
-    background-position: 0 -261.5em;
-    width: 3.9375em;
-    height: 4.3125em;
+  background-position: 0 -261.5em;
+  width: 3.9375em;
+  height: 4.3125em;
 }
 
 .icon--woman-owned-badge-footer:before {
-    background-position: 0 -350.9375em;
-    width: 2.3125em;
-    height: 4.3125em;
+  background-position: 0 -350.9375em;
+  width: 2.3125em;
+  height: 4.3125em;
 }
 
 .icon:before {
-    background-image: url(//bitetoothpastebits.com/cdn/shop/t/275/assets/sprite-icon-67ccb2e4.svg?v=8988397…);
-    background-repeat: no-repeat;
-    background-size: 39.75em 359.125em;
-    content: "";
-    display: block;
-    font-size: 1em;
+  background-image: url(//bitetoothpastebits.com/cdn/shop/t/275/assets/sprite-icon-67ccb2e4.svg?v=8988397…);
+  background-repeat: no-repeat;
+  background-size: 39.75em 359.125em;
+  content: "";
+  display: block;
+  font-size: 1em;
 }
 
 button {
-    width: 250px;
-    height: 50px;
-    transition: .5s;
-    border: none;
-    font-family: var(--sans-serif-font);
-    cursor: pointer;
+  width: 250px;
+  height: 50px;
+  transition: 0.5s;
+  border: none;
+  font-family: var(--sans-serif-font);
+  cursor: pointer;
 }
 
-
 .button {
-    background: #000;
-    color: white;
+  background: #000;
+  color: white;
 }
 
 .button:hover {
-    background: var(--lightblue);
-    color: black;
+  background: var(--lightblue);
+  color: black;
 }
 
 /* MAIN */
 
 .main_wallpaper {
-    background-image: url(//bitetoothpastebits.com/cdn/shop/files/hp-home-hero-desktop-1.jpg?v=1705612565&width=3840);
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    left: 0;
-    top: 0;
-    min-height: 790px;
-    width: 100%;
+  background-image: url(//bitetoothpastebits.com/cdn/shop/files/hp-home-hero-desktop-1.jpg?v=1705612565&width=3840);
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  left: 0;
+  top: 0;
+  min-height: 790px;
+  width: 100%;
 }
 
 .main_content_container {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    height: calc(100% - 70px); /*Main - header height */
-    width: 90%;
-    max-width: 1500px;
-    margin: auto;
-    display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: calc(100% - 70px); /*Main - header height */
+  width: 90%;
+  max-width: 1500px;
+  margin: auto;
+  display: flex;
 }
 
 .main_content_container p {
-    padding: 16px;
+  padding: 16px;
 }
 
 .main_content {
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .main_content h1 {
-    max-width: 350px;
+  max-width: 350px;
 }
 
 .main_content p {
-    max-width: 300px;
+  max-width: 300px;
 }
 
 @media (max-width: 760px) {
-    .main_content_container {
-        justify-content: center;
-        align-items: top;
-    }
-    
-    .main_wallpaper {
-        background-image: url(//bitetoothpastebits.com/cdn/shop/files/v2-home-hero-mobile.jpg?v=1700002377&width=780);
-        min-height: 80vh;
-    }
+  .main_content_container {
+    justify-content: center;
+    align-items: top;
+  }
 
-    .main_content {
-        margin-top: 50px;
-    }
+  .main_wallpaper {
+    background-image: url(//bitetoothpastebits.com/cdn/shop/files/v2-home-hero-mobile.jpg?v=1700002377&width=780);
+    min-height: 80vh;
+  }
+
+  .main_content {
+    margin-top: 50px;
+  }
 }
 
 @media (min-width: 760px) {
-    .main_content_container {
-        justify-content: left;
-        align-items: center;
-    }
+  .main_content_container {
+    justify-content: left;
+    align-items: center;
+  }
 }

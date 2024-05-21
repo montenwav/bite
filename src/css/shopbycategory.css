@@ -1,104 +1,104 @@
 .shop_by_category h1 {
-    text-align: center;
-    padding: 50px;
+  text-align: center;
+  padding: 50px;
 }
 
 .shop_by_category {
-    overflow-x: hidden;
-    padding-bottom: 100px;
+  overflow-x: hidden;
+  padding-bottom: 100px;
 }
 
 .carousel {
-    width: 100%;
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .inner_carousel {
-    margin-inline: 8px;
-    z-index: 0;
-    height: auto;
+  margin-inline: 8px;
+  z-index: 0;
+  height: auto;
 }
 
 .card_image {
-    position: relative;
-    display: flex;
-    overflow: hidden;
-    justify-content: center;
-    align-items: center;
-    background: var(--cards-bg);
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  background: var(--cards-bg);
 }
 
 .shop_by_btn {
-    z-index: 2;
-    width: 100%;
-    color: white;
-    background: black;
-    position: absolute;
-    bottom: -50px;
-    left: 0;
-    transition: .3s;
+  z-index: 2;
+  width: 100%;
+  color: white;
+  background: black;
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  transition: 0.3s;
 }
 
 .shop_by_btn:hover {
-    cursor: pointer;
-    color: black;
-    background: var(--lightblue);
+  cursor: pointer;
+  color: black;
+  background: var(--lightblue);
 }
 
 .inner_carousel:hover .shop_by_btn {
-    bottom: 0;
+  bottom: 0;
 }
 
 .inner_carousel:hover .card_image img {
-    transform: scale(110%);
+  transform: scale(110%);
 }
 
 .card_image img {
-    transition: .3s;
-    pointer-events: none;
+  transition: 0.3s;
+  pointer-events: none;
 }
 
 .inner_carousel h4 {
-    z-index: 1;
-    position: absolute;
-    top: 15px;
-    left: 20px;
+  z-index: 1;
+  position: absolute;
+  top: 15px;
+  left: 20px;
 }
 
 @media (max-width: 1000px) {
-    .carousel {
-        position: relative;
-        left: 5%;
-        display: flex;
-        flex-direction: row;
-        justify-content: left;
-        cursor: grab;
-    }
+  .carousel {
+    position: relative;
+    left: 5%;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    cursor: grab;
+  }
 
-    .card_image {
-        background: var(--cards-bg);
-        position: relative;
-        height: 100%;
-        width: 85vw;
-    }
+  .card_image {
+    background: var(--cards-bg);
+    position: relative;
+    height: 100%;
+    width: 85vw;
+  }
 
-    .shop_by_btn {
-        width: 100%;
-        bottom: -50px;
-    }
+  .shop_by_btn {
+    width: 100%;
+    bottom: -50px;
+  }
 
-    .inner_carousel:hover .card_image img {
-        transform: scale(100%);
-    }
+  .inner_carousel:hover .card_image img {
+    transform: scale(100%);
+  }
 
-    .inner_carousel:hover .shop_by_btn {
-        bottom: -50px;
-    }
+  .inner_carousel:hover .shop_by_btn {
+    bottom: -50px;
+  }
 
-    .card_image {
-        overflow: visible;
-    }
+  .card_image {
+    overflow: visible;
+  }
 }

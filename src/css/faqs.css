@@ -1,54 +1,54 @@
 .faqs {
-    text-align: center;
-    padding-bottom: 80px;
+  text-align: center;
+  padding-bottom: 80px;
 }
 
 .faqs h1 {
-    padding: 50px;
+  padding: 50px;
 }
 
 .question {
-    width: 100%;
+  width: 100%;
 }
 
 .questions_container {
-    text-align: left;
-    margin: auto;
+  text-align: left;
+  margin: auto;
 }
 
 .header_container {
-    height: 65px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  height: 65px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .content_container {
-    margin-bottom: 16px;
-    /* height: 0px; */
-    transition: .5s;
-    display: none;
-    overflow: hidden;
+  margin-bottom: 16px;
+  /* height: 0px; */
+  transition: 0.5s;
+  display: none;
+  overflow: hidden;
 }
 
 .content_container ol {
-    width: 90%;
-    margin: auto;
-    /* margin-bottom: 16px; */
+  width: 90%;
+  margin: auto;
+  /* margin-bottom: 16px; */
 }
 
 .content_container p {
-    font-family: var(--sans-serif-font);
-    line-height: 1;
-    color: rgb(71, 71, 71);
-    padding-top: 10px;
-    padding-bottom: 20px;
-    width: 100%;
+  font-family: var(--sans-serif-font);
+  line-height: 1;
+  color: rgb(71, 71, 71);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  width: 100%;
 }
 
 .active {
-    display: block;
+  display: block;
 }

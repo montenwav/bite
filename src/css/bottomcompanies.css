@@ -1,36 +1,35 @@
 .bottom_companies {
-    cursor: grab;
-    margin-top: 100px;
-    border: 1px solid lightgray;
-    overflow: hidden;
+  cursor: grab;
+  margin-top: 100px;
+  border: 1px solid lightgray;
+  overflow: hidden;
 }
 
 .bottom_comp_container {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
 .bottom_comp_item {
-    min-width: 100%;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 60px;
+  min-width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px;
 }
 
-
 .bottom_comp_item img {
-    margin-top: 10px;
+  margin-top: 10px;
 }
 
 .btm_companies_img {
-    height: 40px;
+  height: 40px;
 }
 
 @media (max-width: 1000px) {
-    .bottom_companies {
-        width: 100%;
-    }
+  .bottom_companies {
+    width: 100%;
+  }
 }
