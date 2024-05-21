@@ -329,10 +329,24 @@ const Checkout = () => {
     )
     total = addedItems.length > 0 && total.reduce((accum, items) => accum + items)
 
+    async function handleChechout() {
+        const response = await fetch('https://example.com', {
+            method: 'POST', 
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(addedItems)
+        })
+
+        if(!response.ok) {
+           throw Error('Request Error') 
+        }
+    }
+
     return (
         <>
             <div className="hr"></div>
-            <div className="checkout_container">
+            <div onClick={handleChechout} className="checkout_container">
                 <div className="checkout">
                     <h5>CHECKOUT</h5>
                     <h5 className="bag_total">{`$${total}.00`}</h5>

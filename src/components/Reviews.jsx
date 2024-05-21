@@ -4,7 +4,7 @@ import { useSize } from '../hooks/useSize.jsx'
 export function Reviews() {
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const windowsize = useSize()
+    const windowsize = useSize() 
 
     const updateIndex = (newIndex) => {
         if (newIndex >= reviews.length - 3) {
