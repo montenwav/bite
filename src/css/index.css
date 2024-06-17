@@ -118,11 +118,83 @@ b {
   font-weight: bold;
 }
 
-/* Icons */
+button {
+  width: 250px;
+  height: 50px;
+  transition: 0.5s;
+  border: none;
+  font-family: var(--sans-serif-font);
+  cursor: pointer;
+}
+
+.button {
+  background: #000;
+  color: white;
+}
+
+.button:hover {
+  background: var(--lightblue);
+  color: black;
+}
+
+/* ICONS */
 
 .icon {
   display: inline-block;
 }
+
+.icon:before {
+  background-image: url(//bitetoothpastebits.com/cdn/shop/t/275/assets/sprite-icon-67ccb2e4.svg?v=8988397…);
+  background-repeat: no-repeat;
+  background-size: 39.75em 359.125em;
+  content: "";
+  display: block;
+  font-size: 1em;
+}
+
+/* BITS ARE BETTER ICONS */
+
+.bits-are-better__icon-wrap .icon:before {
+  font-size: 13px;
+}
+
+.icon--bit-in-hand:before {
+  background-position: 0 -64.4375em;
+  width: 3.125em;
+  height: 3.125em;
+}
+
+.icon--hotel-class:before {
+  background-position: 0 -230.125em;
+  width: 3.125em;
+  height: 3.125em;
+}
+
+.icon--counter-top:before {
+  background-position: 0 -162.6875em;
+  width: 3.125em;
+  height: 3.125em;
+}
+
+.icon--luggage:before {
+  background-position: 0 -238.5em;
+  width: 3.125em;
+  height: 3.125em;
+}
+
+.icon--earth:before {
+  background-position: 0 -185.625em;
+  width: 3.125em;
+  height: 3.125em;
+}
+
+.icon--anti-bacterial:before {
+  background-position: 0 -9.375em;
+  width: 3.125em;
+  height: 3.125em;
+}
+
+/* FOOTER ICONS */
 
 .icon--b-corp:before {
   background-position: 0 -42.25em;
@@ -146,34 +218,6 @@ b {
   background-position: 0 -350.9375em;
   width: 2.3125em;
   height: 4.3125em;
-}
-
-.icon:before {
-  background-image: url(//bitetoothpastebits.com/cdn/shop/t/275/assets/sprite-icon-67ccb2e4.svg?v=8988397…);
-  background-repeat: no-repeat;
-  background-size: 39.75em 359.125em;
-  content: "";
-  display: block;
-  font-size: 1em;
-}
-
-button {
-  width: 250px;
-  height: 50px;
-  transition: 0.5s;
-  border: none;
-  font-family: var(--sans-serif-font);
-  cursor: pointer;
-}
-
-.button {
-  background: #000;
-  color: white;
-}
-
-.button:hover {
-  background: var(--lightblue);
-  color: black;
 }
 
 /* MAIN */

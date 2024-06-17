@@ -1,24 +1,25 @@
 import { useState, useEffect, memo } from "react";
 import { useSize } from "../hooks/useSize.jsx";
+import { Stars } from "../Stars";
 
 export function Reviews() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  // const [activeIndex, setActiveIndex] = useState(0);
 
-  const windowsize = useSize();
+  // const windowsize = useSize();
 
-  const updateIndex = (newIndex) => {
-    if (newIndex >= reviews.length - 3) {
-      newIndex = 0;
-    }
-    setActiveIndex(newIndex);
-  };
+  // const updateIndex = (newIndex) => {
+  //   if (newIndex >= reviews.length - 3) {
+  //     newIndex = 0;
+  //   }
+  //   setActiveIndex(newIndex);
+  // };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      updateIndex(activeIndex + 1);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     updateIndex(activeIndex + 1);
+  //   }, 3000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <section className="reviews">
@@ -68,83 +69,6 @@ const ReviewCards = memo(() => {
         </div>
       ))}
     </>
-  );
-});
-
-const Stars = memo(() => {
-  return (
-    <div className="cardStars reviews-stars">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={26}
-        height={24}
-        fill="none"
-        viewBox="-1 -1 26 24"
-        id="star-teal"
-        y={4873}
-      >
-        <path
-          d="m11.886 0 2.67 8.213h8.635l-6.986 5.077 2.668 8.213-6.987-5.076L4.9 21.503l2.668-8.213L.582 8.213h8.636L11.886 0Z"
-          fill="#72F2C7"
-        />
-      </svg>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={26}
-        height={24}
-        fill="none"
-        viewBox="-1 -1 26 24"
-        id="star-teal"
-        y={4873}
-      >
-        <path
-          d="m11.886 0 2.67 8.213h8.635l-6.986 5.077 2.668 8.213-6.987-5.076L4.9 21.503l2.668-8.213L.582 8.213h8.636L11.886 0Z"
-          fill="#72F2C7"
-        />
-      </svg>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={26}
-        height={24}
-        fill="none"
-        viewBox="-1 -1 26 24"
-        id="star-teal"
-        y={4873}
-      >
-        <path
-          d="m11.886 0 2.67 8.213h8.635l-6.986 5.077 2.668 8.213-6.987-5.076L4.9 21.503l2.668-8.213L.582 8.213h8.636L11.886 0Z"
-          fill="#72F2C7"
-        />
-      </svg>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={26}
-        height={24}
-        fill="none"
-        viewBox="-1 -1 26 24"
-        id="star-teal"
-        y={4873}
-      >
-        <path
-          d="m11.886 0 2.67 8.213h8.635l-6.986 5.077 2.668 8.213-6.987-5.076L4.9 21.503l2.668-8.213L.582 8.213h8.636L11.886 0Z"
-          fill="#72F2C7"
-        />
-      </svg>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width={26}
-        height={24}
-        fill="none"
-        viewBox="-1 -1 26 24"
-        id="star-teal"
-        y={4873}
-      >
-        <path
-          d="m11.886 0 2.67 8.213h8.635l-6.986 5.077 2.668 8.213-6.987-5.076L4.9 21.503l2.668-8.213L.582 8.213h8.636L11.886 0Z"
-          fill="#72F2C7"
-        />
-      </svg>
-    </div>
   );
 });
 

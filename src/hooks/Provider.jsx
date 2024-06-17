@@ -18,7 +18,6 @@ export const setIsEmptyCtx = createContext(null);
 export function Provider({ children }) {
   const [isBagOpen, setIsBagOpen] = useState(false);
   const [isAdaptive, setIsAdaptive] = useState(false);
-
   const [isEmpty, setIsEmpty] = useState(true);
 
   // Add button state

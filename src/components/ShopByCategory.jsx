@@ -3,46 +3,46 @@ import { useEffect, useState } from "react";
 import { useSize } from "../hooks/useSize.jsx";
 
 export function ShopByCategory() {
-  const [imgIndex, setImgIndex] = useState(0);
+  // const [imgIndex, setImgIndex] = useState(0);
 
-  const windowsize = useSize();
+  // const windowsize = useSize();
 
-  // Drag effect
-  const [isDragging, setIsDragging] = useState(false);
+  // // Drag effect
+  // const [isDragging, setIsDragging] = useState(false);
 
-  const ChangeThreshold = 50; // How much you should drag to change an image
-  const dragLenght = useMotionValue(0); // displays how much you dragged
+  // const ChangeThreshold = 50; // How much you should drag to change an image
+  // const dragLenght = useMotionValue(0); // displays how much you dragged
 
-  const onDragStart = () => setIsDragging(true);
+  // const onDragStart = () => setIsDragging(true);
 
-  const onDragEnd = () => {
-    setIsDragging(false);
+  // const onDragEnd = () => {
+  //   setIsDragging(false);
 
-    const x = dragLenght.get();
+  //   const x = dragLenght.get();
 
-    if (x <= -ChangeThreshold && imgIndex < imgs.length - 1) {
-      setImgIndex((prev) => prev + 1);
-    } else if (x >= ChangeThreshold && imgIndex > 0) {
-      setImgIndex((prev) => prev - 1);
-    }
-  };
+  //   if (x <= -ChangeThreshold && imgIndex < imgs.length - 1) {
+  //     setImgIndex((prev) => prev + 1);
+  //   } else if (x >= ChangeThreshold && imgIndex > 0) {
+  //     setImgIndex((prev) => prev - 1);
+  //   }
+  // };
 
-  //Autoplay effect
-  const updateIndex = (newIndex) => {
-    if (newIndex >= imgs.length) {
-      newIndex = 0;
-    }
-    setImgIndex(newIndex);
-  };
+  // //Autoplay effect
+  // const updateIndex = (newIndex) => {
+  //   if (newIndex >= imgs.length) {
+  //     newIndex = 0;
+  //   }
+  //   setImgIndex(newIndex);
+  // };
 
-  useEffect(() => {
-    if (windowsize <= 1000) {
-      const interval = setInterval(() => {
-        updateIndex(imgIndex + 1);
-      }, 3000);
-      return () => clearInterval(interval);
-    }
-  }, [windowsize]);
+  // useEffect(() => {
+  //   if (windowsize <= 1000) {
+  //     const interval = setInterval(() => {
+  //       updateIndex(imgIndex + 1);
+  //     }, 3000);
+  //     return () => clearInterval(interval);
+  //   }
+  // }, [windowsize]);
 
   return (
     <section className="shop_by_category">
@@ -95,8 +95,7 @@ const Images = ({ windowsize }) => {
   );
 };
 
-const imgs = [];
-imgs.push(
+const imgs = [
   {
     name: "ORAL CARE",
     src: "/src/images/shopby/hp-shop-by-category-oral-care.webp",
@@ -106,14 +105,4 @@ imgs.push(
     name: "BODY CARE",
     src: "/src/images/shopby/hp-shop-by-category-body-care.webp",
   }
-);
-
-// if (windowsize < 1000) {
-//     for (let i = 0; i < 30; i++) {
-//         imgs.push(
-//             { name: 'ORAL CARE', src: '/src/images/shopby/hp-shop-by-category-oral-care.webp' },
-//             { name: 'SETS', src: '/src/images/shopby/hp-shop-by-category-sets.png' },
-//             { name: 'BODY CARE', src: '/src/images/shopby/hp-shop-by-category-body-care.webp' },
-//         )
-//     }
-// }
+];

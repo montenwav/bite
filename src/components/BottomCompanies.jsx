@@ -1,49 +1,11 @@
-import { motion, useMotionValue } from "framer-motion";
-import { useEffect, useState, memo } from "react";
+import { motion } from "framer-motion";
+import { memo } from "react";
+import { useAutoPlay } from "../hooks/useAutoPlay";
+import { useDrugEffect } from "../hooks/useDrugEffect";
 
 export function BottomCompanies() {
-  const [imgIndex, setImgIndex] = useState(52);
-
-  // Drag effect
-
-  const [isDragging, setIsDragging] = useState(false);
-
-  const ChangeThreshold = 50; // How much you should drag to change an image
-  const dragLenght = useMotionValue(0); // displays how much you dragged
-
-  const onDragStart = () => setIsDragging(true);
-
-  const onDragEnd = () => {
-    setIsDragging(false);
-
-    const x = dragLenght.get();
-
-    if (x <= -ChangeThreshold && imgIndex < companiesList.length - 1) {
-      setImgIndex((prev) => prev + 1);
-    } else if (x >= ChangeThreshold && imgIndex > 0) {
-      setImgIndex((prev) => prev - 1);
-    }
-  };
-
-  //Autoplay effect
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      updateIndex(imgIndex + 1);
-    }, 3000);
-    return () => {
-      if (interval) {
-        clearInterval(interval);
-      }
-    };
-  }, []);
-
-  const updateIndex = (newIndex) => {
-    if (newIndex >= companiesList.length) {
-      newIndex = 0;
-    }
-    setImgIndex(newIndex);
-  };
+  const something = useDrugEffect()
+  const imgIndex = useAutoPlay(52)
 
   return (
     <section className="bottom_companies">
@@ -75,7 +37,6 @@ const Companies = memo(() => {
           className="bottom_comp_item"
         >
           <h2>{company.title}</h2>
-
           <div className="btm_companies_img">
             <img height="25px" src={company.src} />
           </div>
@@ -89,20 +50,20 @@ const companiesList = [];
 for (let i = 0; i < 10; i++) {
   companiesList.push(
     {
-      title: "“Just what your toiletry bag didn’t know it was missing.”",
-      src: "/src/images/companies/1.png",
+      title: `“Just what your toiletry bag didn’t know it was missing.”`,
+      src: "/companies/1.png",
     },
     {
       title: "“These have changed my life.”",
-      src: "/src/images/companies/4.png",
+      src: "/companies/4.png",
     },
     {
       title: "“Give love to your pearly whites.”",
-      src: "/src/images/companies/6.png",
+      src: "/companies/6.png",
     },
     {
       title: "“Best Whitening Toothpaste Tablets”",
-      src: "/src/images/companies/7.png",
+      src: "/companies/7.png",
     }
   );
 }
