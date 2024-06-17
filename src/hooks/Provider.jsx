@@ -19,8 +19,6 @@ export function Provider({ children }) {
   const [isBagOpen, setIsBagOpen] = useState(false);
   const [isAdaptive, setIsAdaptive] = useState(false);
   const [isEmpty, setIsEmpty] = useState(true);
-
-  // Add button state
   const [whyNotCards, setWhyNotCards] = useState(whyNotToAddArr);
 
   //Add new item to bag
@@ -35,27 +33,27 @@ export function Provider({ children }) {
   }, [addedItems]);
 
   return (
-    <isEmptyCtx.Provider value={isEmpty}>
-      <setIsEmptyCtx.Provider value={setIsEmpty}>
-        <isBagOpenCtx.Provider value={isBagOpen}>
-          <setIsBagOpenCtx.Provider value={setIsBagOpen}>
-            <whyNotCardsCtx.Provider value={whyNotCards}>
-              <setWhyNotCardsCtx.Provider value={setWhyNotCards}>
-                <addedItemsCtx.Provider value={addedItems}>
-                  <dispatchCtx.Provider value={dispatch}>
-                    <isAdaptiveCtx.Provider value={isAdaptive}>
-                      <setIsAdaptiveCtx.Provider value={setIsAdaptive}>
-                        {children}
-                      </setIsAdaptiveCtx.Provider>
-                    </isAdaptiveCtx.Provider>
-                  </dispatchCtx.Provider>
-                </addedItemsCtx.Provider>
-              </setWhyNotCardsCtx.Provider>
-            </whyNotCardsCtx.Provider>
-          </setIsBagOpenCtx.Provider>
-        </isBagOpenCtx.Provider>
-      </setIsEmptyCtx.Provider>
-    </isEmptyCtx.Provider>
+        <isEmptyCtx.Provider value={isEmpty}>
+          <setIsEmptyCtx.Provider value={setIsEmpty}>
+            <isBagOpenCtx.Provider value={isBagOpen}>
+              <setIsBagOpenCtx.Provider value={setIsBagOpen}>
+                <whyNotCardsCtx.Provider value={whyNotCards}>
+                  <setWhyNotCardsCtx.Provider value={setWhyNotCards}>
+                    <addedItemsCtx.Provider value={addedItems}>
+                      <dispatchCtx.Provider value={dispatch}>
+                        <isAdaptiveCtx.Provider value={isAdaptive}>
+                          <setIsAdaptiveCtx.Provider value={setIsAdaptive}>
+                            {children}
+                          </setIsAdaptiveCtx.Provider>
+                        </isAdaptiveCtx.Provider>
+                      </dispatchCtx.Provider>
+                    </addedItemsCtx.Provider>
+                  </setWhyNotCardsCtx.Provider>
+                </whyNotCardsCtx.Provider>
+              </setIsBagOpenCtx.Provider>
+            </isBagOpenCtx.Provider>
+          </setIsEmptyCtx.Provider>
+        </isEmptyCtx.Provider>
   );
 }
 

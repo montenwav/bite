@@ -1,11 +1,22 @@
 import { motion } from "framer-motion";
-import { memo } from "react";
+import { memo, useState } from "react";
 import { useAutoPlay } from "../hooks/useAutoPlay";
 import { useDrugEffect } from "../hooks/useDrugEffect";
+import { companiesList } from "./CompaniesList";
 
 export function BottomCompanies() {
-  const something = useDrugEffect()
-  const imgIndex = useAutoPlay(52)
+  const [imgIndex, setImgIndex] = useState(0);
+  const [_, setIsDragging] = useState(false);
+
+  const arrLength = companiesList.length - 1;
+
+  useAutoPlay(imgIndex, setImgIndex, false, arrLength);
+  const { onDragStart, onDragEnd, dragLenght } = useDrugEffect(
+    imgIndex,
+    setImgIndex,
+    setIsDragging,
+    arrLength
+  );
 
   return (
     <section className="bottom_companies">
@@ -30,7 +41,7 @@ export function BottomCompanies() {
 const Companies = memo(() => {
   return (
     <>
-      {companiesList.map((company, index) => (
+      {BottomCompaniesList.map((company, index) => (
         <motion.div
           key={index}
           whileTap={{ cursor: "grabbing" }}
@@ -46,9 +57,9 @@ const Companies = memo(() => {
   );
 });
 
-const companiesList = [];
+const BottomCompaniesList = [];
 for (let i = 0; i < 10; i++) {
-  companiesList.push(
+  BottomCompaniesList.push(
     {
       title: `“Just what your toiletry bag didn’t know it was missing.”`,
       src: "/companies/1.png",

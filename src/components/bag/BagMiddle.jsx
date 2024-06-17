@@ -3,9 +3,6 @@ import {
   isEmptyCtx,
   dispatchCtx,
   addedItemsCtx,
-  isEmptyCtx,
-  dispatchCtx,
-  addedItemsCtx,
 } from "../../hooks/Provider.jsx";
 import { EmptyBag } from "./EmptyBag.jsx";
 
@@ -115,6 +112,7 @@ const BagCounter = ({ item }) => {
 
 const BagCounterFlex = ({item}) => {
   const addedItems = useContext(addedItemsCtx);
+  const dispatch = useContext(dispatchCtx)
 
   const handleDecrement = (itemId) => {
     let decrementArr = addedItems.map((card) => {

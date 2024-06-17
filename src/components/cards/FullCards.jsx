@@ -1,5 +1,5 @@
 import { memo } from "react";
-
+import { ColorPicker } from "./ColorPicker";
 export const FullCards = memo(({ cards, setCards, addItem }) => {
   return (
     <>

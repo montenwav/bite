@@ -19,7 +19,7 @@ export const Email = () => {
       <h3>Sign up for 10% off your first order.</h3>
       <div className="email_container">
         <input type="email" placeholder="Entar email address" />
-        <div className="hr" style={{ background: "white", width: "95%" }}></div>
+        <div style={{background: 'white'}} className="hr"/>
       </div>
       <button>SUBCRIBE</button>
     </div>
@@ -95,6 +95,8 @@ export const FooterLinkIcon = () => {
     </svg>
   );
 };
+
+export const FooterHr = () => <div className="moblie_footer_hr"></div>;
 
 const FooterIconsArr = [
   "icon--b-corp",

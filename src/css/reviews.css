@@ -22,6 +22,10 @@
   left: 40px;
 }
 
+.AuthorAndStars p {
+  white-space: nowrap;
+}
+
 .review_container {
   margin-left: 30%;
   text-align: left;

@@ -2,7 +2,7 @@ export const cardsArr = [
   {
     id: 4,
     display_title: "TOOTHPASTE BITS FLUORIDE-FREE",
-    src: "/src/images/products/1/pc-tpb-ff-4oz-mint-no-bg.webp",
+    src: "/products/1/pc-tpb-ff-4oz-mint-no-bg.webp",
     colors: [
       { colorId: 0, color: "#c7f6e6", clicked: true },
       { colorId: 1, color: "#4d4c4c", clicked: false },
@@ -21,7 +21,7 @@ export const cardsArr = [
   {
     id: 5,
     display_title: "TOOTHPASTE BITS WITH FLUORIDE",
-    src: "/src/images/products/2/pc-tpb-wf-2oz-mint-fluoride-no-bg.webp",
+    src: "/products/2/pc-tpb-wf-2oz-mint-fluoride-no-bg.webp",
     colors: [{ colorId: 0, color: "#c7f6e6", clicked: true }],
     type: "Mint",
     reviews: "21,266",
@@ -36,7 +36,7 @@ export const cardsArr = [
   {
     id: 6,
     display_title: "DEODORANT SET",
-    src: "/src/images/products/3/pdp-product-card-desktop-silver-case-open-no-bg.webp",
+    src: "/products/3/pdp-product-card-desktop-silver-case-open-no-bg.webp",
     colors: [
       { colorId: 0, color: "#f0f0f0", clicked: true },
       { colorId: 1, color: "#f27c2d", clicked: false },
@@ -55,7 +55,7 @@ export const cardsArr = [
   {
     id: 7,
     display_title: "MOUTHWASH BITS",
-    src: "/src/images/products/4/pc-mouthwash-no-bg.webp",
+    src: "/products/4/pc-mouthwash-no-bg.webp",
     colors: [{ colorId: 0, color: "#c7f6e6", clicked: true }],
     type: "Mint",
     reviews: "834",

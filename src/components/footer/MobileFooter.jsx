@@ -2,6 +2,7 @@ import { Email } from "./Footer";
 import { FooterLogos } from "./Footer";
 import { FooterInitials } from "./Footer";
 import { FooterLinks } from "./FooterLinks";
+import {FooterHr} from './Footer'
 
 export const MoblieFooter = () => {
   return (

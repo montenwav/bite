@@ -34,16 +34,17 @@ export const Adaptive = memo(() => {
           <h5>Shop All</h5>
         </a>
       </div>
-      <div className="hr"/>
+      <div className="hr" />
       <div className="adaptive_open_item">
         <a href="/">
           <h5>OUR BEST SELLERS</h5>
         </a>
-      </div>
 
-      {AdaptiveOpenEmenentsArr.map((emenent) => (
-        <AdaptiveOpenElem key={emenent.id} emenent={emenent}/>
-      ))}
+        {AdaptiveOpenEmenentsArr.map((emenent) => (
+          <AdaptiveOpenElem key={emenent.id} emenent={emenent} />
+        ))}
+      </div>
+      <div className="hr"/>
       {AdaptiveItemsArr.map((title, index) => (
         <AdaptiveItem key={index} title={title} />
       ))}
@@ -51,11 +52,11 @@ export const Adaptive = memo(() => {
   );
 });
 
-const AdaptiveOpenElem = ({emenent}) => {
+const AdaptiveOpenElem = ({ emenent }) => {
   return (
     <>
       <div className="adaptive_flex_item">
-        <AdaptiveFlexElements emenent={emenent}/>
+        <AdaptiveFlexElements emenent={emenent} />
         <div
           style={{ border: "1px solid black" }}
           className="adaptive_flex_elem"
@@ -67,12 +68,12 @@ const AdaptiveOpenElem = ({emenent}) => {
           />
         </div>
       </div>
-      <div className="hr"></div>
+    <div className="hr"/>
     </>
   );
 };
 
-const AdaptiveFlexElements = ({emenent}) => {
+const AdaptiveFlexElements = ({ emenent }) => {
   return (
     <div className="adaptive_flex_elem">
       <span>

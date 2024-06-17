@@ -1,48 +1,23 @@
-import { motion, useMotionValue } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useAutoPlay } from "../hooks/useAutoPlay.jsx";
+import { useDrugEffect } from "../hooks/useDrugEffect.jsx";
 import { useSize } from "../hooks/useSize.jsx";
+import { useState } from "react";
 
 export function ShopByCategory() {
-  // const [imgIndex, setImgIndex] = useState(0);
+  const [imgIndex, setImgIndex] = useState(0);
+  const [_, setIsDragging] = useState(false);
 
-  // const windowsize = useSize();
+  const arrLength = imgs.length-1
 
-  // // Drag effect
-  // const [isDragging, setIsDragging] = useState(false);
-
-  // const ChangeThreshold = 50; // How much you should drag to change an image
-  // const dragLenght = useMotionValue(0); // displays how much you dragged
-
-  // const onDragStart = () => setIsDragging(true);
-
-  // const onDragEnd = () => {
-  //   setIsDragging(false);
-
-  //   const x = dragLenght.get();
-
-  //   if (x <= -ChangeThreshold && imgIndex < imgs.length - 1) {
-  //     setImgIndex((prev) => prev + 1);
-  //   } else if (x >= ChangeThreshold && imgIndex > 0) {
-  //     setImgIndex((prev) => prev - 1);
-  //   }
-  // };
-
-  // //Autoplay effect
-  // const updateIndex = (newIndex) => {
-  //   if (newIndex >= imgs.length) {
-  //     newIndex = 0;
-  //   }
-  //   setImgIndex(newIndex);
-  // };
-
-  // useEffect(() => {
-  //   if (windowsize <= 1000) {
-  //     const interval = setInterval(() => {
-  //       updateIndex(imgIndex + 1);
-  //     }, 3000);
-  //     return () => clearInterval(interval);
-  //   }
-  // }, [windowsize]);
+  useAutoPlay(imgIndex, setImgIndex, true, arrLength);
+  const { onDragStart, onDragEnd, dragLenght } = useDrugEffect(
+    imgIndex,
+    setImgIndex,
+    setIsDragging,
+    arrLength
+  );
+  const windowsize = useSize();
 
   return (
     <section className="shop_by_category">
@@ -95,14 +70,17 @@ const Images = ({ windowsize }) => {
   );
 };
 
-const imgs = [
-  {
-    name: "ORAL CARE",
-    src: "/src/images/shopby/hp-shop-by-category-oral-care.webp",
-  },
-  { name: "SETS", src: "/src/images/shopby/hp-shop-by-category-sets.png" },
-  {
-    name: "BODY CARE",
-    src: "/src/images/shopby/hp-shop-by-category-body-care.webp",
-  }
-];
+const imgs = [];
+for (let i = 0; i < 20; i++) {
+  imgs.push(
+    {
+      name: "ORAL CARE",
+      src: "/shopby/hp-shop-by-category-oral-care.webp",
+    },
+    { name: "SETS", src: "/shopby/hp-shop-by-category-sets.png" },
+    {
+      name: "BODY CARE",
+      src: "/shopby/hp-shop-by-category-body-care.webp",
+    }
+  );
+}

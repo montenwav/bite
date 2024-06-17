@@ -6,14 +6,10 @@ import {
 } from "framer-motion";
 import { useContext, useEffect, useRef } from "react";
 import {
-  isEmptyCtx,
-  addedItemsCtx,
   isBagOpenCtx,
-  setIsBagOpenCtx,
   isAdaptiveCtx,
-  setIsAdaptiveCtx,
 } from "../../hooks/Provider.jsx";
-import { Bag } from "./Bag.jsx";
+import { Bag } from "../bag/Bag.jsx";
 import { Adaptive } from "../Adaptive.jsx";
 import { HeaderMain } from "./HeaderMain.jsx";
 

@@ -9,6 +9,7 @@ import {
 
 export const WhyNotToAdd = () => {
   const isEmpty = useContext(isEmptyCtx);
+  
   return (
     <>
       <div className="why_not_to_add">

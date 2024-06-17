@@ -22,7 +22,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  opacity: 0.7;
+  /* opacity: 0.7; */
   animation: 0.5s opacityAnimation;
   background: black;
   width: 100vw;
