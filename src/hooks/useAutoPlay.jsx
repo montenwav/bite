@@ -1,30 +1,26 @@
 import { useEffect } from "react";
 import { useSize } from "./useSize";
 
-export const useAutoPlay = (imgIndex, setImgIndex, isDependencies, length) => {
-  const windowsize = useSize()
+export const useAutoPlay = (imgIndex, setImgIndex, isDepenencies, length) => {
+  const windowSize = useSize();
 
   useEffect(() => {
-    if (isDependencies && windowsize < 1000) {
-      const interval = setInterval(() => {
-        updateIndex(imgIndex + 1);
-      }, 3000);
-      return () => clearInterval(interval);
-    } else {
-      const interval = setInterval(() => {
-        updateIndex(imgIndex + 1);
-      }, 3000);
+    let interval;
+    if (isDepenencies) {
+      if (windowSize < 1000) {
+        interval = setInterval(() => {
+          setImgIndex((prevIndex) => prevIndex + 1);
+        }, 3000);
+      } else {
+        setImgIndex(0);
+      }
       return () => clearInterval(interval);
     }
-  }, [isDependencies && windowsize]);
+    interval = setInterval(() => {
+      setImgIndex((prevIndex) => prevIndex + 1);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [isDepenencies && windowSize]);
 
-  const updateIndex = (newIndex) => {
-    imgIndex =+ newIndex
-    if (imgIndex > length) {
-      setImgIndex(0);
-      imgIndex = 0
-    }
-    return setImgIndex(prev => prev + 1);
-  };
-
+  if(imgIndex > length) setImgIndex(0)
 };

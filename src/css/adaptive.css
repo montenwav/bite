@@ -29,8 +29,6 @@
 }
 
 .adaptive_flex_item {
-  width: 95%;
-  margin: auto;
   display: flex;
   justify-content: space-between;
   width: 100%;

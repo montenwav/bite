@@ -22,14 +22,12 @@ export function Provider({ children }) {
   const [whyNotCards, setWhyNotCards] = useState(whyNotToAddArr);
 
   //Add new item to bag
-  const getBagSrotage = JSON.parse(localStorage.getItem("bag")) || [];
-  const [addedItems, dispatch] = useReducer(BagReducerFunc, getBagSrotage);
+  const getBagStorage = JSON.parse(localStorage.getItem("bag")) || [];
+  const [addedItems, dispatch] = useReducer(BagReducerFunc, getBagStorage);
 
   useEffect(() => {
-    //Set storage
     localStorage.setItem("bag", JSON.stringify(addedItems));
-    //IsEmpty Check
-    setIsEmpty(addedItems.length === 0);
+    setIsEmpty(addedItems.length ? false : true);
   }, [addedItems]);
 
   return (
@@ -74,8 +72,15 @@ export const BagReducerFunc = (addedItems, action) => {
         return card;
       });
     }
-    case "decrement_button": {
-      return action.decrementArr;
+    case 'decrement_button': {
+      const decrementItem = addedItems.map((card) => {
+        if (card.id === action.itemId)
+          return { ...card, count: card.count - 1 };
+        return card;
+      });
+      const filteredItems = decrementItem.filter(card => card.count > 0)
+      return filteredItems
+      
     }
     case "remove_button": {
       return addedItems.filter((c) => c.id !== action.itemId);

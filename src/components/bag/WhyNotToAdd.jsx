@@ -9,7 +9,7 @@ import {
 
 export const WhyNotToAdd = () => {
   const isEmpty = useContext(isEmptyCtx);
-  
+
   return (
     <>
       <div className="why_not_to_add">
@@ -26,15 +26,17 @@ export const WhyNotToAdd = () => {
   );
 };
 
+localStorage.clear();
+
 const WhyNotToAddCard = () => {
   const whyNotCards = useContext(whyNotCardsCtx);
   const setWhyNotCards = useContext(setWhyNotCardsCtx);
   const addedItems = useContext(addedItemsCtx);
   const dispatch = useContext(dispatchCtx);
 
-  const addingItem = (card) => {
+  const addItem = (card) => {
     let existingItem = addedItems.find((item) => item.id === card.id);
-    if (existingItem) {
+    if (typeof existingItem !== "undefined") {
       dispatch({ type: "if_exist", cardId: card.id });
     } else {
       dispatch({ type: "if_not_exist", card: card });
@@ -69,7 +71,7 @@ const WhyNotToAddCard = () => {
           </div>
 
           <button
-            onClick={() => addingItem(card)}
+            onClick={() => addItem(card)}
             disabled={card.added}
             style={{ background: card.added && "gray" }}
             className="why_not_to_add_button"
@@ -89,25 +91,11 @@ const Checkout = () => {
   total = addedItems.map((item) => item.count * item.price);
   total =
     addedItems.length > 0 && total.reduce((accum, items) => accum + items);
-
-  async function handleChechout() {
-    const response = await fetch("https://example.com", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(addedItems),
-    });
-
-    if (!response.ok) {
-      throw Error("Request Error");
-    }
-  }
-
+    
   return (
     <>
       <div className="hr"></div>
-      <div onClick={handleChechout} className="checkout_container">
+      <div className="checkout_container">
         <div className="checkout">
           <h5>CHECKOUT</h5>
           <h5 className="bag_total">{`$${total}.00`}</h5>

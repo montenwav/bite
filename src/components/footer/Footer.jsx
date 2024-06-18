@@ -19,7 +19,7 @@ export const Email = () => {
       <h3>Sign up for 10% off your first order.</h3>
       <div className="email_container">
         <input type="email" placeholder="Entar email address" />
-        <div style={{background: 'white'}} className="hr"/>
+        <div style={{ background: "white" }} className="hr" />
       </div>
       <button>SUBCRIBE</button>
     </div>
@@ -30,8 +30,7 @@ export const FooterLogos = () => {
   return (
     <div className="footer__logos">
       {FooterIconsArr.map((iconName, index) => (
-        <div key={index} 
-          className="footer__logo">
+        <div key={index} className="footer__logo">
           <i className={`icon ${iconName}`} role="presentation" />
         </div>
       ))}
@@ -45,22 +44,20 @@ export const FooterInitials = () => {
       <div className="bottom_footer_head">
         <h5>© 2024 Bite. All Rights Reserved.</h5>
       </div>
-      <div className="bottom_footer_flex">
-        <BottomFooterFlex />
-      </div>
+      <BottomFooterFlex />
     </div>
   );
 };
 
 const BottomFooterFlex = () => {
   return (
-    <>
+    <div className="bottom_footer_flex">
       {BottomFooterFlexArr.map((item, index) => {
         <a key={index} href="/">
           <h5>{item}</h5>
         </a>;
       })}
-    </>
+    </div>
   );
 };
 
@@ -95,8 +92,6 @@ export const FooterLinkIcon = () => {
     </svg>
   );
 };
-
-export const FooterHr = () => <div className="moblie_footer_hr"></div>;
 
 const FooterIconsArr = [
   "icon--b-corp",

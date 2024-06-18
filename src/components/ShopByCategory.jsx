@@ -8,7 +8,7 @@ export function ShopByCategory() {
   const [imgIndex, setImgIndex] = useState(0);
   const [_, setIsDragging] = useState(false);
 
-  const arrLength = imgs.length-1
+  const arrLength = imgs.length - 1;
 
   useAutoPlay(imgIndex, setImgIndex, true, arrLength);
   const { onDragStart, onDragEnd, dragLenght } = useDrugEffect(
@@ -25,7 +25,7 @@ export function ShopByCategory() {
       {windowsize < 1000 ? (
         <motion.div
           style={{
-            transform: `translateX(calc(-${
+          transform: `translateX(calc(-${
               imgIndex * 85
             }vw - ${imgIndex} * 16px))`, //card width + padding
             x: dragLenght,
@@ -70,17 +70,14 @@ const Images = ({ windowsize }) => {
   );
 };
 
-const imgs = [];
-for (let i = 0; i < 20; i++) {
-  imgs.push(
-    {
-      name: "ORAL CARE",
-      src: "/shopby/hp-shop-by-category-oral-care.webp",
-    },
-    { name: "SETS", src: "/shopby/hp-shop-by-category-sets.png" },
-    {
-      name: "BODY CARE",
-      src: "/shopby/hp-shop-by-category-body-care.webp",
-    }
-  );
-}
+const imgs = [
+  {
+    name: "ORAL CARE",
+    src: "/shopby/hp-shop-by-category-oral-care.webp",
+  },
+  { name: "SETS", src: "/shopby/hp-shop-by-category-sets.png" },
+  {
+    name: "BODY CARE",
+    src: "/shopby/hp-shop-by-category-body-care.webp",
+  },
+];

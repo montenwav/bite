@@ -8,7 +8,7 @@ import { EmptyBag } from "./EmptyBag.jsx";
 
 export const BagMiddle = () => {
   const isEmpty = useContext(isEmptyCtx);
-  
+
   return (
     <div
       style={{ height: isEmpty ? `calc(100% - 345px)` : `calc(100% - 415px)` }}
@@ -28,7 +28,6 @@ const MiddleBagCard = () => {
         <div key={item.id}>
           <div className="added_item_container">
             <div className="added_item">
-
               <div className="added_item_img">
                 <img src={item.src} alt={item.title} />
               </div>
@@ -36,7 +35,6 @@ const MiddleBagCard = () => {
               <AddedItemDescription item={item} />
             </div>
           </div>
-
           <div className="hr" style={{ width: "95%" }}></div>
         </div>
       ))}
@@ -95,37 +93,18 @@ const AddedItemDescription = ({ item }) => {
 };
 
 const BagCounter = ({ item }) => {
+  const addedItems = useContext(addedItemsCtx);
   const dispatch = useContext(dispatchCtx);
 
   return (
     <div className="bag_counter">
-      <BagCounterFlex item={item}/>
-      <h5
-        className="bag_remove_btn"
-        onClick={() => dispatch({ type: "remove_button", itemId: item.id })}
-      >
-        Remove
-      </h5>
-    </div>
-  );
-};
-
-const BagCounterFlex = ({item}) => {
-  const addedItems = useContext(addedItemsCtx);
-  const dispatch = useContext(dispatchCtx)
-
-  const handleDecrement = (itemId) => {
-    let decrementArr = addedItems.map((card) => {
-      if (card.id === itemId) return { ...card, count: card.count - 1 };
-      return card;
-    });
-    decrementArr = decrementArr.filter((c) => c.count > 0);
-
-    dispatch({ type: "decrement_button", decrementArr: decrementArr });
-  };
-
-  <div className="bag_counter_flex">
-        <BagCounterItem func={handleDecrement(item.id)}>
+      <div className="bag_counter_flex">
+        <div
+          onClick={() =>
+            dispatch({ type: "decrement_button", itemId: item.id })
+          }
+          className="bag_counter_item"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={18}
@@ -151,14 +130,15 @@ const BagCounterFlex = ({item}) => {
               />
             </g>
           </svg>
-        </BagCounterItem>
-
+        </div>
         <div className="bag_counter_item">
           <h5>{item.count}</h5>
         </div>
-
-        <BagCounterItem
-          func={dispatch({ type: "increment_button", itemId: item.id })}
+        <div
+          onClick={() =>
+            dispatch({ type: "increment_button", itemId: item.id })
+          }
+          className="bag_counter_item"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -185,14 +165,15 @@ const BagCounterFlex = ({item}) => {
               />
             </g>
           </svg>
-        </BagCounterItem>
+        </div>
       </div>
-}
 
-const BagCounterItem = ({ children, func }) => {
-  return (
-    <div onClick={() => func} className="bag_counter_item">
-      {children}
+      <h5
+        className="bag_remove_btn"
+        onClick={() => dispatch({ type: "remove_button", itemId: item.id })}
+      >
+        Remove
+      </h5>
     </div>
   );
 };

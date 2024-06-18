@@ -8,7 +8,7 @@ export function BottomCompanies() {
   const [imgIndex, setImgIndex] = useState(0);
   const [_, setIsDragging] = useState(false);
 
-  const arrLength = companiesList.length - 1;
+  const arrLength = companiesList.length - 2;
 
   useAutoPlay(imgIndex, setImgIndex, false, arrLength);
   const { onDragStart, onDragEnd, dragLenght } = useDrugEffect(

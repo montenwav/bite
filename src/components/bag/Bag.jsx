@@ -9,21 +9,17 @@ export function Bag({ bagRef }) {
 
   const handleExitBtn = () => {
     setIsBagOpen(false);
-    bagRef.current.style.right = "100%";
     document.body.style.overflow = "visible";
   };
 
   return (
-    <>
       <div className="bag">
-        <div onClick={handleExitBtn} className="bag_bg">
+        <div onClick={handleExitBtn} className="bag_bg"/>
           <div ref={bagRef} className="bag_container">
             <BagTop bagRef={bagRef} handleExitBtn={handleExitBtn} />
             <BagMiddle />
             <WhyNotToAdd />
           </div>
         </div>
-      </div>
-    </>
   );
 }

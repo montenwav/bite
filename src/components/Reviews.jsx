@@ -5,7 +5,7 @@ import {useSize } from '../hooks/useSize'
 
 export function Reviews() {
   const [imgIndex, setImgIndex] = useState(0)
-  useAutoPlay(imgIndex, setImgIndex, false, reviews.length-1);
+  useAutoPlay(imgIndex, setImgIndex, false, reviews.length-2);
   const windowsize = useSize();
 
   return (

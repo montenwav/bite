@@ -1,6 +1,4 @@
 .companies_list {
-  /* margin-top: 20px;
-    margin-bottom: 20px; */
   padding: 30px;
   overflow-x: hidden;
   display: flex;
@@ -18,10 +16,18 @@
 }
 
 .companies_container {
+  height: 40px;
+  position: relative;
+  display: flex;
+  width: 100vw;
+  align-items: center;
+}
+
+.companies_inner_container {
+  margin-left: 5%;
   transition: 0.5s;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  position: absolute;
   gap: 40px;
 }
 
@@ -57,8 +63,7 @@
   }
 
   .companies_container {
-    margin-left: 190px;
-    height: 50px;
+    height: 40px;
     margin-top: 10px;
     margin-bottom: 10px;
   }

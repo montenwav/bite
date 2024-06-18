@@ -63,6 +63,11 @@
   width: 50%;
 }
 
+.review_card_img img {
+  object-fit: cover;
+  
+}
+
 .reviews-stars {
   width: 120px;
 }

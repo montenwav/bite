@@ -22,7 +22,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  /* opacity: 0.7; */
+  opacity: 0.7;
   animation: 0.5s opacityAnimation;
   background: black;
   width: 100vw;
@@ -44,14 +44,25 @@
   position: fixed;
   top: 0;
   right: 0;
+  transform: translateX(0%);
   display: flex;
   flex-direction: column;
   width: 370px;
   height: 100%;
-  transition: 0.3s;
+  /* transition: 0.3s; */
+  animation: .3s openSlide;
   z-index: 3;
   background: var(--bg-color);
 }
+
+@keyframes openSlide {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0%);
+  }
+} 
 
 .bag_top_text {
   margin-top: 30px;

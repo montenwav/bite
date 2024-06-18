@@ -68,7 +68,7 @@ const AdaptiveOpenElem = ({ emenent }) => {
           />
         </div>
       </div>
-    <div className="hr"/>
+    {emenent.id === 0 && <div className="hr"/>}
     </>
   );
 };

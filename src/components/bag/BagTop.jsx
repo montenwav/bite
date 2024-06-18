@@ -1,23 +1,18 @@
-import { useContext, useEffect } from "react";
-import {
-  addedItemsCtx,
-} from "../../hooks/Provider.jsx";
+import { useContext, useEffect, useState } from "react";
+import { addedItemsCtx } from "../../hooks/Provider.jsx";
 
 export const BagTop = ({ handleExitBtn }) => {
   const addedItems = useContext(addedItemsCtx);
-
   let freeShipping = 32;
 
   // Update freeShipping
-  useEffect(() => {
-    if (addedItems.length > 0) {
-      let allPrices = addedItems
+  if (addedItems.length > 0) {
+    let allPrices = addedItems
       .map((item) => item.count * item.price)
       .reduce((accum, item) => accum + item, 0);
     freeShipping -= allPrices;
   }
-}, [addedItems])
-  
+
   return (
     <>
       <div className="bag_top_bg">

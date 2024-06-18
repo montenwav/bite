@@ -2,7 +2,6 @@ import { Email } from "./Footer";
 import { FooterLogos } from "./Footer";
 import { FooterInitials } from "./Footer";
 import { FooterLinks } from "./FooterLinks";
-import {FooterHr} from './Footer'
 
 export const MoblieFooter = () => {
   return (
@@ -21,13 +20,13 @@ export const MoblieFooter = () => {
 const ShopAll = () => {
   return (
     <>
-      <FooterHr />
+      <div className="moblie_footer_hr" />
       <div className="shop_all">
         <a href="/">
           <h4>Shop All</h4>
         </a>
       </div>
-      <FooterHr />
+      <div className="moblie_footer_hr" />
     </>
   );
 };

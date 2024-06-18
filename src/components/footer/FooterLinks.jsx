@@ -1,5 +1,4 @@
 import { FooterLinkIcon } from "./Footer";
-import { FooterHr } from "../footer/Footer";
 
 export const FooterLinks = ({ isMoblie }) => {
   return (
@@ -9,7 +8,7 @@ export const FooterLinks = ({ isMoblie }) => {
           <div key={item.id} className="footer_links_container">
             <h4>{item.title}</h4>
             <FooterLinksContent isMoblie={isMoblie} item={item} />
-            {isMoblie && <FooterHr />}
+            {isMoblie && <div className="moblie_footer_hr"/>}
           </div>
       ))}
       <ArrowUp />
