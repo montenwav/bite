@@ -303,3 +303,7 @@
   background: black;
   border-radius: 5px;
 }
+
+.bag_icon {
+  cursor: pointer;
+}
