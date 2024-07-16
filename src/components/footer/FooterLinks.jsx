@@ -3,21 +3,21 @@ import { FooterLinkIcon } from "./Footer";
 export const FooterLinks = ({ isMoblie }) => {
   return (
     <>
-    <div className={`footer_links ${isMoblie ? '' : "full_links"}`}>
-      {FooterLinksArr.map((item) => (
+      <div className={`footer_links ${isMoblie ? "" : "full_links"}`}>
+        {FooterLinksArr.map((item) => (
           <div key={item.id} className="footer_links_container">
             <h4>{item.title}</h4>
-            <FooterLinksContent isMoblie={isMoblie} item={item} />
-            {isMoblie && <div className="moblie_footer_hr"/>}
+            <FooterLinksContent item={item} />
+            {isMoblie && <div className="moblie_footer_hr" />}
           </div>
-      ))}
-      <ArrowUp />
-    </div>
+        ))}
+        <ArrowUp />
+      </div>
     </>
   );
 };
 
-const FooterLinksContent = ({ isMoblie, item }) => {
+const FooterLinksContent = ({ item }) => {
   return (
     <>
       <div className="footer_links_content">
@@ -71,7 +71,7 @@ const ArrowUp = () => {
   );
 };
 
-export const FooterLinksArr = [
+const FooterLinksArr = [
   {
     id: 0,
     title: "SHOP",

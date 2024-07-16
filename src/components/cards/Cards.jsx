@@ -5,9 +5,9 @@ import {
   setIsBagOpenCtx,
   dispatchCtx,
 } from "../../hooks/Provider.jsx";
-import {cardsArr} from './CardsArr.jsx'
-import {AdaptiveCards} from './AdaptiveCards.jsx'
-import {FullCards} from './FullCards.jsx'
+import { cardsArr } from "./CardsArr.jsx";
+import { AdaptiveCards } from "./AdaptiveCards.jsx";
+import { FullCards } from "./FullCards.jsx";
 
 export function Cards() {
   const [cards, setCards] = useState(cardsArr);
@@ -17,7 +17,7 @@ export function Cards() {
   const addedItems = useContext(addedItemsCtx);
   const setIsBagOpen = useContext(setIsBagOpenCtx);
 
-  const addItem = useCallback((card) => {
+  const addItem = (card) => {
     setIsBagOpen(true);
 
     // Add item
@@ -27,7 +27,7 @@ export function Cards() {
     } else {
       dispatch({ type: "if_not_exist", card: card });
     }
-  }, []);
+  };
 
   return (
     <>

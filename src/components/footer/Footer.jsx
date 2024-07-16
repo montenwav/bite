@@ -49,18 +49,6 @@ export const FooterInitials = () => {
   );
 };
 
-const BottomFooterFlex = () => {
-  return (
-    <div className="bottom_footer_flex">
-      {BottomFooterFlexArr.map((item, index) => {
-        <a key={index} href="/">
-          <h5>{item}</h5>
-        </a>;
-      })}
-    </div>
-  );
-};
-
 export const FooterLinkIcon = () => {
   return (
     <svg
@@ -90,6 +78,18 @@ export const FooterLinkIcon = () => {
         />
       </g>
     </svg>
+  );
+};
+
+const BottomFooterFlex = () => {
+  return (
+    <div className="bottom_footer_flex">
+      {BottomFooterFlexArr.map((item, index) => {
+        <a key={index} href="/">
+          <h5>{item}</h5>
+        </a>;
+      })}
+    </div>
   );
 };
 

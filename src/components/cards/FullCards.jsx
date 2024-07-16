@@ -84,7 +84,7 @@ const DeliversEveny = ({ card }) => {
         </svg>
         <h5>Delivers Every 4 Months</h5>
       </div>
-      
+
       {card.id <= 1 && (
         <div className="delivers_every_save">
           <h5>Save 33%</h5>

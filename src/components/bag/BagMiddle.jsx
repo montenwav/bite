@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { Children, useContext } from "react";
 import {
   isEmptyCtx,
   dispatchCtx,
@@ -35,7 +35,7 @@ const MiddleBagCard = () => {
               <AddedItemDescription item={item} />
             </div>
           </div>
-          <div className="hr" style={{ width: "95%" }}></div>
+          <div className="hr" style={{ width: "95%" }}/>
         </div>
       ))}
     </>
@@ -93,17 +93,14 @@ const AddedItemDescription = ({ item }) => {
 };
 
 const BagCounter = ({ item }) => {
-  const addedItems = useContext(addedItemsCtx);
   const dispatch = useContext(dispatchCtx);
 
   return (
     <div className="bag_counter">
       <div className="bag_counter_flex">
-        <div
-          onClick={() =>
-            dispatch({ type: "decrement_button", itemId: item.id })
-          }
-          className="bag_counter_item"
+        <DispatchBagCouterFlex
+        type='decrement'
+        item={item}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -130,15 +127,15 @@ const BagCounter = ({ item }) => {
               />
             </g>
           </svg>
-        </div>
+        </DispatchBagCouterFlex>
+
         <div className="bag_counter_item">
           <h5>{item.count}</h5>
         </div>
-        <div
-          onClick={() =>
-            dispatch({ type: "increment_button", itemId: item.id })
-          }
-          className="bag_counter_item"
+
+        <DispatchBagCouterFlex
+        type='increment'
+        item={item}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -165,7 +162,7 @@ const BagCounter = ({ item }) => {
               />
             </g>
           </svg>
-        </div>
+        </DispatchBagCouterFlex>
       </div>
 
       <h5
@@ -177,3 +174,16 @@ const BagCounter = ({ item }) => {
     </div>
   );
 };
+
+const DispatchBagCouterFlex = ({item, type, children}) => {
+  return (    
+  <div
+    onClick={() =>
+      dispatch({ type: `${type === 'increment' ? 'increment' : 'decrement'}_button`, itemId: item.id })
+    }
+    className="bag_counter_item"
+    >
+    {children}
+    </div>
+  )
+}

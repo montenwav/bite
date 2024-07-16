@@ -25,7 +25,7 @@ export const AdaptiveCards = ({ cards, setCards, addItem }) => {
               : `$${card.price}/month`}
           </p>
 
-          <Stars color={'000'}/>
+          <Stars color="000" />
           <p>{`${card.reviews} Reviews`}</p>
 
           <button onClick={() => addItem(card)} className="button cardBtn">

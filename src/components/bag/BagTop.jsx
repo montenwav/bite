@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { addedItemsCtx } from "../../hooks/Provider.jsx";
 
 export const BagTop = ({ handleExitBtn }) => {
