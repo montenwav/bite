@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { isAdaptiveCtx, setIsAdaptiveCtx } from "../../hooks/Provider.jsx";
+import { isAdaptiveCtx, setIsAdaptiveCtx } from "../../Contexts.jsx";
 
 export const Hamburger = () => {
   const isAdaptive = useContext(isAdaptiveCtx);

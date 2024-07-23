@@ -1,0 +1,46 @@
+.two_up_main {
+    display: flex;
+}
+
+.two_up_card {
+    background-position: center;
+    background-size: cover;
+    width: 50%;
+    border: 1px solid black;
+    height: 500px;
+    position: relative;
+    cursor: pointer;
+}
+
+.top_up_card_content {
+    width: 100%;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 30px;
+    text-align: center;
+}
+
+.top_up_card_content h5 {
+    padding: 10px;
+}
+
+.two_up_card:first-child {
+    border-right: 1px solid transparent;
+}
+
+@media (max-width: 760px) {
+    .two_up_main {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .two_up_card {
+        width: 100%;
+    }
+
+    .two_up_card:first-child {
+        border-right: 1px solid black;
+        border-bottom: 1px solid transparent;
+    }
+}

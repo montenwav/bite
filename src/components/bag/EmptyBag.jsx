@@ -5,7 +5,7 @@ export const EmptyBag = () => {
     <>
       <div className="middle_bag_text">
         <h5>OOPS. YOUR BAG IS EMPTY.</h5>
-        <p>Here's what's trending:</p>
+        <h4 style={{ fontFamily: "serif" }}>Here's what's trending:</h4>
       </div>
       <EmptyMiddleBagCard />
     </>

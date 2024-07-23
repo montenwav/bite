@@ -38,7 +38,7 @@ export function BottomCompanies() {
   );
 }
 
-const Companies = memo(() => {
+const Companies = memo(function Companies() {
   return (
     <>
       {BottomCompaniesList.map((company, index) => (
@@ -47,7 +47,7 @@ const Companies = memo(() => {
           whileTap={{ cursor: "grabbing" }}
           className="bottom_comp_item"
         >
-          <h2>{company.title}</h2>
+          <h3>{company.title}</h3>
           <div className="btm_companies_img">
             <img height="25px" src={company.src} />
           </div>

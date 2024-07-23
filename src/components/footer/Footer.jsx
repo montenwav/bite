@@ -16,7 +16,7 @@ export const Email = () => {
   return (
     <div className="footer_email">
       <h4>STAY IN THE KNOW</h4>
-      <h3>Sign up for 10% off your first order.</h3>
+      <h2>Sign up for 10% off your first order.</h2>
       <div className="email_container">
         <input type="email" placeholder="Entar email address" />
         <div style={{ background: "white" }} className="hr" />

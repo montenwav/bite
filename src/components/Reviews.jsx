@@ -35,7 +35,7 @@ export function Reviews() {
   );
 }
 
-const ReviewCards = memo(() => {
+const ReviewCards = memo(function ReviewCards() {
   return (
     <>
       {reviews.map((review, idx) => (
@@ -45,7 +45,7 @@ const ReviewCards = memo(() => {
 
             <div className="AuthorAndStars">
               <p>{review.author}</p>
-              <Stars color="FFF" />
+              <Stars color="72f2c7" />
             </div>
           </div>
 

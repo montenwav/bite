@@ -5,16 +5,16 @@
 
 :root {
   --bg-color: #f8f8f8;
-  --sans-serif-font: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-    sans-serif;
+  --sans-serif-font: sans-serif;
   --cards-bg: #e9e9eb;
   --lightblue: #72f2c7;
   --bg-reviews: #131313;
-  --h1: clamp(1.5rem, 8vw, 3.5rem);
+  --dark-gray: rgb(33, 33, 33);
+  --h1: clamp(3rem, 8vw, 3.5rem);
   --h2: clamp(16px, 5vw, 40px);
   --h3: clamp(16px, 6vw, 30px);
-  --h4: clamp(16px, 2.5vw, 24px);
-  --h5: clamp(14px, 2vw, 16px);
+  --h4: clamp(14px, 2vw, 22px);
+  --h5: clamp(14px, 2vw, 14px);
   --h6: 12px;
   --p: clamp(14px, 3vw, 20px);
 }
@@ -23,7 +23,7 @@
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: normal;
   font-family: "Times New Roman", Times, serif;
 }
@@ -37,7 +37,7 @@ body {
   color: white;
 }
 
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
   width: 10px;
 }
 
@@ -48,7 +48,7 @@ body {
 ::-webkit-scrollbar-thumb {
   background: black;
   border-radius: 5px;
-}
+} */
 
 section:not(.main_wallpaper, .BitsAreBetter, .footer) {
   width: min(1500px, 95%);
@@ -109,6 +109,7 @@ h6 {
 a {
   text-decoration: none;
   color: black;
+  font-size: var(--h6);
   font-family: var(--sans-serif-font);
 }
 
@@ -117,9 +118,16 @@ b {
   font-weight: bold;
 }
 
+strong {
+  font-size: 1em;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
 button {
-  width: 250px;
-  height: 50px;
+  width: 180px;
+  height: 45px;
+  padding: 15px;
   transition: 0.5s;
   border: none;
   font-family: var(--sans-serif-font);
@@ -222,69 +230,80 @@ button {
 /* MAIN */
 
 .main_wallpaper {
-  background-image: url(//bitetoothpastebits.com/cdn/shop/files/hp-home-hero-desktop-1.jpg?v=1705612565&width=3840);
-  background-position: top center;
+  background-image: url(https://bitetoothpastebits.com/cdn/shop/files/jpeg-optimizer_2024.07.01_homepage_hero_desktop_2.jpg?v=1720816230&width=3000);
+  background-position: top 35px center;
   background-repeat: no-repeat;
   background-size: cover;
   position: relative;
   left: 0;
-  top: 0;
-  min-height: 790px;
+  top: 0px;
+  z-index: 0;
+  min-height: 635px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 80px;
 }
 
 .main_content_container {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  height: calc(100% - 70px); /*Main - header height */
-  width: 90%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  height: 380px;
+  width: 85%;
   max-width: 1500px;
   margin: auto;
-  display: flex;
+  color: white;
 }
 
 .main_content_container p {
-  padding: 16px;
+  padding: 25px;
 }
 
 .main_content {
-  height: 300px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   text-align: center;
-}
-
-.main_content h1 {
+  width: 100%;
   max-width: 350px;
 }
 
+.main_content h1 {
+  font-size: 6em;
+}
+
 .main_content p {
-  max-width: 300px;
+  font-size: 2em;
+}
+
+.main_content .button {
+  width: 100%;
 }
 
 @media (max-width: 760px) {
   .main_content_container {
+    display: flex;
+    align-items: flex-start;
     justify-content: center;
-    align-items: top;
+    text-align: center;
+  }
+
+  .main_content h1 {
+    font-size: 2.7em;
+    max-width: 180px;
+    margin: auto;
+  }
+
+  .main_content p,
+  .main_content h1 {
+    color: black;
   }
 
   .main_wallpaper {
-    background-image: url(//bitetoothpastebits.com/cdn/shop/files/v2-home-hero-mobile.jpg?v=1700002377&width=780);
+    background-image: url("//bitetoothpastebits.com/cdn/shop/files/jpeg-optimizer_2024.07.01_homepage_hero_mobile_3.jpg?v=1720816209&width=780");
     min-height: 80vh;
   }
 
-  .main_content {
-    margin-top: 50px;
-  }
-}
-
-@media (min-width: 760px) {
-  .main_content_container {
-    justify-content: left;
-    align-items: center;
+  .main_content .button {
+    width: 120px;
   }
 }

@@ -1,19 +1,19 @@
 import { useContext } from "react";
 import {
-  isEmptyCtx,
   dispatchCtx,
   addedItemsCtx,
   whyNotCardsCtx,
   setWhyNotCardsCtx,
-} from "../../hooks/Provider.jsx";
+} from "../../Contexts.jsx";
 
 export const WhyNotToAdd = () => {
-  const isEmpty = useContext(isEmptyCtx);
+  const addedItems = useContext(addedItemsCtx);
+  console.log(addedItems.length);
 
   return (
     <>
       <div className="why_not_to_add">
-        {!isEmpty && <Checkout />}
+        {addedItems.length && <Checkout />}
         <div className="hr"></div>
 
         <h5 className="why_not_to_add_h5">WHY NOT ADD?</h5>
@@ -73,10 +73,10 @@ const WhyNotToAddCard = () => {
           <button
             onClick={() => addItem(card)}
             disabled={card.added}
-            style={{ background: card.added && "gray" }}
+            style={{ background: card.added && "gray", color: "white" }}
             className="why_not_to_add_button"
           >
-            {card.added ? "ADDING..." : "ADD"}
+            {card.added ? "ADDING.." : "ADD"}
           </button>
         </div>
       ))}
@@ -91,7 +91,7 @@ const Checkout = () => {
   total = addedItems.map((item) => item.count * item.price);
   total =
     addedItems.length > 0 && total.reduce((accum, items) => accum + items);
-    
+
   return (
     <>
       <div className="hr"></div>

@@ -1,10 +1,10 @@
-import { useCallback, useContext, memo, useState, useMemo } from "react";
+import { useContext, useState } from "react";
 import { useSize } from "../../hooks/useSize.jsx";
 import {
   addedItemsCtx,
   setIsBagOpenCtx,
   dispatchCtx,
-} from "../../hooks/Provider.jsx";
+} from "../../Contexts.jsx";
 import { cardsArr } from "./CardsArr.jsx";
 import { AdaptiveCards } from "./AdaptiveCards.jsx";
 import { FullCards } from "./FullCards.jsx";

@@ -1,67 +1,76 @@
-export const ColorPicker = ({ cardID, card, cards, setCards }) => {
-  const handleColors = (colorId) => {
-    return card.colors.map((item) => {
-      if (item.colorId === colorId) return { ...item, clicked: true };
-      return { ...item, clicked: false };
+export const ColorPicker = ({ card, cards, setCards }) => {
+  const cardID = card.id;
+
+  const handleColor = (card, colID) => {
+    return card.colors.map((color) => {
+      if (color.colorId == colID) return { ...color, clicked: true };
+      return { ...color, clicked: false };
     });
   };
 
-  const handleColorPicker = (colorId) => {
+  const handleColorPicker = (colID) => {
     setCards(
       cards.map((card) => {
-        if (card.id == 4 && card.id === colorId) {
-          switch (colorId) {
+        {
+          /*First Card*/
+        }
+        if (card.id == 4 && card.id == cardID) {
+          switch (colID) {
             case 0:
               return {
                 ...card,
                 src: "/products/1/pc-tpb-ff-4oz-mint-no-bg.webp",
                 type: "Mint",
-                colors: handleColors(colorId),
+                colors: handleColor(card, colID),
               };
             case 1:
               return {
                 ...card,
                 src: "/products/1/pdp-product-card-tpb-ff-4oz-mint-charcoal.webp",
                 type: "Mint Charcoal",
-                colors: handleColors(colorId),
+                colors: handleColor(card, colID),
               };
             case 2:
               return {
                 ...card,
                 src: "/products/1/pdp-product-card-tpb-ff-4oz-berry-twist-no-bg-012524.webp",
                 type: "Berry Twist",
-                colors: handleColors(colorId),
+                colors: handleColor(card, colID),
               };
           }
-        } else if (card.id == 6 && card.id === colorId) {
-          switch (colorId) {
+        }
+        {
+          /*Third Card*/
+        }
+        if (card.id == 6 && card.id == cardID) {
+          switch (colID) {
             case 0:
               return {
                 ...card,
                 bgPrevirew: "transparent",
                 type: "Fragrance-Free",
-                colors: handleColors(colorId),
+                colors: handleColor(card, colID),
               };
             case 1:
               return {
                 ...card,
                 bgPrevirew: "#f27c2d",
                 type: "Neroli",
-                colors: handleColors(colorId),
+                colors: handleColor(card, colID),
               };
             case 2:
               return {
                 ...card,
                 bgPrevirew: "#e5497a",
                 type: "Rose Vert",
-                colors: handleColors(colorId),
+                colors: handleColor(card, colID),
               };
             case 3:
               return {
                 ...card,
                 bgPrevirew: "#51511a",
                 type: "Santal",
-                colors: handleColors(colorId),
+                colors: handleColor(card, colID),
               };
           }
         }
@@ -72,17 +81,17 @@ export const ColorPicker = ({ cardID, card, cards, setCards }) => {
 
   return (
     <ul className="cardColorDiv">
-      {card.colors.map((item) => (
+      {card.colors.map((color) => (
         <li
-          key={item.colorId}
+          key={color.colorId}
           className="cardColor"
-          onClick={() => handleColorPicker(item.colorId)}
+          onClick={() => handleColorPicker(color.colorId)}
           style={{
-            background: item.color,
-            border: item.clicked && "1px solid black",
+            background: color.color,
+            border: color.clicked && "1px solid black",
             cursor: "pointer",
           }}
-        />
+        ></li>
       ))}
     </ul>
   );

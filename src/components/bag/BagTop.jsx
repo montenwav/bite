@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { addedItemsCtx } from "../../hooks/Provider.jsx";
+import { addedItemsCtx } from "../../Contexts";
 
 export const BagTop = ({ handleExitBtn }) => {
   const addedItems = useContext(addedItemsCtx);

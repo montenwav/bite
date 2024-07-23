@@ -5,13 +5,11 @@ import {
   useAnimation,
 } from "framer-motion";
 import { useContext, useEffect, useRef } from "react";
-import {
-  isBagOpenCtx,
-  isAdaptiveCtx,
-} from "../../hooks/Provider.jsx";
+import { isBagOpenCtx, isAdaptiveCtx } from "../../Contexts.jsx";
 import { Bag } from "../bag/Bag.jsx";
 import { Adaptive } from "../Adaptive.jsx";
 import { HeaderMain } from "./HeaderMain.jsx";
+import { Promocode } from "./Promocode.jsx";
 
 export function Header() {
   const bagRef = useRef(null);
@@ -36,11 +34,12 @@ export function Header() {
     if (scrollY.current >= 100 || isAdaptive) {
       controls.start("visible");
     }
-  }, [scrollY, isAdaptive]);
+  }, [scrollY, isAdaptive, controls]);
 
   return (
     <>
-      <section className="header_sec">
+      <Promocode />
+      <header>
         <motion.div
           variants={{
             hidden: { background: "transparent" },
@@ -52,7 +51,7 @@ export function Header() {
         >
           <HeaderMain />
         </motion.div>
-      </section>
+      </header>
 
       <Adaptive />
       {isBagOpen && <Bag bagRef={bagRef} />}

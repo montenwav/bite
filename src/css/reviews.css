@@ -18,11 +18,12 @@
 
 .AuthorAndStars {
   position: absolute;
-  bottom: 20px;
+  bottom: 40px;
   left: 40px;
 }
 
 .AuthorAndStars p {
+  margin-bottom: 10px;
   white-space: nowrap;
 }
 
@@ -70,6 +71,16 @@
 
 .reviews-stars {
   width: 120px;
+}
+
+.reviews_btn {
+  background: var(--lightblue);
+  font-size: 1.2em;
+  width: 250px;
+}
+
+.reviews_btn:hover {
+  background: white;
 }
 
 @media (max-width: 1001px) {

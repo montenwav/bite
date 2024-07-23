@@ -27,9 +27,9 @@ const FirstSecElement = ({ arr }) => {
     <>
       {arr.map((element) => (
         <div key={element.id} className="FirstSecElement">
-          <i className={`icon ${element.icon}`} role="presentation"/>
+          <i className={`icon ${element.icon}`} role="presentation" />
           <h4>{element.title}</h4>
-          <p className="bits_are_better_content">{element.description}</p>
+          <h5 className="bits_are_better_content">{element.description}</h5>
         </div>
       ))}
     </>

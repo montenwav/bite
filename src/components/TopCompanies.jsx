@@ -2,32 +2,36 @@ import { memo, useEffect, useRef, useState } from "react";
 import { useAutoPlay } from "../hooks/useAutoPlay.jsx";
 import { companiesList } from "./CompaniesList.jsx";
 
-export const TopCompanies = memo(() => {
+export const TopCompanies = memo(function TopCompanies() {
   const [imgIndex, setImgIndex] = useState(0);
   useAutoPlay(imgIndex, setImgIndex, true, companiesList.length - 5);
 
   return (
-    <section className="companies_list">
-      <div className="as_seen_in">
-        <h4>AS SEEN IN</h4>
-      </div>
-      <CompaniesContainer imgIndex={imgIndex} />
-    </section>
+    <>
+      <div className="hr"></div>
+      <section className="companies_list">
+        <div className="as_seen_in">
+          <h5>AS SEEN IN</h5>
+        </div>
+        <CompaniesContainer imgIndex={imgIndex} />
+      </section>
+      <div className="hr"></div>
+    </>
   );
 });
 
 const CompaniesContainer = ({ imgIndex }) => {
   const ref = useRef(null);
-  const [companyItemWidth, setCompanyItemWidth] = useState(0)
+  const [companyItemWidth, setCompanyItemWidth] = useState(0);
   let ITEM_WIDTH;
 
-  if(companyItemWidth) {
+  if (companyItemWidth) {
     ITEM_WIDTH = companyItemWidth * imgIndex;
   }
 
   useEffect(() => {
     if (ref.current) {
-      setCompanyItemWidth(ref.current.offsetWidth+40); //width + gap
+      setCompanyItemWidth(ref.current.offsetWidth + 40); //width + gap
     }
   }, [imgIndex]);
 

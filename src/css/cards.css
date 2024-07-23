@@ -53,6 +53,11 @@
   border: 1px solid lightgray;
 }
 
+.cards p {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
 .preview img {
   object-fit: cover;
 }
@@ -118,6 +123,7 @@
 }
 
 .preview_title {
+  max-width: 90%;
   margin-left: 20px;
   margin-top: 14px;
 }
@@ -128,6 +134,8 @@
 }
 
 .cardColorDiv {
+  padding-top: 10px;
+  padding-bottom: 10px;
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -138,14 +146,27 @@
   font-family: var(--sans-serif-font);
 }
 
+.cards h5 {
+  color: var(--dark-gray)
+}
+
 .cards_div h4:hover {
   text-decoration: underline;
   cursor: pointer;
 }
 
+.adaptive_cards_stars {
+  display: flex;
+  align-items: center;
+}
+
+.adaptive_cards_stars .cardStarsDiv {
+  margin-right: 20px;
+}
+
 /* Other cards styling */
 
-@media (max-width: 1300px) {
+@media (max-width: 1200px) {
   .cards_div {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

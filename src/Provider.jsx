@@ -1,57 +1,59 @@
-import { createContext, useReducer, useState, useEffect } from "react";
-
-export const isBagOpenCtx = createContext(null);
-export const setIsBagOpenCtx = createContext(null);
-
-export const isAdaptiveCtx = createContext(null);
-export const setIsAdaptiveCtx = createContext(null);
-
-export const whyNotCardsCtx = createContext(null);
-export const setWhyNotCardsCtx = createContext(null);
-
-export const addedItemsCtx = createContext(null);
-export const dispatchCtx = createContext(null);
-
-export const isEmptyCtx = createContext(null);
-export const setIsEmptyCtx = createContext(null);
+import { useReducer, useState, useEffect } from "react";
+import {
+  isPopUpCtx,
+  setIsPopUpCtx,
+  isBagOpenCtx,
+  setIsBagOpenCtx,
+  isAdaptiveCtx,
+  setIsAdaptiveCtx,
+  whyNotCardsCtx,
+  setWhyNotCardsCtx,
+  addedItemsCtx,
+  dispatchCtx,
+} from "./Contexts";
 
 export function Provider({ children }) {
   const [isBagOpen, setIsBagOpen] = useState(false);
   const [isAdaptive, setIsAdaptive] = useState(false);
-  const [isEmpty, setIsEmpty] = useState(true);
   const [whyNotCards, setWhyNotCards] = useState(whyNotToAddArr);
+  const [isPopUp, setIsPopUp] = useState(true);
 
   //Add new item to bag
-  const getBagStorage = JSON.parse(localStorage.getItem("bag")) || [];
-  const [addedItems, dispatch] = useReducer(BagReducerFunc, getBagStorage);
+  // const getBagStorage = JSON.parse(localStorage.getItem("bag")) || [];
+
+  const getBagStorage = () => {
+    const storedBag = localStorage.getItem("bag");
+    return storedBag ? JSON.parse(storedBag) : [];
+  };
+
+  const [addedItems, dispatch] = useReducer(BagReducerFunc, getBagStorage());
 
   useEffect(() => {
     localStorage.setItem("bag", JSON.stringify(addedItems));
-    setIsEmpty(addedItems.length ? false : true);
   }, [addedItems]);
 
   return (
-        <isEmptyCtx.Provider value={isEmpty}>
-          <setIsEmptyCtx.Provider value={setIsEmpty}>
-            <isBagOpenCtx.Provider value={isBagOpen}>
-              <setIsBagOpenCtx.Provider value={setIsBagOpen}>
-                <whyNotCardsCtx.Provider value={whyNotCards}>
-                  <setWhyNotCardsCtx.Provider value={setWhyNotCards}>
-                    <addedItemsCtx.Provider value={addedItems}>
-                      <dispatchCtx.Provider value={dispatch}>
-                        <isAdaptiveCtx.Provider value={isAdaptive}>
-                          <setIsAdaptiveCtx.Provider value={setIsAdaptive}>
-                            {children}
-                          </setIsAdaptiveCtx.Provider>
-                        </isAdaptiveCtx.Provider>
-                      </dispatchCtx.Provider>
-                    </addedItemsCtx.Provider>
-                  </setWhyNotCardsCtx.Provider>
-                </whyNotCardsCtx.Provider>
-              </setIsBagOpenCtx.Provider>
-            </isBagOpenCtx.Provider>
-          </setIsEmptyCtx.Provider>
-        </isEmptyCtx.Provider>
+    <isPopUpCtx.Provider value={isPopUp}>
+      <setIsPopUpCtx.Provider value={setIsPopUp}>
+        <isBagOpenCtx.Provider value={isBagOpen}>
+          <setIsBagOpenCtx.Provider value={setIsBagOpen}>
+            <whyNotCardsCtx.Provider value={whyNotCards}>
+              <setWhyNotCardsCtx.Provider value={setWhyNotCards}>
+                <addedItemsCtx.Provider value={addedItems}>
+                  <dispatchCtx.Provider value={dispatch}>
+                    <isAdaptiveCtx.Provider value={isAdaptive}>
+                      <setIsAdaptiveCtx.Provider value={setIsAdaptive}>
+                        {children}
+                      </setIsAdaptiveCtx.Provider>
+                    </isAdaptiveCtx.Provider>
+                  </dispatchCtx.Provider>
+                </addedItemsCtx.Provider>
+              </setWhyNotCardsCtx.Provider>
+            </whyNotCardsCtx.Provider>
+          </setIsBagOpenCtx.Provider>
+        </isBagOpenCtx.Provider>
+      </setIsPopUpCtx.Provider>
+    </isPopUpCtx.Provider>
   );
 }
 
@@ -72,15 +74,14 @@ export const BagReducerFunc = (addedItems, action) => {
         return card;
       });
     }
-    case 'decrement_button': {
+    case "decrement_button": {
       const decrementItem = addedItems.map((card) => {
         if (card.id === action.itemId)
           return { ...card, count: card.count - 1 };
         return card;
       });
-      const filteredItems = decrementItem.filter(card => card.count > 0)
-      return filteredItems
-      
+      const filteredItems = decrementItem.filter((card) => card.count > 0);
+      return filteredItems;
     }
     case "remove_button": {
       return addedItems.filter((c) => c.id !== action.itemId);

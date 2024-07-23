@@ -11,22 +11,14 @@ export const AdaptiveCards = ({ cards, setCards, addItem }) => {
           </div>
 
           <h4>{card.display_title}</h4>
-          <p>{card.type}</p>
+          <h5>{card.type}</h5>
 
-          <ColorPicker
-            cardID={card.id}
-            card={card}
-            setCards={setCards}
-            cards={cards}
-          />
-          <p>
-            {card.id == 0
-              ? `From $${card.price}/month`
-              : `$${card.price}/month`}
-          </p>
+          <ColorPicker card={card} setCards={setCards} cards={cards} />
 
-          <Stars color="000" />
-          <p>{`${card.reviews} Reviews`}</p>
+          <div className="adaptive_cards_stars">
+            <Stars color="000" />
+            <h5>{`${card.reviews} Reviews`}</h5>
+          </div>
 
           <button onClick={() => addItem(card)} className="button cardBtn">
             ADD TO BAG

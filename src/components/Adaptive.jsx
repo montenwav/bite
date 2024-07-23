@@ -1,8 +1,8 @@
 import { useRef, useContext, memo, useEffect } from "react";
 import { useSize } from "../hooks/useSize.jsx";
-import { isAdaptiveCtx, setIsAdaptiveCtx } from "../hooks/Provider.jsx";
+import { isAdaptiveCtx, setIsAdaptiveCtx } from "../Contexts.jsx";
 
-export const Adaptive = memo(() => {
+export const Adaptive = memo(function Adaptive() {
   const isAdaptive = useContext(isAdaptiveCtx);
   const setIsAdaptive = useContext(setIsAdaptiveCtx);
 
@@ -15,7 +15,7 @@ export const Adaptive = memo(() => {
       adaptiveRef.current.style.right = "-100%";
       document.body.style.overflow = "visible";
     }
-  }, [windowsize]);
+  }, [windowsize, setIsAdaptive]);
 
   useEffect(() => {
     if (isAdaptive) {
@@ -44,7 +44,7 @@ export const Adaptive = memo(() => {
           <AdaptiveOpenElem key={emenent.id} emenent={emenent} />
         ))}
       </div>
-      <div className="hr"/>
+      <div className="hr" />
       {AdaptiveItemsArr.map((title, index) => (
         <AdaptiveItem key={index} title={title} />
       ))}
@@ -68,7 +68,7 @@ const AdaptiveOpenElem = ({ emenent }) => {
           />
         </div>
       </div>
-    {emenent.id === 0 && <div className="hr"/>}
+      {emenent.id === 0 && <div className="hr" />}
     </>
   );
 };

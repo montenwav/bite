@@ -1,6 +1,6 @@
 import { memo } from "react";
 
-export const Stars = memo(({ color }) => {
+export const Stars = memo(function Stars({ color }) {
   return (
     <div className="cardStarsDiv">
       <div className="cardStars">

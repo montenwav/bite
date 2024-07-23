@@ -1,20 +1,20 @@
-import { Children, useContext } from "react";
-import {
-  isEmptyCtx,
-  dispatchCtx,
-  addedItemsCtx,
-} from "../../hooks/Provider.jsx";
+import { useContext } from "react";
+import { dispatchCtx, addedItemsCtx } from "../../Contexts.jsx";
 import { EmptyBag } from "./EmptyBag.jsx";
 
 export const BagMiddle = () => {
-  const isEmpty = useContext(isEmptyCtx);
+  const addedItems = useContext(addedItemsCtx);
 
   return (
     <div
-      style={{ height: isEmpty ? `calc(100% - 345px)` : `calc(100% - 415px)` }}
+      style={{
+        height: !addedItems.length
+          ? `calc(100% - 345px)`
+          : `calc(100% - 415px)`,
+      }}
       className="bag_middle"
     >
-      {isEmpty ? <EmptyBag /> : <MiddleBagCard />}
+      {!addedItems.length ? <EmptyBag /> : <MiddleBagCard />}
     </div>
   );
 };
@@ -35,7 +35,7 @@ const MiddleBagCard = () => {
               <AddedItemDescription item={item} />
             </div>
           </div>
-          <div className="hr" style={{ width: "95%" }}/>
+          <div className="hr" style={{ width: "95%" }} />
         </div>
       ))}
     </>
@@ -98,10 +98,7 @@ const BagCounter = ({ item }) => {
   return (
     <div className="bag_counter">
       <div className="bag_counter_flex">
-        <DispatchBagCouterFlex
-        type='decrement'
-        item={item}
-        >
+        <DispatchBagCouterFlex type="decrement" item={item}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={18}
@@ -133,10 +130,7 @@ const BagCounter = ({ item }) => {
           <h5>{item.count}</h5>
         </div>
 
-        <DispatchBagCouterFlex
-        type='increment'
-        item={item}
-        >
+        <DispatchBagCouterFlex type="increment" item={item}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={18}
@@ -175,15 +169,19 @@ const BagCounter = ({ item }) => {
   );
 };
 
-const DispatchBagCouterFlex = ({item, type, children}) => {
-  return (    
-  <div
-    onClick={() =>
-      dispatch({ type: `${type === 'increment' ? 'increment' : 'decrement'}_button`, itemId: item.id })
-    }
-    className="bag_counter_item"
+const DispatchBagCouterFlex = ({ item, type, children }) => {
+  const dispatch = useContext(dispatchCtx);
+  return (
+    <div
+      onClick={() =>
+        dispatch({
+          type: `${type === "increment" ? "increment" : "decrement"}_button`,
+          itemId: item.id,
+        })
+      }
+      className="bag_counter_item"
     >
-    {children}
+      {children}
     </div>
-  )
-}
+  );
+};

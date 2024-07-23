@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { ColorPicker } from "./ColorPicker";
-export const FullCards = memo(({ cards, setCards, addItem }) => {
+export const FullCards = memo(function FullCards({ cards, setCards, addItem }) {
   return (
     <>
       {cards.map((card) => (
@@ -42,7 +42,7 @@ const FullCardsHover = ({ card, cards, setCards }) => {
             setCards={setCards}
             cards={cards}
           />
-          <p>{card.type}</p>
+          <h6>{card.type}</h6>
         </div>
 
         <div className="hr" />
@@ -82,15 +82,15 @@ const DeliversEveny = ({ card }) => {
             />
           </g>
         </svg>
-        <h5>Delivers Every 4 Months</h5>
+        <h6>Delivers Every 4 Months</h6>
       </div>
 
       {card.id <= 1 && (
         <div className="delivers_every_save">
-          <h5>Save 33%</h5>
+          <h6>Save 33%</h6>
         </div>
       )}
-      <h5>{`$${card.price}/month`}</h5>
+      <h6>{`$${card.price}/month`}</h6>
     </div>
   );
 };

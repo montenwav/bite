@@ -22,21 +22,21 @@ const FooterLinksContent = ({ item }) => {
     <>
       <div className="footer_links_content">
         <a href="/">
-          <h4>{item.first}</h4>
+          <h5>{item.first}</h5>
           {item.title === "HELP" ||
             (item.title === "FOLLOW" && <FooterLinkIcon />)}
         </a>
         <a href="/">
-          <h4>{item.second}</h4>
+          <h5>{item.second}</h5>
           {item.title === "HELP" ||
             (item.title === "FOLLOW" && <FooterLinkIcon />)}
         </a>
         <a href="/">
-          <h4>{item.third}</h4>
+          <h5>{item.third}</h5>
           {item.title === "FOLLOW" && <FooterLinkIcon />}
         </a>
         <a href="/">
-          <h4>{item.forth}</h4>
+          <h5>{item.forth}</h5>
           {item.title === "FOLLOW" && <FooterLinkIcon />}
         </a>
       </div>

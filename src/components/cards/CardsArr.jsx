@@ -11,7 +11,6 @@ export const cardsArr = [
     type: "Mint",
     reviews: "21,266",
     month_price: 8,
-
     title: "Toothpaste Bits",
     fluoride: false,
     count: 1,
@@ -26,7 +25,6 @@ export const cardsArr = [
     type: "Mint",
     reviews: "21,266",
     month_price: 8,
-
     title: "Toothpaste Bits",
     fluoride: true,
     count: 1,
@@ -46,7 +44,6 @@ export const cardsArr = [
     type: "Fragrance-Free",
     reviews: "644",
     month_price: 8,
-
     title: "Deodorant set",
     count: 1,
     price: 32,
@@ -60,7 +57,6 @@ export const cardsArr = [
     type: "Mint",
     reviews: "834",
     month_price: 5,
-
     title: "Mouthwash Bits",
     description: "Mouthwash",
     count: 1,

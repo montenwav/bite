@@ -1,0 +1,91 @@
+.how-to-use {
+    text-align: center;
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+}
+
+.how-to-use .button {
+    width: 300px;
+    font-size: 1.2em;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.how-to-use h1 {
+    padding: 40px;
+}
+
+.how-to-cards {
+    display: flex;
+    width: 95%;
+    gap: 10px;
+}
+
+.how-to-card {
+    cursor: pointer;
+    width: calc(100% / 3)
+}
+
+.how-to-card-top img {
+    width: 100%;
+    height: 100%;
+}
+
+.how-to-card-bottom {
+    margin-top: 20px;
+    display: flex;
+}
+
+.how-to-card-bottom-left {
+    width: 30%;
+}
+
+.how-to-card-step {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+    border-radius: 50%;
+    font-size: 1.2em;
+}
+
+.how-to-card-bottom-right {
+    text-align: left;
+    width: 70%;
+}
+
+.how-to-card-bottom-right h4 {
+    padding-bottom: 5px;
+}
+
+.how-to-card-bottom-right h5 {
+    color: rgb(54, 54, 54);
+    font-size: 1.2em;
+}
+
+@media (max-width: 760px) {
+    .how-to-cards {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .how-to-card {
+        width: 100%;
+    }
+
+    .how-to-card-bottom-left {
+        width: 40px;
+        margin-left: 50px;
+    }
+
+    .how-to-card-bottom {
+        margin-bottom: 10px;
+    }
+
+    .how-to-use .button {
+        width: 90%;
+    }
+}

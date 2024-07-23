@@ -15,12 +15,13 @@ export const useAutoPlay = (imgIndex, setImgIndex, isDepenencies, length) => {
         setImgIndex(0);
       }
       return () => clearInterval(interval);
+    } else {
+      interval = setInterval(() => {
+        setImgIndex((prevIndex) => prevIndex + 1);
+      }, 3000);
     }
-    interval = setInterval(() => {
-      setImgIndex((prevIndex) => prevIndex + 1);
-    }, 3000);
     return () => clearInterval(interval);
-  }, [isDepenencies && windowSize]);
+  }, [windowSize, setImgIndex, isDepenencies]);
 
-  if(imgIndex > length) setImgIndex(0)
+  if (imgIndex > length) setImgIndex(0);
 };
