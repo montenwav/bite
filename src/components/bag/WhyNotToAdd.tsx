@@ -79,6 +79,8 @@ const WhyNotToAddCard = () => {
 const Checkout = () => {
   const { addedItems } = useContext(mainContext);
 
+  let checkout = "CHECKOUT";
+
   let total: number[] | number | boolean = 0;
   total = addedItems.map((item) => item.count * item.price);
   total =
@@ -86,13 +88,18 @@ const Checkout = () => {
 
   return (
     <>
-      <div className="hr"></div>
-      <div className="checkout_container">
-        <div className="checkout">
-          <h5>CHECKOUT</h5>
-          <h5 className="bag_total">{`$${total}.00`}</h5>
+      <div className="hr" />
+      <a href="checkout">
+        <div
+          onClick={() => (checkout = "CHECKING OUT...")}
+          className="checkout_container"
+        >
+          <div className="checkout">
+            <h5>{checkout}</h5>
+            <h5 className="bag_total">{`$${total}.00`}</h5>
+          </div>
         </div>
-      </div>
+      </a>
     </>
   );
 };

@@ -9,11 +9,14 @@
   --cards-bg: #e9e9eb;
   --lightblue: #72f2c7;
   --bg-reviews: #131313;
+  --gray: #ededed;
+  --shadow-color: rgba(196, 196, 196, 0.542);
+  --hr-color: rgb(214, 214, 214);
   --dark-gray: rgb(33, 33, 33);
   --h1: clamp(3rem, 8vw, 3.5rem);
   --h2: clamp(16px, 5vw, 40px);
   --h3: clamp(16px, 6vw, 30px);
-  --h4: clamp(14px, 2vw, 22px);
+  --h4: clamp(14px, 2vw, 20px);
   --h5: clamp(14px, 2vw, 14px);
   --h6: 12px;
   --p: clamp(14px, 3vw, 20px);
@@ -145,6 +148,11 @@ button {
 }
 
 /* ICONS */
+
+.close_svg {
+  width: 16px;
+  height: 16px;
+}
 
 .icon {
   display: inline-block;

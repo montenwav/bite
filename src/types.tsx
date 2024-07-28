@@ -23,6 +23,7 @@ export type cardsObjType = {
   bgPrevirew?: string;
   description?: string;
 };
+
 export type bagType = cardsObjType | whyNotToAddObjType;
 
 export type cardsArrType = cardsObjType[];

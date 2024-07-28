@@ -95,7 +95,7 @@ const RightHeader = () => {
   return (
     <div className="bag_icon_container">
       <div className="bag_icons">
-        <a href="/login">
+        <a href="login">
           <svg
             className="login_icon"
             xmlns="http://www.w3.org/2000/svg"

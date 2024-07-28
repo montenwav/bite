@@ -100,7 +100,7 @@ export const ColorPicker = ({
           onClick={() => handleColorPicker(color.colorId)}
           style={{
             background: color.color,
-            border: color.clicked && "1px solid black",
+            border: color.clicked ? "1px solid black" : "",
             cursor: "pointer",
           }}
         ></li>

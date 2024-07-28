@@ -18,17 +18,6 @@
   border-radius: 50%;
 }
 
-.popup_close span {
-  width: 10px;
-  height: 2px;
-  background: #000;
-}
-
-.popup_close svg {
-  width: 16px;
-  height: 16px;
-}
-
 .popup_tag_main {
   cursor: pointer;
 }
@@ -146,7 +135,7 @@
   background: var(--lightblue);
 }
 
-.popup_close_svg {
+.popup_l_svg {
   position: absolute;
   top: 20px;
   right: 20px;

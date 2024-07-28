@@ -194,6 +194,11 @@
   justify-content: space-between;
   width: 90%;
   margin: auto;
+  text-decoration: none;
+}
+
+a[href="checkout"] {
+  text-decoration: none;
 }
 
 .added_item_container {
