@@ -64,7 +64,17 @@
   width: 50%;
 }
 
+.popup_close_svg {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}
+
 .popup_content_right {
+  position: relative;
   text-align: center;
   display: flex;
   flex-direction: column;

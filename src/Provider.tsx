@@ -2,24 +2,38 @@ import { useReducer, useState, useEffect } from "react";
 import { createContext } from "react";
 import { whyNotToAddArr } from "./WhyNotToAddArr";
 import { reducerActionTypes, bagType } from "./types";
-import { SetStateAction } from "react";
+import { MainContextType, PaymentFormType } from "./types";
+import { useFetch } from "./hooks/useFetch";
+import { zipCodesType } from "./components/checkout/CheckoutForms";
 
-type whyNotCardsArrType = typeof whyNotToAddArr;
-
-interface MainContextType {
-  isPopUp: boolean;
-  setIsPopUp: React.Dispatch<SetStateAction<boolean>>;
-  isBagOpen: boolean;
-  setIsBagOpen: React.Dispatch<SetStateAction<boolean>>;
-  isAdaptive: boolean;
-  setIsAdaptive: React.Dispatch<SetStateAction<boolean>>;
-  whyNotCards: whyNotCardsArrType;
-  setWhyNotCards: React.Dispatch<SetStateAction<whyNotCardsArrType>>;
-  addedItems: bagType[];
-  dispatch: React.Dispatch<reducerActionTypes>;
-}
+export const paymentFormObj = {
+  email: "",
+  country: "USA",
+  firstName: "",
+  lastName: "",
+  address: "",
+  apartment: "",
+  city: "",
+  state: "AL",
+  zip: "",
+  phone: "",
+  card_number: "",
+  card_date: "",
+  cvv: "",
+  card_name: "",
+};
 
 export const mainContext = createContext<MainContextType>({
+  currentStateZipCodes: [],
+  setCurrentStateZipCodes: () => {},
+  zipCodes: [],
+  USStates: {},
+  filteredDiscount: [{ id: 0, title: "PFJ24", discount: 24 }],
+  setFilteredDiscount: () => {},
+  paymentForm: paymentFormObj,
+  setPaymentForm: () => {},
+  emptyArrState: [],
+  setEmptyArrState: () => {},
   isPopUp: true,
   setIsPopUp: () => {},
   isBagOpen: false,
@@ -28,7 +42,7 @@ export const mainContext = createContext<MainContextType>({
   setIsAdaptive: () => {},
   whyNotCards: [],
   setWhyNotCards: () => {},
-  addedItems: [],
+  bag: [],
   dispatch: () => {},
 });
 
@@ -37,26 +51,48 @@ export function Provider({ children }: { children: React.ReactNode }) {
   const [isAdaptive, setIsAdaptive] = useState(false);
   const [whyNotCards, setWhyNotCards] = useState(whyNotToAddArr);
   const [isPopUp, setIsPopUp] = useState(true);
+  const [paymentForm, setPaymentForm] = useState<PaymentFormType>(paymentFormObj);
+  const [emptyArrState, setEmptyArrState] = useState<string[]>([]);
+  const [currentStateZipCodes, setCurrentStateZipCodes] = useState<zipCodesType[]>([]); // Getting ZIP code objects by US state
+  const [filteredDiscount, setFilteredDiscount] = useState([
+    { id: 0, title: "PFJ24", discount: 24 },
+  ]);
+  const [bag, dispatch] = useReducer(
+    BagReducerFunc,
+    JSON.parse(localStorage.getItem("bag")!) || []
+  );
 
-  //Add new item to bag
-  const initialState: bagType[] =
-    JSON.parse(localStorage.getItem("bag")!) || [];
-  const [addedItems, dispatch] = useReducer(BagReducerFunc, initialState);
+  const zipCodes = useFetch(
+    "https://raw.githubusercontent.com/millbj92/US-Zip-Codes-JSON/master/USCities.json"
+  ) as zipCodesType[]; // Base of ZIP codes of every US city.
+  const USStates = useFetch(
+    "https://gist.githubusercontent.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_hash.json"
+  ) as Record<string, string>;
 
   useEffect(() => {
-    localStorage.setItem("bag", JSON.stringify(addedItems));
-  }, [addedItems]);
+    localStorage.setItem("bag", JSON.stringify(bag));
+  }, [bag]);
 
   return (
     <mainContext.Provider
       value={{
+        currentStateZipCodes,
+        setCurrentStateZipCodes,
+        zipCodes,
+        USStates,
+        filteredDiscount,
+        setFilteredDiscount,
+        paymentForm,
+        setPaymentForm,
+        emptyArrState,
+        setEmptyArrState,
         isPopUp,
         setIsPopUp,
         isBagOpen,
         setIsBagOpen,
         whyNotCards,
         setWhyNotCards,
-        addedItems,
+        bag,
         dispatch,
         isAdaptive,
         setIsAdaptive,
@@ -67,37 +103,32 @@ export function Provider({ children }: { children: React.ReactNode }) {
   );
 }
 
-export const BagReducerFunc = (
-  addedItems: bagType[],
-  action: reducerActionTypes
-) => {
+export const BagReducerFunc = (state: bagType[], action: reducerActionTypes) => {
   switch (action.type) {
     case "if_exist": {
-      return addedItems.map((item) =>
+      return state.map((item) =>
         item.id === action.cardId ? { ...item, count: item.count + 1 } : item
       );
     }
     case "if_not_exist": {
-      return [{ ...action.card }, ...addedItems];
+      return [...state, { ...action.card }];
     }
     case "increment_button": {
-      return addedItems.map((card) => {
-        if (card.id === action.itemId)
-          return { ...card, count: card.count + 1 };
+      return state.map((card) => {
+        if (card.id === action.itemId) return { ...card, count: card.count + 1 };
         return card;
       });
     }
     case "decrement_button": {
-      const decrementItem = addedItems.map((card) => {
-        if (card.id === action.itemId)
-          return { ...card, count: card.count - 1 };
+      const decrementItem = state.map((card) => {
+        if (card.id === action.itemId) return { ...card, count: card.count - 1 };
         return card;
       });
       const filteredItems = decrementItem.filter((card) => card.count > 0);
       return filteredItems;
     }
     case "remove_button": {
-      return addedItems.filter((c) => c.id !== action.itemId);
+      return state.filter((c) => c.id !== action.itemId);
     }
   }
 };

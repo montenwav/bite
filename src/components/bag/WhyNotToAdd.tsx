@@ -1,14 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { mainContext } from "../../Provider";
 import { whyNotToAddObjType } from "../../types";
 
 export const WhyNotToAdd = () => {
-  const { addedItems } = useContext(mainContext);
+  const { bag } = useContext(mainContext);
 
   return (
     <>
       <div className="why_not_to_add">
-        {addedItems.length > 0 && <Checkout />}
+        {bag.length > 0 && <Checkout />}
         <div className="hr"></div>
 
         <h5 className="why_not_to_add_h5">WHY NOT ADD?</h5>
@@ -22,11 +22,10 @@ export const WhyNotToAdd = () => {
 };
 
 const WhyNotToAddCard = () => {
-  const { whyNotCards, setWhyNotCards, addedItems, dispatch } =
-    useContext(mainContext);
+  const { whyNotCards, setWhyNotCards, bag, dispatch } = useContext(mainContext);
 
   const addItem = (card: whyNotToAddObjType) => {
-    let existingItem = addedItems.find((item) => item.id === card.id);
+    let existingItem = bag.find((item) => item.id === card.id);
 
     if (typeof existingItem !== "undefined") {
       dispatch({ type: "if_exist", cardId: card.id });
@@ -77,26 +76,21 @@ const WhyNotToAddCard = () => {
 };
 
 const Checkout = () => {
-  const { addedItems } = useContext(mainContext);
-
-  let checkout = "CHECKOUT";
+  const { bag } = useContext(mainContext);
+  const [checkout, setCheckout] = useState("CHECKOUT");
 
   let total: number[] | number | boolean = 0;
-  total = addedItems.map((item) => item.count * item.price);
-  total =
-    addedItems.length > 0 && total.reduce((accum, items) => accum + items);
+  total = bag.map((item) => item.count * item.price);
+  total = bag.length > 0 && total.reduce((accum, items) => accum + items);
 
   return (
     <>
       <div className="hr" />
       <a href="checkout">
-        <div
-          onClick={() => (checkout = "CHECKING OUT...")}
-          className="checkout_container"
-        >
+        <div onClick={() => setCheckout("CHECKING OUT...")} className="checkout_container">
           <div className="checkout">
             <h5>{checkout}</h5>
-            <h5 className="bag_total">{`$${total}.00`}</h5>
+            <h5 className="bag_total">${(total as number).toFixed(2)}</h5>
           </div>
         </div>
       </a>

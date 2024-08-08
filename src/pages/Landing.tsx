@@ -6,7 +6,7 @@ import { ShopByCategory } from "../components/ShopByCategory.jsx";
 import { BottomCompanies } from "../components/BottomCompanies.jsx";
 import { FAQs } from "../components/FAQs.jsx";
 import { HowToUse } from "../components/HowToUse.jsx";
-import { TwoUp } from "../components/ TwoUp.jsx";
+import { TwoUp } from "../components/TwoUp.js";
 import { PopUp } from "../components/PopUp.jsx";
 import { mainContext } from "../Provider";
 import { useContext } from "react";

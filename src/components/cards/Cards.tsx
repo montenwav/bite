@@ -7,9 +7,7 @@ import { FullCards } from "./FullCards.jsx";
 import { cardsObjType, cardsArrType } from "../../types.js";
 
 export type addItemType = (card: cardsObjType) => void;
-export type setCardsType = React.Dispatch<
-  React.SetStateAction<typeof cardsArr>
->;
+export type setCardsType = React.Dispatch<React.SetStateAction<typeof cardsArr>>;
 
 export type CardArgsType = {
   addItem: addItemType;
@@ -19,15 +17,13 @@ export type CardArgsType = {
 
 export function Cards() {
   const [cards, setCards] = useState(cardsArr);
-
+  const { bag, dispatch, setIsBagOpen } = useContext(mainContext);
   const windowsize = useSize(); // Add dynamic width
-  const { addedItems, dispatch, setIsBagOpen } = useContext(mainContext);
 
   const addItem = (card: cardsObjType) => {
     setIsBagOpen(true);
-
     // Add item
-    let existingItem = addedItems.find((item) => item.id === card.id);
+    let existingItem = bag.find((item) => item.id === card.id);
     if (existingItem) {
       dispatch({ type: "if_exist", cardId: card.id });
     } else {

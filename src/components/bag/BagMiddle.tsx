@@ -1,38 +1,34 @@
 import { useContext } from "react";
 import { mainContext } from "../../Provider";
 import { EmptyBag } from "./EmptyBag.jsx";
-import { cardsObjType } from "../../types.js";
+import { cardsObjType, whyNotToAddObjType } from "../../types.js";
 
 export const BagMiddle = () => {
-  const { addedItems } = useContext(mainContext);
+  const { bag } = useContext(mainContext);
 
   return (
     <div
-      style={{
-        height: !addedItems.length
-          ? `calc(100% - 345px)`
-          : `calc(100% - 415px)`,
-      }}
+      // prettier-ignore
+      style={{ height: !bag.length ? `calc(100% - 345px)` : `calc(100% - 415px)` }}
       className="bag_middle"
     >
-      {!addedItems.length ? <EmptyBag /> : <MiddleBagCard />}
+      {!bag.length ? <EmptyBag /> : <MiddleBagCard />}
     </div>
   );
 };
 
 const MiddleBagCard = () => {
-  let { addedItems } = useContext(mainContext);
+  let { bag } = useContext(mainContext);
 
   return (
     <>
-      {addedItems.map((item) => (
+      {bag.map((item) => (
         <div key={item.id}>
           <div className="added_item_container">
             <div className="added_item">
               <div className="added_item_img">
                 <img src={item.src} alt={item.title} />
               </div>
-
               <AddedItemDescription item={item} />
             </div>
           </div>
@@ -43,7 +39,7 @@ const MiddleBagCard = () => {
   );
 };
 
-const AddedItemDescription = ({ item }: { item: cardsObjType }) => {
+const AddedItemDescription = ({ item }: { item: cardsObjType | whyNotToAddObjType }) => {
   return (
     <div className="added_item_description">
       <h1>{item.title}</h1>
@@ -84,16 +80,14 @@ const AddedItemDescription = ({ item }: { item: cardsObjType }) => {
 
         <div className="bag_total">
           <h5>${item.price}.00</h5>
-          <s style={{ color: "gray" }}>
-            {item.old_price != 0 && <h5>${item.old_price}.00</h5>}
-          </s>
+          <s style={{ color: "gray" }}>{item.old_price != 0 && <h5>${item.old_price}.00</h5>}</s>
         </div>
       </div>
     </div>
   );
 };
 
-const BagCounter = ({ item }: { item: cardsObjType }) => {
+const BagCounter = ({ item }: { item: cardsObjType | whyNotToAddObjType }) => {
   const { dispatch } = useContext(mainContext);
 
   return (
@@ -119,10 +113,7 @@ const BagCounter = ({ item }: { item: cardsObjType }) => {
               <rect width={18} height={18} fill="#D9D9D9" />
             </mask>{" "}
             <g mask="url(#mask0_1954_1480)">
-              <path
-                d="M6.57703 10.3V9.69995H14.2514V10.3H6.57703Z"
-                fill="#131313"
-              />
+              <path d="M6.57703 10.3V9.69995H14.2514V10.3H6.57703Z" fill="#131313" />
             </g>
           </svg>
         </DispatchCouter>
@@ -175,7 +166,7 @@ const DispatchCouter = ({
   type,
   children,
 }: {
-  item: cardsObjType;
+  item: cardsObjType | whyNotToAddObjType;
   type: "increment" | "decrement";
   children: React.JSX.Element;
 }) => {

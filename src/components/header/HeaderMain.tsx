@@ -85,7 +85,7 @@ const HeaderLink = ({ children }: { children: React.ReactNode }) => {
 };
 
 const RightHeader = () => {
-  const { addedItems, setIsBagOpen } = useContext(mainContext);
+  const { bag, setIsBagOpen } = useContext(mainContext);
 
   const handleOpenBtn = () => {
     setIsBagOpen(true);
@@ -155,9 +155,9 @@ const RightHeader = () => {
           </g>
         </svg>
       </div>
-      {addedItems.length > 0 && (
+      {bag.length > 0 && (
         <div className="how_many_items">
-          <h6 style={{ fontSize: ".7em" }}>{addedItems.length}</h6>
+          <h6 style={{ fontSize: ".7em" }}>{bag.length}</h6>
         </div>
       )}
     </div>

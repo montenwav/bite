@@ -1,13 +1,8 @@
 import { useEffect } from "react";
 import { useSize } from "./useSize";
-import { authoPlayHookType } from "../types";
+import { autoPlayHookType } from "../types";
 
-export const useAutoPlay: authoPlayHookType = (
-  imgIndex,
-  setImgIndex,
-  length,
-  isDepenencies
-) => {
+export const useAutoPlay: autoPlayHookType = (imgIndex, setImgIndex, length, isDepenencies) => {
   const windowSize = useSize();
 
   useEffect(() => {

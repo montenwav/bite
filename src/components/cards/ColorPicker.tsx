@@ -23,9 +23,8 @@ export const ColorPicker = ({
   const handleColorPicker = (colID: number) => {
     setCards(
       cards.map((card) => {
-        {
-          /*First Card*/
-        }
+        // prettier-ignore
+        {/* First Card */}
         if (card.id == 4 && card.id == cardID) {
           switch (colID) {
             case 0:
@@ -51,9 +50,8 @@ export const ColorPicker = ({
               };
           }
         }
-        {
-          /*Third Card*/
-        }
+        // prettier-ignore
+        {/* Third Card */}
         if (card.id == 6 && card.id == cardID) {
           switch (colID) {
             case 0:

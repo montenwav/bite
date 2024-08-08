@@ -2,12 +2,12 @@ import { useContext } from "react";
 import { mainContext } from "../../Provider";
 
 export const BagTop = ({ handleExitBtn }: { handleExitBtn: () => void }) => {
-  const { addedItems } = useContext(mainContext);
+  const { bag } = useContext(mainContext);
   let freeShipping = 32;
 
   // Update freeShipping
-  if (addedItems.length > 0) {
-    let allPrices = addedItems
+  if (bag.length > 0) {
+    let allPrices = bag
       .map((item) => item.count * item.price)
       .reduce((accum, item) => accum + item, 0);
     freeShipping -= allPrices;
@@ -20,9 +20,8 @@ export const BagTop = ({ handleExitBtn }: { handleExitBtn: () => void }) => {
           <div className="bag_top_text">
             <h5>YOUR BAG</h5>
             {freeShipping <= 0 ? (
-              <h5>
-                🎉 Congrats! You've Unlocked <b>FREE SHIPPING!</b>
-              </h5>
+              // prettier-ignore
+              <h5>🎉 Congrats! You've Unlocked <b>FREE SHIPPING!</b></h5>
             ) : (
               <h5>You Are ${freeShipping} Away From Free Shipping</h5>
             )}
@@ -36,14 +35,7 @@ export const BagTop = ({ handleExitBtn }: { handleExitBtn: () => void }) => {
               viewBox="0 0 34 34"
               fill="none"
             >
-              <rect
-                x={1}
-                y={1}
-                width={32}
-                height={32}
-                fill="white"
-                stroke="#131313"
-              />{" "}
+              <rect x={1} y={1} width={32} height={32} fill="white" stroke="#131313" />{" "}
               <mask
                 id="mask0_1986_1154"
                 maskUnits="userSpaceOnUse"
