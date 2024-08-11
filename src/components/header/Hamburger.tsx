@@ -5,12 +5,7 @@ export const Hamburger = () => {
   const { isAdaptive, setIsAdaptive } = useContext(mainContext);
 
   return (
-    <div
-      className="hamburger"
-      onClick={() => {
-        setIsAdaptive(!isAdaptive);
-      }}
-    >
+    <div className="hamburger" onClick={() => setIsAdaptive(!isAdaptive)}>
       {isAdaptive ? (
         <svg
           className="close"

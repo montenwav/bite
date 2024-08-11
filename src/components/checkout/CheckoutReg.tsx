@@ -1,27 +1,28 @@
-import { useState, useContext } from "react";
-import { bagType } from "../../types";
+import { useState, useContext, useEffect, useRef } from "react";
+import { bagType, PaymentFormType } from "../../types";
 import { whyNotToAddArr } from "../../WhyNotToAddArr";
-import { CheckoutForms } from "./CheckoutForms";
-import { FormInput } from "./CheckoutForms";
+import { CheckoutForms, FormInput } from "./CheckoutForms";
 import { mainContext } from "../../Provider";
-import { PaymentFormType } from "../../types";
+import { CheckoutFormBag } from "./CheckoutBag";
+import { useSize } from "../../hooks/useSize";
 
 export const CheckoutReg = () => {
   const { bag } = useContext(mainContext);
+  const [isDisabled, setIsDisabled] = useState(false);
 
-  // Уникальные рекомендации
+  // Uniq recommendations
   const recArray = whyNotToAddArr.filter((card) => card.id <= 2);
   const combinedArrays = bag
     .map((card) => card.title)
     .concat(...recArray.map((card) => card.title));
 
-  // Используем объект для подсчета количества каждого значения
+  // Counting how much same values we have
   const valueCounts = combinedArrays.reduce((acc: any, value: string) => {
     acc[value] = (acc[value] || 0) + 1;
     return acc;
   }, {});
 
-  // Возвращаем значения, которые встречаются только один раз
+  // Return values that equals 1
   const uniqueValues = Object.keys(valueCounts).filter((key) => valueCounts[key] === 1);
   const uniqRecommenarions = uniqueValues.map((title) =>
     whyNotToAddArr.filter((card) => card.title === title)
@@ -36,6 +37,9 @@ export const CheckoutReg = () => {
             recommendationsArr.map((card) => {
               return (
                 <RecommendationsItem
+                  isDisabled={isDisabled}
+                  setIsDisabled={setIsDisabled}
+                  key={card.id}
                   card={card}
                   recommendationsArr={recommendationsArr}
                   setRecommendationsArr={setRecommendationsArr}
@@ -43,8 +47,7 @@ export const CheckoutReg = () => {
               );
             })}
         </div>
-        <TextOffers />
-        <div className="hr" />
+        {recommendationsArr.length > 0 && <div className="hr" />}
         <PaymentForm />
         <div className="hr" />
         <div className="checkoutreg_footer">
@@ -60,12 +63,18 @@ export const CheckoutReg = () => {
 };
 
 const PaymentForm = () => {
-  const { paymentForm, setEmptyArrState, currentStateZipCodes } = useContext(mainContext);
+  const { paymentForm, emptyArrState, setEmptyArrState, currentStateZipCodes } =
+    useContext(mainContext);
   const [isSecced, setIsSucced] = useState(false);
+  const windowSize = useSize();
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
 
+    if (formRef.current) {
+      formRef.current.scrollIntoView({ behavior: "smooth" });
+    }
     // Is empty array
     let key: keyof PaymentFormType;
     const emptyArr: string[] = [];
@@ -75,17 +84,36 @@ const PaymentForm = () => {
         if (paymentForm[key] === "") emptyArr.push(key);
       }
     }
-    if (setEmptyArrState) {
+
+    // Is succed
+    if (paymentForm.card_number.length < 19) {
+      emptyArr.push("card_number");
+    } else if (paymentForm.cvv.length < 3) {
+      emptyArr.push("cvv");
+    } else if (paymentForm.card_date.length < 5) {
+      emptyArr.push("card_date");
+    } else if (paymentForm.address.length < 3) {
+      emptyArr.push("address");
+    } else if (paymentForm.phone.length < 3) {
+      emptyArr.push("phone");
+    } else if (!currentStateZipCodes.some((obj) => obj.zip_code.toString() === paymentForm.zip)) {
+      emptyArr.push("zip");
+    } else if (!currentStateZipCodes.some((obj) => obj.city.toString() === paymentForm.city)) {
+      emptyArr.push("city");
+    }
+
+    if (emptyArr.length !== 0) {
       setEmptyArrState(emptyArr);
     }
 
-    // Is succed
     if (
       //prettier-ignore
-      currentStateZipCodes.some((obj) => obj.zip_code.toString() === paymentForm.zip) && emptyArr.length === 0 &&
-      paymentForm.card_number.length === 16 && paymentForm.cvv.length >= 3 && paymentForm.card_date.length === 4 
-      && paymentForm.address.length >=3
+      currentStateZipCodes.some((obj) => obj.zip_code.toString() === paymentForm.zip) && 
+      currentStateZipCodes.some((obj) => obj.city.toString() === paymentForm.city) && emptyArr.length === 0 &&
+      paymentForm.card_number.length === 20 && paymentForm.cvv.length >= 3 && paymentForm.card_date.length === 6 &&
+      paymentForm.address.length >= 3 && paymentForm.phone.length >= 3
     ) {
+      setEmptyArrState([]);
       setIsSucced(true);
       fetch("", {
         method: "POST",
@@ -94,12 +122,17 @@ const PaymentForm = () => {
     }
   };
 
+  useEffect(() => {
+    console.log(emptyArrState);
+  }, [emptyArrState]);
+
   return (
-    <form method="post">
+    <form ref={formRef} method="post">
       <CheckoutForms />
       <ShippingMethod />
       <Payment />
       <RememberMe />
+      {windowSize < 1000 && <CheckoutFormBag />}
       <h5 className="one_or_more_items">
         One or more items in your cart is a deferred or recurring purchase. By continuing with your
         payment, you agree that your payment method will automatically be charged at the price and
@@ -123,12 +156,15 @@ const PaymentForm = () => {
 };
 
 const RememberMe = () => {
+  const { paymentForm } = useContext(mainContext);
+
   return (
     <div className="remember_me">
       <h4>Remember me</h4>
       <div>
-        <label>
-          <input type="checkbox" /> Save my information for a faster checkout
+        <label onClick={() => localStorage.setItem("user_data", JSON.stringify(paymentForm))}>
+          <input type="checkbox" />
+          Save my information for a faster checkout
         </label>
       </div>
     </div>
@@ -158,20 +194,20 @@ const Payment = () => {
         </div>
         <div className="payment_card_bottom">
           <FormInput
-            type="number"
+            type="text"
             placeholder="Card number"
             empty="a card number"
             name="card_number"
-            max={16}
+            max={19}
             required={true}
           />
           <div className="payment_card_bottom_name">
             <FormInput
-              type="number"
+              type="text"
               placeholder="Expiration Date (MM / YY)"
               empty="a valid expiration date"
               name="card_date"
-              max={4}
+              max={5}
               required={true}
             />
             <FormInput
@@ -215,15 +251,18 @@ const ShippingMethod = () => {
 };
 
 const RecommendationsItem = ({
+  isDisabled,
+  setIsDisabled,
   card,
   recommendationsArr,
   setRecommendationsArr,
 }: {
+  isDisabled: boolean;
+  setIsDisabled: React.Dispatch<React.SetStateAction<boolean>>;
   card: bagType;
   recommendationsArr: typeof whyNotToAddArr;
   setRecommendationsArr: React.Dispatch<React.SetStateAction<typeof whyNotToAddArr>>;
 }) => {
-  const [isDisabled, setIsDisabled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { bag, dispatch } = useContext(mainContext);
 
@@ -232,8 +271,8 @@ const RecommendationsItem = ({
   };
 
   const handleClick = (cardId: number) => {
-    setIsDisabled(true);
     setIsLoading(true);
+    setIsDisabled(true);
 
     setTimeout(() => {
       //Добавляем элемент
@@ -274,33 +313,6 @@ const RecommendationsItem = ({
           )}
         </button>
       </div>
-    </div>
-  );
-};
-
-const TextOffers = () => {
-  const [subscribe, setSubscribe] = useState("");
-
-  return (
-    <div className="text_offers">
-      <h5 style={{ fontWeight: "bold", fontSize: "1.3em" }}>Text offers</h5>
-      <h5>Get the latest discounts and offers sent directly to your phone ✨</h5>
-      <form>
-        <input
-          type="number"
-          value={subscribe}
-          onChange={(event) => setSubscribe(event.target.value)}
-          placeholder="Moblie phone (optional)"
-        />
-        <button onClick={(event) => event.preventDefault()}>Subscribe</button>
-      </form>
-      <h6>
-        *By providing your phone number, you agree to receive recurring automated marketing text
-        messages (e.g. cart reminders) from this shop and third parties acting on its behalf.
-        Consent is not a condition to obtain goods or services. Msg & data rates may apply. Msg
-        frequency varies. Reply HELP for help and STOP to cancel. You also agree to the{" "}
-        <u>Terms of Service</u> and <u>Privacy Policy</u>.
-      </h6>
     </div>
   );
 };

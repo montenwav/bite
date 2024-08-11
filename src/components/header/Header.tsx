@@ -1,15 +1,11 @@
-import {
-  motion,
-  useScroll,
-  useMotionValueEvent,
-  useAnimation,
-} from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, useAnimation } from "framer-motion";
 import { useContext, useEffect } from "react";
 import { mainContext } from "../../Provider";
 import { Bag } from "../bag/Bag.jsx";
 import { Adaptive } from "../Adaptive.jsx";
 import { HeaderMain } from "./HeaderMain.jsx";
 import { Promocode } from "./Promocode.jsx";
+
 export function Header() {
   const { isAdaptive, isBagOpen } = useContext(mainContext);
 
@@ -27,7 +23,7 @@ export function Header() {
   });
 
   useEffect(() => {
-    if (scrollY.current >= 100 || isAdaptive) {
+    if ((scrollY as any).current >= 100 || isAdaptive) {
       controls.start("visible");
     }
   }, [scrollY, isAdaptive, controls]);

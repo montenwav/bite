@@ -1,4 +1,4 @@
-import { useRef, useContext, memo, useEffect } from "react";
+import { useRef, useContext, useEffect } from "react";
 import { useSize } from "../hooks/useSize.jsx";
 import { mainContext } from "../Provider";
 
@@ -12,29 +12,28 @@ type AdaptiveObjType = {
   };
 };
 
-export const Adaptive = memo(function Adaptive() {
+export const Adaptive = () => {
   const { isAdaptive, setIsAdaptive } = useContext(mainContext);
   const adaptiveRef = useRef<HTMLDivElement>(null);
-  const windowsize = useSize();
+  const windowSize = useSize();
 
   useEffect(() => {
-    if (windowsize > 1000) {
-      setIsAdaptive(false);
-      if (adaptiveRef.current) {
-        adaptiveRef.current.style.right = "-100%";
-      }
-      document.body.style.overflow = "visible";
+    if (windowSize > 1000 && adaptiveRef.current) {
+      adaptiveRef.current.style.right = "-100%";
     }
-  }, [windowsize, setIsAdaptive]);
+    setIsAdaptive(false);
+    document.body.style.overflow = "visible";
+  }, [windowSize]);
 
   useEffect(() => {
     if (adaptiveRef.current) {
       if (isAdaptive) {
         adaptiveRef.current.style.right = "0%";
         document.body.style.overflow = "hidden";
+      } else {
+        adaptiveRef.current.style.right = "-100%";
+        document.body.style.overflow = "visible";
       }
-      adaptiveRef.current.style.right = "-100%";
-      document.body.style.overflow = "visible";
     }
   }, [isAdaptive]);
 
@@ -61,17 +60,14 @@ export const Adaptive = memo(function Adaptive() {
       ))}
     </div>
   );
-});
+};
 
 const AdaptiveOpenElem = ({ element }: AdaptiveObjType) => {
   return (
     <>
       <div className="adaptive_flex_item">
         <AdaptiveFlexElements element={element} />
-        <div
-          style={{ border: "1px solid black" }}
-          className="adaptive_flex_elem"
-        >
+        <div style={{ border: "1px solid black" }} className="adaptive_flex_elem">
           <img
             style={{ objectFit: "cover", width: "100%", height: "100%" }}
             src={element.src}
@@ -139,7 +135,7 @@ const AdaptiveItem = ({ title }: { title: string }) => {
           <h5>{title}</h5>
         </a>
       </div>
-      <div style={{ background: "black", height: "1px" }}></div>
+      <div className="hr" />
     </>
   );
 };

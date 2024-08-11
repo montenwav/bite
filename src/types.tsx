@@ -1,8 +1,7 @@
 import { MotionValue } from "framer-motion";
 import { SetStateAction } from "react";
-import { paymentFormObj } from "./Provider";
+import { paymentFormObj, zipCodesType } from "./Provider";
 import { whyNotToAddArr } from "./WhyNotToAddArr";
-import { zipCodesType } from "./components/checkout/CheckoutForms";
 
 export type filteredDiscountType = { id: number; title: string; discount: number }[];
 
@@ -10,6 +9,8 @@ export type PaymentFormType = typeof paymentFormObj;
 export type whyNotCardsArrType = typeof whyNotToAddArr;
 
 export interface MainContextType {
+  currentCityObj: zipCodesType | object;
+  setCurrentCityObj: React.Dispatch<React.SetStateAction<zipCodesType | object>>;
   currentStateZipCodes: zipCodesType[];
   setCurrentStateZipCodes: React.Dispatch<React.SetStateAction<zipCodesType[]>>;
   zipCodes: zipCodesType[];
@@ -55,6 +56,8 @@ export type cardsObjType = {
   bgPrevirew?: string;
   description?: string;
 };
+
+// export type cardsObjType = (typeof cardsArr)[0];
 
 export type bagType = cardsObjType | whyNotToAddObjType;
 

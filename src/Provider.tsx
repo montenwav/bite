@@ -4,7 +4,6 @@ import { whyNotToAddArr } from "./WhyNotToAddArr";
 import { reducerActionTypes, bagType } from "./types";
 import { MainContextType, PaymentFormType } from "./types";
 import { useFetch } from "./hooks/useFetch";
-import { zipCodesType } from "./components/checkout/CheckoutForms";
 
 export const paymentFormObj = {
   email: "",
@@ -23,7 +22,18 @@ export const paymentFormObj = {
   card_name: "",
 };
 
+export type zipCodesType = {
+  city: string;
+  county: string;
+  latitude: number;
+  longitude: number;
+  state: string;
+  zip_code: number;
+};
+
 export const mainContext = createContext<MainContextType>({
+  currentCityObj: {},
+  setCurrentCityObj: () => {},
   currentStateZipCodes: [],
   setCurrentStateZipCodes: () => {},
   zipCodes: [],
@@ -47,27 +57,33 @@ export const mainContext = createContext<MainContextType>({
 });
 
 export function Provider({ children }: { children: React.ReactNode }) {
-  const [isBagOpen, setIsBagOpen] = useState(false);
-  const [isAdaptive, setIsAdaptive] = useState(false);
-  const [whyNotCards, setWhyNotCards] = useState(whyNotToAddArr);
-  const [isPopUp, setIsPopUp] = useState(true);
-  const [paymentForm, setPaymentForm] = useState<PaymentFormType>(paymentFormObj);
-  const [emptyArrState, setEmptyArrState] = useState<string[]>([]);
-  const [currentStateZipCodes, setCurrentStateZipCodes] = useState<zipCodesType[]>([]); // Getting ZIP code objects by US state
-  const [filteredDiscount, setFilteredDiscount] = useState([
-    { id: 0, title: "PFJ24", discount: 24 },
-  ]);
-  const [bag, dispatch] = useReducer(
-    BagReducerFunc,
-    JSON.parse(localStorage.getItem("bag")!) || []
-  );
-
   const zipCodes = useFetch(
     "https://raw.githubusercontent.com/millbj92/US-Zip-Codes-JSON/master/USCities.json"
   ) as zipCodesType[]; // Base of ZIP codes of every US city.
   const USStates = useFetch(
     "https://gist.githubusercontent.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_hash.json"
   ) as Record<string, string>;
+
+  const [isBagOpen, setIsBagOpen] = useState(false);
+  const [isAdaptive, setIsAdaptive] = useState(false);
+  const [whyNotCards, setWhyNotCards] = useState(whyNotToAddArr);
+  const [isPopUp, setIsPopUp] = useState(true);
+  //prettier-ignore
+  const [paymentForm, setPaymentForm] = useState<PaymentFormType>(JSON.parse(localStorage.getItem("user_data")!) || paymentFormObj);
+  const [emptyArrState, setEmptyArrState] = useState<string[]>([]);
+  //prettier-ignore
+  const [filteredDiscount, setFilteredDiscount] = useState([{ id: 0, title: "PFJ24", discount: 24 }]);
+  const [bag, dispatch] = useReducer(
+    BagReducerFunc,
+    JSON.parse(localStorage.getItem("bag")!) || []
+  );
+  //prettier-ignore
+  const [currentStateZipCodes, setCurrentStateZipCodes] = useState<zipCodesType[]>([]); // Getting ZIP code objects by US state
+  const [currentCityObj, setCurrentCityObj] = useState<zipCodesType | object>({}); // Current object with city and ZIP code
+
+  useEffect(() => {
+    setCurrentStateZipCodes(zipCodes.filter((obj) => obj.state === paymentForm.state));
+  }, [zipCodes]);
 
   useEffect(() => {
     localStorage.setItem("bag", JSON.stringify(bag));
@@ -76,6 +92,8 @@ export function Provider({ children }: { children: React.ReactNode }) {
   return (
     <mainContext.Provider
       value={{
+        currentCityObj,
+        setCurrentCityObj,
         currentStateZipCodes,
         setCurrentStateZipCodes,
         zipCodes,

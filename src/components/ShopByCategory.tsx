@@ -25,9 +25,7 @@ export function ShopByCategory() {
       {windowsize < 1000 ? (
         <motion.div
           style={{
-            transform: `translateX(calc(-${
-              imgIndex * 85
-            }vw - ${imgIndex} * 16px))`, //card width + padding
+            transform: `translateX(calc(-${imgIndex * 85}vw - ${imgIndex} * 16px))`, //card width + padding
             x: dragLenght,
           }}
           drag="x"
@@ -58,7 +56,7 @@ const Images = () => {
       {imgs.map((img, idx) => (
         <motion.div
           key={idx}
-          whileTap={{ cursor: windowsize < 1000 && "grabbing" }}
+          whileTap={{ cursor: windowsize < 1000 ? "grabbing" : "" }}
           className="inner_carousel"
         >
           <motion.div className="card_image">

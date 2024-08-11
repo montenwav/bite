@@ -1,21 +1,27 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { cardsObjType, whyNotToAddObjType, bagType } from "../../types";
 import { mainContext } from "../../Provider";
 
 export const CheckoutBag = () => {
+  return (
+    <div className="checkout_form_bag_container">
+      <CheckoutFormBag />
+    </div>
+  );
+};
+
+export const CheckoutFormBag = () => {
   const { bag, filteredDiscount } = useContext(mainContext);
   const allDiscounts = filteredDiscount.reduce((acc, promo) => acc + promo.discount, 0);
 
   return (
-    <div className="checkout_form_bag_container">
-      <div className="checkout_form_bag">
-        {bag &&
-          bag.map((card) => (
-            <CheckoutBagItem allDiscounts={allDiscounts} key={card.id} card={card} />
-          ))}
-        <CheckoutBagPromocode />
-        <CheckoutBagTotal allDiscounts={allDiscounts} />
-      </div>
+    <div className="checkout_form_bag">
+      {bag &&
+        bag.map((card) => (
+          <CheckoutBagItem allDiscounts={allDiscounts} key={card.id} card={card} />
+        ))}
+      <CheckoutBagPromocode />
+      <CheckoutBagTotal allDiscounts={allDiscounts} />
     </div>
   );
 };
@@ -318,6 +324,7 @@ const CheckoutBagPromocode = () => {
   const [promocode, setPromocode] = useState("");
   const [notFoundPromo, setNotFoundPromo] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const labelRef = useRef<HTMLLabelElement>(null);
 
   const promlen = promocode.length > 0;
 
@@ -335,18 +342,17 @@ const CheckoutBagPromocode = () => {
 
         setFilteredDiscount(filteredArr);
         setNotFoundPromo(false);
-        setPromocode("");
       } else {
         setNotFoundPromo(true);
-        setPromocode("");
       }
+      setPromocode("");
       setIsLoading(false);
     }, 2000);
   };
 
   return (
     <div className="checkout_bag_promocode">
-      <form>
+      <label ref={labelRef} className="promocode_label">
         <input
           type="text"
           style={{
@@ -374,7 +380,7 @@ const CheckoutBagPromocode = () => {
             "Apply"
           )}
         </button>
-      </form>
+      </label>
       {notFoundPromo && (
         <h5 style={{ color: "#dd1d1d", marginTop: "5px" }}>
           Enter a valid discount code or gift card

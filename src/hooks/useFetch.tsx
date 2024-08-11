@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { phoneCodesType, zipCodesType } from "../components/checkout//CheckoutForms";
+import { zipCodesType } from "../Provider";
 
 export const useFetch = (url: string) => {
   // prettier-ignore
-  const [result, setResult] = useState<phoneCodesType[] | zipCodesType[] | Record<string, string>>([]);
+  const [result, setResult] = useState<zipCodesType[] | Record<string, string>>([]);
 
   useEffect(() => {
     (async () => {

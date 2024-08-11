@@ -3,10 +3,10 @@
   right: -100%;
   transition: 0.3s;
   position: fixed;
-  top: 60px; /* Header height */
-  z-index: 1;
-  width: 100%;
-  height: 100vh;
+  top: 87px; /* Header height */
+  width: 100vw;
+  height: calc(100vh - 87px);
+  z-index: 11;
   background: white;
 }
 
@@ -26,6 +26,10 @@
 
 .adaptive_item a:hover {
   text-decoration: underline;
+}
+
+.adaptive_content .hr:last-child {
+  margin-bottom: 20px;
 }
 
 .adaptive_flex_item {

@@ -157,6 +157,12 @@
   margin-top: 25px;
 }
 
+.promocode_label {
+  display: grid;
+  grid-template-columns: 1fr 80px;
+  gap: 15px;
+}
+
 .checkout_forms_container select {
   height: 47px;
   padding: 15px;
@@ -171,12 +177,15 @@
 
 .checkout_form input {
   padding: 15px;
-  padding-right: 40px;
   border-radius: 5px;
   font-family: sans-serif;
   font-size: 1.2em;
   border: 1px solid var(--hr-color);
   transition: border 0.3s;
+}
+
+.checkout_form input:not(.card_date_input) {
+  padding-right: 40px;
 }
 
 .checkout_form input[type="checkbox"] {
@@ -192,18 +201,20 @@
   position: relative;
 }
 
-.payment_form input[name="card_number"] {
-  position: relative;
+.lock_icon,
+.cvv_question {
+  position: absolute;
+  display: grid;
+  place-content: center;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
 }
 
-.payment_form input[name="card_number"]:after {
-  content: "url(/lock.svg)";
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
-  width: 15px;
-  height: 15px;
+.lock_icon {
+  width: 18px;
+  height: 18px;
+  right: 15px;
 }
 
 .phone_stuff {
@@ -213,6 +224,11 @@
   transform: translateY(-50%);
   display: flex;
   align-items: center;
+}
+
+.cvv_question .checkout_bag_question_content {
+  height: 150px;
+  top: -165px;
 }
 
 .phone_stuff img:last-child {
@@ -300,7 +316,6 @@
 .checkout_form_reg_content {
   padding: 40px;
   z-index: 0;
-  width: 100%;
   max-width: 660px;
 }
 
@@ -471,26 +486,12 @@
   position: absolute;
   left: -72px;
   border-radius: 5px;
-  animation: openPopUp 0.3s;
   display: none;
   top: -105px;
 }
 
 .checkout_bag_question_content_img:hover .checkout_bag_question_content {
   display: grid;
-}
-
-@keyframes openPopUp {
-  from {
-    scale: 0.8;
-    top: -80px;
-    opacity: 0;
-  }
-  to {
-    top: -105px;
-    opacity: 1;
-    scale: 1;
-  }
 }
 
 .checkout_bag_question_content h6 {
@@ -721,4 +722,28 @@
 
 .phone_input_container {
   position: relative;
+}
+
+@media (max-width: 1000px) {
+  .checkout_form_bag_container {
+    display: none;
+    width: 100%;
+  }
+
+  .checkout_form_reg {
+    width: 100%;
+    margin-right: 0;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+  }
+
+  .checkout_header {
+    max-width: 660px;
+  }
+
+  .checkout_form_bag {
+    min-width: 100%;
+    margin-bottom: 30px;
+  }
 }

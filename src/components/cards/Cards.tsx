@@ -7,7 +7,7 @@ import { FullCards } from "./FullCards.jsx";
 import { cardsObjType, cardsArrType } from "../../types.js";
 
 export type addItemType = (card: cardsObjType) => void;
-export type setCardsType = React.Dispatch<React.SetStateAction<typeof cardsArr>>;
+export type setCardsType = React.Dispatch<React.SetStateAction<cardsArrType>>;
 
 export type CardArgsType = {
   addItem: addItemType;
@@ -16,7 +16,7 @@ export type CardArgsType = {
 };
 
 export function Cards() {
-  const [cards, setCards] = useState(cardsArr);
+  const [cards, setCards] = useState<cardsArrType>(cardsArr);
   const { bag, dispatch, setIsBagOpen } = useContext(mainContext);
   const windowsize = useSize(); // Add dynamic width
 

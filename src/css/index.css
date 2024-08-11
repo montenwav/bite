@@ -50,6 +50,7 @@ input::-webkit-inner-spin-button {
 section:not(.main_wallpaper, .BitsAreBetter, .footer) {
   width: min(1500px, 95%);
   margin: auto;
+  margin-top: 50px;
 }
 
 u {

@@ -1,6 +1,5 @@
 import { setCardsType } from "./Cards";
-import { cardsObjType } from "../../types";
-import { cardsArr } from "./cardsArr";
+import { cardsArrType, cardsObjType } from "../../types";
 
 export const ColorPicker = ({
   card,
@@ -8,7 +7,7 @@ export const ColorPicker = ({
   setCards,
 }: {
   card: cardsObjType;
-  cards: typeof cardsArr;
+  cards: cardsArrType;
   setCards: setCardsType;
 }) => {
   const cardID = card.id;
