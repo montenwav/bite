@@ -126,6 +126,7 @@
 
 .middle_bag_card_desc h6 {
   padding-top: 5px;
+  width: 90%;
   padding-bottom: 5px;
 }
 
@@ -314,4 +315,10 @@ a[href="checkout"] {
 
 .bag_icon {
   cursor: pointer;
+}
+
+@media (max-width: 1000px) {
+  .bag_container {
+    width: 100%;
+  }
 }

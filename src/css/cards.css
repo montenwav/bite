@@ -147,7 +147,7 @@
 }
 
 .cards h5 {
-  color: var(--dark-gray)
+  color: var(--dark-gray);
 }
 
 .cards_div h4:hover {
@@ -197,5 +197,11 @@
     max-width: none;
     padding-top: 10px;
     padding-bottom: 20px;
+  }
+}
+
+@media (max-width: 700px) {
+  .cards_div {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }

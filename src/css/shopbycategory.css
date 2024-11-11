@@ -85,20 +85,20 @@
     width: 85vw;
   }
 
-  .shop_by_btn {
+  /* .shop_by_btn {
     width: 100%;
     bottom: -50px;
-  }
+  } */
 
   .inner_carousel:hover .card_image img {
     transform: scale(100%);
   }
 
-  .inner_carousel:hover .shop_by_btn {
+  /* .inner_carousel:hover .shop_by_btn {
     bottom: -50px;
-  }
-
+  } */
+  /* 
   .card_image {
     overflow: visible;
-  }
+  } */
 }

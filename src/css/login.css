@@ -46,3 +46,12 @@
 .login_content h1 {
   margin-bottom: 20px;
 }
+
+@media (max-width: 1000px) {
+  .login_container {
+    max-width: 80vw;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+}

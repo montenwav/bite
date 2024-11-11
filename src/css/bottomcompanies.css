@@ -32,4 +32,7 @@
   .bottom_companies {
     width: 100%;
   }
+  .bottom_comp_item {
+    padding: 35px;
+  }
 }

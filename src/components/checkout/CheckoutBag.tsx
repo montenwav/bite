@@ -352,7 +352,7 @@ const CheckoutBagPromocode = () => {
 
   return (
     <div className="checkout_bag_promocode">
-      <label ref={labelRef} className="promocode_label">
+      <form ref={labelRef} className="promocode_label">
         <input
           type="text"
           style={{
@@ -380,7 +380,7 @@ const CheckoutBagPromocode = () => {
             "Apply"
           )}
         </button>
-      </label>
+      </form>
       {notFoundPromo && (
         <h5 style={{ color: "#dd1d1d", marginTop: "5px" }}>
           Enter a valid discount code or gift card

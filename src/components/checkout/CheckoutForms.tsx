@@ -70,17 +70,15 @@ const DeliveryForm = () => {
           />
         </div>
         <FormInput placeholder="Address" name="address" type="text" required={true} />
-        <div className="checkout_input_item">
-          <FormInput
-            placeholder="Apartemnt, suite, etc. (optional)"
-            name="apartment"
-            type="text"
-            required={false}
-          />
-        </div>
+        <FormInput
+          placeholder="Apartemnt, suite, etc. (optional)"
+          name="apartment"
+          type="text"
+          required={false}
+        />
         <div className="delivery_forms_city">
           <FormInput placeholder="City" name="city" type="text" required={true} />
-          <select value={paymentForm.state} onChange={handleState}>
+          <select className="american_states" value={paymentForm.state} onChange={handleState}>
             {Object.values(USStates).map((state, index) => (
               <option key={index} value={Object.keys(USStates)[index]}>
                 {state}
@@ -99,11 +97,11 @@ const DeliveryForm = () => {
         <div className="phone_input_container">
           <PhoneInput
             placeholder="Phone"
-            style={{
-              border: emptyArrState.includes("phone")
-                ? "2px solid red"
-                : "1px solid var(--hr-color)",
-            }}
+            // style={{
+            //   border: emptyArrState.includes("phone")
+            //     ? "2px solid red"
+            //     : "1px solid var(--hr-color)",
+            // }}
             value={paymentForm.phone}
             defaultCountry="US"
             onChange={(value: any) => setPaymentForm({ ...paymentForm, phone: value })}
@@ -231,43 +229,41 @@ export const FormInput = ({
   };
 
   return (
-    <div className="checkout_input_item">
-      <div className="checkout_input_phone">
-        <input
-          className={name === "card_date" ? "card_date_input" : ""}
-          onChange={handleChange}
-          type={type}
-          placeholder={placeholder}
-          name={name}
-          value={inputValues()}
-          style={{
-            border:
-              name !== "apartment" && emptyArrState.includes(name)
-                ? "2px solid red"
-                : "1px solid var(--hr-color)",
-          }}
-          required={required}
-        />
-        {name === "card_number" && <img src="/lock.svg" className="lock_icon" alt="lock" />}
-        {name === "cvv" && (
-          <div className="cvv_question">
-            <span className="checkout_bag_question_content_img">
-              <img
-                style={{ marginRight: "2px" }}
-                className="icon_16px"
-                src="question-25.png"
-                alt="questions mark in circle"
-              />
-              <div className="checkout_bag_question_content">
-                <h6>
-                  3-digit security code usually found on the back of your card. American Express
-                  cards have a 4-digit code located on the front.
-                </h6>
-              </div>
-            </span>
-          </div>
-        )}
-      </div>
+    <div className="checkout_input_phone">
+      <input
+        className={name === "card_date" ? "card_date_input" : ""}
+        onChange={handleChange}
+        type={type}
+        placeholder={placeholder}
+        name={name}
+        value={inputValues()}
+        style={{
+          border:
+            name !== "apartment" && emptyArrState.includes(name)
+              ? "2px solid red"
+              : "1px solid var(--hr-color)",
+        }}
+        required={required}
+      />
+      {name === "card_number" && <img src="/lock.svg" className="lock_icon" alt="lock" />}
+      {name === "cvv" && (
+        <div className="cvv_question">
+          <span className="checkout_bag_question_content_img">
+            <img
+              style={{ marginRight: "2px" }}
+              className="icon_16px"
+              src="question-25.png"
+              alt="questions mark in circle"
+            />
+            <div className="checkout_bag_question_content">
+              <h6>
+                3-digit security code usually found on the back of your card. American Express cards
+                have a 4-digit code located on the front.
+              </h6>
+            </div>
+          </span>
+        </div>
+      )}
       {emptyArrState.includes(name) && name !== "apartment" && name !== "card_name" && (
         <h5 style={{ color: "#dd1d1d", marginTop: "5px" }}>{`Enter ${
           empty

@@ -8,8 +8,9 @@
 }
 
 .checkout_header_container {
-  height: 70px;
   width: 100vw;
+  padding-top: 20px;
+  padding-bottom: 20px;
   display: flex;
   justify-content: center;
   box-shadow: 0px 1px 0 var(--hr-color);
@@ -50,7 +51,6 @@
 
 .checkout_form_bag_container {
   padding: 40px;
-  height: 100vh;
   position: sticky;
   top: 0;
   right: 0;
@@ -198,7 +198,12 @@
 }
 
 .checkout_input_phone {
+  margin-bottom: 10px;
   position: relative;
+}
+
+.checkout_input_item h5 {
+  margin-bottom: 5px;
 }
 
 .lock_icon,
@@ -633,10 +638,6 @@
   border-end-end-radius: 5px;
 }
 
-.payment_card_bottom .checkout_input_item {
-  margin-bottom: 10px;
-}
-
 .payment_header {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -745,5 +746,9 @@
   .checkout_form_bag {
     min-width: 100%;
     margin-bottom: 30px;
+  }
+
+  .delivery_forms_city {
+    grid-template-columns: none;
   }
 }

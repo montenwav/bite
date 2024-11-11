@@ -10,6 +10,7 @@
   height: 50px;
   border: 1px solid lightgray;
   display: grid;
+  cursor: pointer;
   place-items: center;
 }
 
@@ -51,9 +52,15 @@
   margin-left: 20px;
 }
 
+.bottom_footer {
+  position: relative;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
 .footer_initials {
   position: absolute;
-  bottom: 10px;
+  bottom: 20px;
 }
 
 .full_footer {
@@ -114,12 +121,6 @@
   align-items: center;
 }
 
-.bottom_footer {
-  position: relative;
-  padding-top: 25px;
-  padding-bottom: 25px;
-}
-
 .bottom_footer h4 {
   padding-right: 25px;
 }
@@ -155,5 +156,10 @@
 @media (max-width: 1000px) {
   .full_links {
     display: block;
+  }
+
+  .footer_initials {
+    position: static;
+    bottom: 0;
   }
 }

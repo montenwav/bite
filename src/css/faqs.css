@@ -7,8 +7,6 @@
   padding: 50px;
 }
 
-
-
 .question {
   width: 100%;
 }
@@ -45,6 +43,7 @@
 .content_container p {
   font-family: var(--sans-serif-font);
   line-height: 1;
+  font-size: 18px;
   color: rgb(71, 71, 71);
   padding-top: 10px;
   padding-bottom: 20px;

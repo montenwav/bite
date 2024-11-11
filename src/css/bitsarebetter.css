@@ -66,4 +66,12 @@
   .bits_are_better_content {
     display: none;
   }
+
+  .FirstSecBg {
+    background-size: 80%;
+  }
+
+  .FirstSecMain {
+    max-width: 90%;
+  }
 }
