@@ -324,7 +324,7 @@ const CheckoutBagPromocode = () => {
   const [promocode, setPromocode] = useState("");
   const [notFoundPromo, setNotFoundPromo] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const labelRef = useRef<HTMLLabelElement>(null);
+  const labelRef = useRef<HTMLFormElement>(null);
 
   const promlen = promocode.length > 0;
 
