@@ -156,6 +156,10 @@
   width: 25%;
 }
 
+.why_not_to_add_card img {
+  object-fit: cover;
+}
+
 .why_not_to_add_card h2 {
   text-align: center;
 }
@@ -317,7 +321,7 @@ a[href="checkout"] {
   cursor: pointer;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 500px) {
   .bag_container {
     width: 100%;
   }
