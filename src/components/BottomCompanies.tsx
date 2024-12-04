@@ -29,7 +29,7 @@ export function BottomCompanies() {
         }}
         drag="x"
         dragConstraints={{ right: 0, left: 0 }}
-        animate={{ translateX: `-${imgIndex * 100}%` }} // translate by img size
+        animate={{ translateX: `-${imgIndex * 100}%` }} // translate by img width
         onDragStart={onDragStart}
         onDragEnd={onDragEnd}
         className="bottom_comp_container"

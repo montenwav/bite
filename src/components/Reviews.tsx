@@ -15,7 +15,7 @@ export function Reviews() {
         className="review_container"
         style={{
           transform:
-            windowsize < 600
+            windowsize < 600 // calculating animation distance based on window size
               ? `translateX(calc(-${imgIndex} * 70% + ${imgIndex} * -20px))`
               : windowsize < 1000
               ? `translateX(calc(-${imgIndex} * 50% + ${imgIndex} * -20px))`
@@ -62,8 +62,7 @@ const reviews: { title: string; author: string; src: string }[] = [];
 for (let i = 0; i < 10; i++) {
   reviews.push(
     {
-      title:
-        "No mess, cleans and whitens beautifully, and no plastic or repeat containers!",
+      title: "No mess, cleans and whitens beautifully, and no plastic or repeat containers!",
       author: "KATHLEEN M.",
       src: "/reviews/homepage-ugc-review-1.webp",
     },

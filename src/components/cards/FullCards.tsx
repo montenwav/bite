@@ -10,11 +10,7 @@ type FullCardsFunctionArgs = {
   setCards: setCardsType;
 };
 
-export const FullCards = memo(function FullCards({
-  cards,
-  setCards,
-  addItem,
-}: CardArgsType) {
+export const FullCards = memo(function FullCards({ cards, setCards, addItem }: CardArgsType) {
   return (
     <>
       {cards.map((card) => (
@@ -34,9 +30,7 @@ const Preview = ({ card, cards, setCards }: FullCardsFunctionArgs) => {
     <div className="preview">
       <div className="preview_title">
         <h4>{card.display_title}</h4>
-        <p>
-          {card.id == 0 ? `From $${card.price}/month` : `$${card.price}/month`}
-        </p>
+        <h3>{card.id == 0 ? `From $${card.price}/month` : `$${card.price}/month`}</h3>
       </div>
       <img style={{ background: card.bgPrevirew }} src={card.src} />
 
@@ -74,14 +68,7 @@ const DeliversEveny = ({ card }: { card: cardsObjType }) => {
           id="radio-on"
           y={4605}
         >
-          <mask
-            id="dpa"
-            height={24}
-            maskUnits="userSpaceOnUse"
-            width={24}
-            x={0}
-            y={0}
-          >
+          <mask id="dpa" height={24} maskUnits="userSpaceOnUse" width={24} x={0} y={0}>
             <path d="M0 0h24v24H0z" fill="#d9d9d9" />
           </mask>
           <g mask="url(#dpa)">

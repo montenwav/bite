@@ -85,6 +85,7 @@ export function Provider({ children }: { children: React.ReactNode }) {
     setCurrentStateZipCodes(zipCodes.filter((obj) => obj.state === paymentForm.state));
   }, [zipCodes]);
 
+  // Add new items to storage on every bag change
   useEffect(() => {
     localStorage.setItem("bag", JSON.stringify(bag));
   }, [bag]);
@@ -132,21 +133,19 @@ export const BagReducerFunc = (state: bagType[], action: reducerActionTypes) => 
       return [...state, { ...action.card }];
     }
     case "increment_button": {
-      return state.map((card) => {
-        if (card.id === action.itemId) return { ...card, count: card.count + 1 };
-        return card;
-      });
+      return state.map((card) =>
+        card.id === action.itemId ? { ...card, count: card.count + 1 } : card
+      );
     }
     case "decrement_button": {
-      const decrementItem = state.map((card) => {
-        if (card.id === action.itemId) return { ...card, count: card.count - 1 };
-        return card;
-      });
+      const decrementItem = state.map((card) =>
+        card.id === action.itemId ? { ...card, count: card.count - 1 } : card
+      );
       const filteredItems = decrementItem.filter((card) => card.count > 0);
       return filteredItems;
     }
     case "remove_button": {
-      return state.filter((c) => c.id !== action.itemId);
+      return state.filter((card) => card.id !== action.itemId);
     }
   }
 };

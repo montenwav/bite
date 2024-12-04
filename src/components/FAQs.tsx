@@ -10,12 +10,13 @@ interface FaqsObj {
   p5?: string;
   isOpen: boolean;
 }
+
 export const FAQs = () => {
   return (
     <section className="faqs">
       <h1>FAQs</h1>
       <div className="questions_container">
-        <div className="hr"></div>
+        <div className="hr" />
         <FAQsContaniner />
       </div>
     </section>
@@ -28,6 +29,7 @@ const FAQsContaniner = () => {
   const handleToggle = (itemId: number) => {
     setFaqArr(
       FaqArr.map((item) => {
+        // open selected tab, other close
         if (item.id !== itemId) return { ...item, isOpen: false };
         return { ...item, isOpen: !item.isOpen };
       })
@@ -38,10 +40,7 @@ const FAQsContaniner = () => {
     <div className="question">
       {FaqArr.map((item) => (
         <div key={item.id} className="toggle_item">
-          <div
-            onClick={() => handleToggle(item.id)}
-            className="header_container"
-          >
+          <div onClick={() => handleToggle(item.id)} className="header_container">
             <h4>{item.title}</h4>
             <svg
               className="cervon"
@@ -73,18 +72,19 @@ const FAQsContaniner = () => {
             </svg>
           </div>
 
-          <CententContainer item={item} />
-          <div className="hr"></div>
+          <ContentContainer item={item} />
+          <div className="hr" />
         </div>
       ))}
     </div>
   );
 };
 
-const CententContainer = ({ item }: { item: FaqsObj }) => {
+const ContentContainer = ({ item }: { item: FaqsObj }) => {
   return (
     <div className={`content_container ${item.isOpen && "active"}`}>
       <p>{item.p1}</p>
+      {/* all tabs except 2 */}
       {item.id !== 2 ? (
         <>
           {item.p2 && <p>{item.p2}</p>}

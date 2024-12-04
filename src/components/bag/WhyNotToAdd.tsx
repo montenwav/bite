@@ -2,22 +2,19 @@ import { useContext, useState } from "react";
 import { mainContext } from "../../Provider";
 import { whyNotToAddObjType } from "../../types";
 
-export const WhyNotToAdd = () => {
+export const WhyNotToAdd = ({ TOTAL }: { TOTAL: number }) => {
   const { bag } = useContext(mainContext);
 
   return (
-    <>
-      <div className="why_not_to_add">
-        {bag.length > 0 && <Checkout />}
-        <div className="hr"></div>
-
-        <h5 className="why_not_to_add_h5">WHY NOT ADD?</h5>
-        <div className="why_not_to_add_flex">
-          <WhyNotToAddCard />
-        </div>
-        <button className="shop_all_prod">SHOP ALL PRODUCTS</button>
+    <div className="why_not_to_add">
+      {bag.length > 0 && <Checkout TOTAL={TOTAL} />}
+      <div className="hr" />
+      <h5 className="why_not_to_add_h5">WHY NOT ADD?</h5>
+      <div className="why_not_to_add_flex">
+        <WhyNotToAddCard />
       </div>
-    </>
+      <button className="shop_all_prod">SHOP ALL PRODUCTS</button>
+    </div>
   );
 };
 
@@ -33,12 +30,9 @@ const WhyNotToAddCard = () => {
       dispatch({ type: "if_not_exist", card: card });
     }
 
-    // Adding state to the button to prevent multipe clicks
+    // Adding delay to the button to prevent multipe clicks
     setWhyNotCards(
-      whyNotCards.map((item) => {
-        if (item.id === card.id) return { ...item, added: true };
-        return item;
-      })
+      whyNotCards.map((item) => (item.id === card.id ? { ...item, added: true } : item))
     );
     setTimeout(() => {
       setWhyNotCards(
@@ -75,13 +69,8 @@ const WhyNotToAddCard = () => {
   );
 };
 
-const Checkout = () => {
-  const { bag } = useContext(mainContext);
+const Checkout = ({ TOTAL }: { TOTAL: number }) => {
   const [checkout, setCheckout] = useState("CHECKOUT");
-
-  let total: number[] | number | boolean = 0;
-  total = bag.map((item) => item.count * item.price);
-  total = bag.length > 0 && total.reduce((accum, items) => accum + items);
 
   return (
     <>
@@ -90,7 +79,7 @@ const Checkout = () => {
         <div onClick={() => setCheckout("CHECKING OUT...")} className="checkout_container">
           <div className="checkout">
             <h5>{checkout}</h5>
-            <h5 className="bag_total">${(total as number).toFixed(2)}</h5>
+            <h5 className="bag_total">${TOTAL.toFixed(2)}</h5>
           </div>
         </div>
       </a>

@@ -1,17 +1,8 @@
-import { useContext } from "react";
-import { mainContext } from "../../Provider";
-
-export const BagTop = ({ handleExitBtn }: { handleExitBtn: () => void }) => {
-  const { bag } = useContext(mainContext);
-  let freeShipping = 32;
-
-  // Update freeShipping
-  if (bag.length > 0) {
-    let allPrices = bag
-      .map((item) => item.count * item.price)
-      .reduce((accum, item) => accum + item, 0);
-    freeShipping -= allPrices;
-  }
+export const BagTop = ({ handleExitBtn, TOTAL }: { handleExitBtn: () => void; TOTAL: number }) => {
+  // Calculating shipping
+  let SHIPPING = 32;
+  SHIPPING -= TOTAL;
+  if (SHIPPING < 0) SHIPPING = 0;
 
   return (
     <>
@@ -19,11 +10,11 @@ export const BagTop = ({ handleExitBtn }: { handleExitBtn: () => void }) => {
         <div className="bag_top">
           <div className="bag_top_text">
             <h5>YOUR BAG</h5>
-            {freeShipping <= 0 ? (
+            {SHIPPING <= 0 ? (
               // prettier-ignore
               <h5>🎉 Congrats! You've Unlocked <b>FREE SHIPPING!</b></h5>
             ) : (
-              <h5>You Are ${freeShipping} Away From Free Shipping</h5>
+              <h5>You Are ${SHIPPING} Away From Free Shipping</h5>
             )}
           </div>
 

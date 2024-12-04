@@ -22,9 +22,9 @@ export function Cards() {
 
   const addItem = (card: cardsObjType) => {
     setIsBagOpen(true);
-    // Add item
-    let existingItem = bag.find((item) => item.id === card.id);
-    if (existingItem) {
+    let isExist = bag.find((item) => item.id === card.id);
+    // if exist add quantity, if not add new item
+    if (isExist) {
       dispatch({ type: "if_exist", cardId: card.id });
     } else {
       dispatch({ type: "if_not_exist", card: card });

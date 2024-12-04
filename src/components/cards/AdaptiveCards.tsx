@@ -10,10 +10,8 @@ export const AdaptiveCards = ({ addItem, cards, setCards }: CardArgsType) => {
           <div className="preview">
             <img style={{ background: card.bgPrevirew }} src={card.src} />
           </div>
-
           <h4>{card.display_title}</h4>
           <h5>{card.type}</h5>
-
           <ColorPicker card={card} setCards={setCards} cards={cards} />
 
           <div className="adaptive_cards_stars">

@@ -9,9 +9,7 @@ export function useSize() {
     };
     window.addEventListener("resize", windowSizeHandler);
 
-    return () => {
-      window.removeEventListener("resize", windowSizeHandler);
-    };
+    return () => window.removeEventListener("resize", windowSizeHandler);
   }, []);
   return windowSize;
 }

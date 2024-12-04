@@ -1,4 +1,4 @@
-import { CheckoutBag } from "../components/checkout/CheckoutBag";
+import { CheckoutFormBag } from "../components/checkout/CheckoutBag";
 import { CheckoutReg } from "../components/checkout/CheckoutReg";
 
 export const CheckoutPage = () => {
@@ -38,7 +38,7 @@ const CheckoutForm = () => {
   return (
     <div className="checkout_form">
       <CheckoutReg />
-      <CheckoutBag />
+      <CheckoutFormBag />
     </div>
   );
 };

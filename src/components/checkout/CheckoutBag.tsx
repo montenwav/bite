@@ -1,27 +1,22 @@
 import { useContext, useRef, useState } from "react";
 import { cardsObjType, whyNotToAddObjType, bagType } from "../../types";
 import { mainContext } from "../../Provider";
-
-export const CheckoutBag = () => {
-  return (
-    <div className="checkout_form_bag_container">
-      <CheckoutFormBag />
-    </div>
-  );
-};
+import { availablePromocodes } from "../../availablePromocodes";
 
 export const CheckoutFormBag = () => {
   const { bag, filteredDiscount } = useContext(mainContext);
-  const allDiscounts = filteredDiscount.reduce((acc, promo) => acc + promo.discount, 0);
+  const allDiscounts = filteredDiscount.reduce((acc, promo) => acc + promo.discount, 0); // all discounts in percent
 
   return (
-    <div className="checkout_form_bag">
-      {bag &&
-        bag.map((card) => (
-          <CheckoutBagItem allDiscounts={allDiscounts} key={card.id} card={card} />
-        ))}
-      <CheckoutBagPromocode />
-      <CheckoutBagTotal allDiscounts={allDiscounts} />
+    <div className="checkout_form_bag_container">
+      <div className="checkout_form_bag">
+        {bag &&
+          bag.map((card) => (
+            <CheckoutBagItem allDiscounts={allDiscounts} key={card.id} card={card} />
+          ))}
+        <CheckoutBagPromocode />
+        <CheckoutBagTotal allDiscounts={allDiscounts} />
+      </div>
     </div>
   );
 };
@@ -29,12 +24,12 @@ export const CheckoutFormBag = () => {
 const CheckoutBagTotal = ({ allDiscounts }: { allDiscounts: number }) => {
   const { bag } = useContext(mainContext);
 
-  const withoutDiscounts: number = Number(
-    bag.map((obj) => obj.price * obj.count).reduce((acc, obj) => acc + obj)
+  const withoutDiscounts = Number(
+    bag.map((obj) => obj.price * obj.count).reduce((acc, val) => acc + val)
   );
-  const subtotal = (withoutDiscounts / 100) * (100 - allDiscounts);
+  const subtotal = (withoutDiscounts / 100) * (100 - allDiscounts); // all items with discounts
   const savings = (withoutDiscounts / 100) * allDiscounts;
-  const taxes = subtotal - (subtotal / 100) * 92.5;
+  const taxes = subtotal - (subtotal / 100) * 92.5; // 7.5% taxes
 
   return (
     <>
@@ -282,7 +277,7 @@ const CheckoutBagItem = ({ allDiscounts, card }: { allDiscounts: number; card: b
   const { filteredDiscount } = useContext(mainContext);
 
   return (
-    <div key={card.id} className="checkout_bag_item">
+    <div className="checkout_bag_item">
       <div className="checkout_bag_img">
         <img src={card.src} alt={card.title} />
         <div className="checkout_bag_count">{card.count}</div>
@@ -290,6 +285,7 @@ const CheckoutBagItem = ({ allDiscounts, card }: { allDiscounts: number; card: b
       <div className="checkout_bag_description">
         <h5>{card.title}</h5>
         <h6>{(card as cardsObjType).type || (card as whyNotToAddObjType).description}</h6>
+        {/* If discounts selected */}
         {filteredDiscount.length > 0 && (
           <div className="checkout_bag_discount">
             {filteredDiscount.map((promo) => (
@@ -309,10 +305,12 @@ const CheckoutBagItem = ({ allDiscounts, card }: { allDiscounts: number; card: b
       </div>
       <div className="checkout_bag_price">
         {filteredDiscount.length > 0 && (
+          // Usual price
           <s>
             <h5 style={{ color: "gray" }}>{card.price * card.count}$</h5>
           </s>
         )}
+        {/* Price with discount */}
         <h5>{(((card.price * card.count) / 100) * (100 - allDiscounts)).toFixed(2)}$</h5>
       </div>
     </div>
@@ -320,8 +318,8 @@ const CheckoutBagItem = ({ allDiscounts, card }: { allDiscounts: number; card: b
 };
 
 const CheckoutBagPromocode = () => {
-  const { filteredDiscount, setFilteredDiscount } = useContext(mainContext);
-  const [promocode, setPromocode] = useState("");
+  const { filteredDiscount, setFilteredDiscount } = useContext(mainContext); // Selected discounts
+  const [promocode, setPromocode] = useState(""); // Discount input
   const [notFoundPromo, setNotFoundPromo] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const labelRef = useRef<HTMLFormElement>(null);
@@ -331,16 +329,19 @@ const CheckoutBagPromocode = () => {
   const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     setIsLoading(true);
-    const isFind = filteredDiscount.find((promo) => promo.title === promocode);
+    // Returns discount object if found
+    const ifFind = availablePromocodes.find((promo) => promo.title === promocode);
 
     setTimeout(() => {
-      if (typeof isFind !== "undefined") {
-        // Убираем одинаковые объекты
-        const dryArr = [...filteredDiscount, isFind];
-        const filteredArrOfStrings = Array.from(new Set(dryArr.map((obj) => JSON.stringify(obj))));
-        const filteredArr = filteredArrOfStrings.map((obj) => JSON.parse(obj));
+      if (typeof ifFind !== "undefined") {
+        const stringifiedDiscountArr: string[] = [...filteredDiscount, ifFind].map((obj) =>
+          JSON.stringify(obj)
+        );
+        const filteredDiscountArr: { id: number; title: string; discount: number }[] = Array.from(
+          new Set(stringifiedDiscountArr)
+        ).map((obj) => JSON.parse(obj)); // Add discount if exist and exclude copies
 
-        setFilteredDiscount(filteredArr);
+        setFilteredDiscount(filteredDiscountArr);
         setNotFoundPromo(false);
       } else {
         setNotFoundPromo(true);

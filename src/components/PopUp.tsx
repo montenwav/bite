@@ -12,10 +12,10 @@ export const PopUp = () => {
 
   return (
     <div className="popup">
-      {isPopUpOpen ? (
+      {isPopUpOpen && isPopUp ? (
         <PopUpContent setIsPopUpOpen={setIsPopUpOpen} />
       ) : (
-        isPopUp && <PopUpTag setIsPopUpOpen={setIsPopUpOpen} />
+        <PopUpTag setIsPopUpOpen={setIsPopUpOpen} />
       )}
     </div>
   );

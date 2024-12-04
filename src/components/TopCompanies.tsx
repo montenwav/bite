@@ -8,14 +8,14 @@ export const TopCompanies = memo(function TopCompanies() {
 
   return (
     <>
-      <div className="hr"></div>
+      <div className="hr" />
       <section className="companies_list">
         <div className="as_seen_in">
           <h5>AS SEEN IN</h5>
         </div>
         <CompaniesContainer imgIndex={imgIndex} />
       </section>
-      <div className="hr"></div>
+      <div className="hr" />
     </>
   );
 });
@@ -23,15 +23,11 @@ export const TopCompanies = memo(function TopCompanies() {
 const CompaniesContainer = ({ imgIndex }: { imgIndex: number }) => {
   const ref = useRef<HTMLDivElement>(null);
   const [companyItemWidth, setCompanyItemWidth] = useState(0);
-  let ITEM_WIDTH;
-
-  if (companyItemWidth) {
-    ITEM_WIDTH = companyItemWidth * imgIndex;
-  }
+  let ITEM_WIDTH = companyItemWidth * imgIndex;
 
   useEffect(() => {
     if (ref.current) {
-      setCompanyItemWidth(ref.current.offsetWidth + 40); //width + gap
+      setCompanyItemWidth(ref.current.offsetWidth + 40); // width + gap
     }
   }, [imgIndex]);
 
@@ -39,7 +35,7 @@ const CompaniesContainer = ({ imgIndex }: { imgIndex: number }) => {
     <div className="companies_container">
       <div
         className="companies_inner_container"
-        style={{ transform: `translateX(-${ITEM_WIDTH ? ITEM_WIDTH : 0}px)` }}
+        style={{ transform: `translateX(-${ITEM_WIDTH}px)` }}
       >
         {companiesList.map((company) => (
           <div ref={ref} key={company.id} className="top_copm_item">

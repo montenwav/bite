@@ -1,4 +1,4 @@
-import { useRef, useContext, useEffect } from "react";
+import { useRef, useContext, useEffect, Fragment } from "react";
 import { useSize } from "../hooks/useSize.jsx";
 import { mainContext } from "../Provider";
 
@@ -19,9 +19,8 @@ export const Adaptive = () => {
 
   useEffect(() => {
     if (windowSize > 1000 && adaptiveRef.current) {
-      adaptiveRef.current.style.right = "-100%";
-    }
-    setIsAdaptive(false);
+      adaptiveRef.current.style.right = "-100vw";
+    } else setIsAdaptive(false);
     document.body.style.overflow = "visible";
   }, [windowSize]);
 
@@ -31,7 +30,7 @@ export const Adaptive = () => {
         adaptiveRef.current.style.right = "0%";
         document.body.style.overflow = "hidden";
       } else {
-        adaptiveRef.current.style.right = "-100%";
+        adaptiveRef.current.style.right = "-100vw";
         document.body.style.overflow = "visible";
       }
     }
@@ -56,7 +55,14 @@ export const Adaptive = () => {
       </div>
       <div className="hr" />
       {AdaptiveItemsArr.map((title, index) => (
-        <AdaptiveItem key={index} title={title} />
+        <Fragment key={index}>
+          <div className="adaptive_item">
+            <a href="">
+              <h5>{title}</h5>
+            </a>
+          </div>
+          <div className="hr" />
+        </Fragment>
       ))}
     </div>
   );
@@ -124,19 +130,6 @@ const AdaptiveFlexElements = ({ element }: AdaptiveObjType) => {
         </svg>
       </span>
     </div>
-  );
-};
-
-const AdaptiveItem = ({ title }: { title: string }) => {
-  return (
-    <>
-      <div className="adaptive_item">
-        <a href="">
-          <h5>{title}</h5>
-        </a>
-      </div>
-      <div className="hr" />
-    </>
   );
 };
 

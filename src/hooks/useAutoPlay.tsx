@@ -15,7 +15,6 @@ export const useAutoPlay: autoPlayHookType = (imgIndex, setImgIndex, length, isD
       } else {
         setImgIndex(0);
       }
-      return () => clearInterval(interval);
     } else {
       interval = setInterval(() => {
         setImgIndex((prevIndex) => prevIndex + 1);
@@ -24,5 +23,6 @@ export const useAutoPlay: autoPlayHookType = (imgIndex, setImgIndex, length, isD
     return () => clearInterval(interval);
   }, [windowSize, setImgIndex, isDepenencies]);
 
+  // restart
   if (imgIndex > length) setImgIndex(0);
 };

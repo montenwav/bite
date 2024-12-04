@@ -32,7 +32,7 @@ export function ShopByCategory() {
           dragConstraints={{ right: 0, left: 0 }}
           animate={{
             translateX: `calc(-${imgIndex * 85}vw - ${imgIndex} * 16px)`,
-          }} // translate by img size
+          }} // translate by img width
           onDragStart={onDragStart}
           onDragEnd={onDragEnd}
           className="carousel"

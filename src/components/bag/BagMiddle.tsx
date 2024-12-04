@@ -12,7 +12,7 @@ export const BagMiddle = () => {
       style={{ height: !bag.length ? `calc(100% - 345px)` : `calc(100% - 415px)` }}
       className="bag_middle"
     >
-      {!bag.length ? <EmptyBag /> : <MiddleBagCard />}
+      {bag.length ? <MiddleBagCard /> : <EmptyBag />}
     </div>
   );
 };
@@ -80,7 +80,10 @@ const AddedItemDescription = ({ item }: { item: cardsObjType | whyNotToAddObjTyp
 
         <div className="bag_total">
           <h5>${item.price}.00</h5>
-          <s style={{ color: "gray" }}>{item.old_price != 0 && <h5>${item.old_price}.00</h5>}</s>
+          {/* if old price exist then add */}
+          <s style={{ color: "gray" }}>
+            {item.old_price != 0 && <h5>${item.old_price.toFixed(2)}</h5>}
+          </s>
         </div>
       </div>
     </div>
@@ -93,7 +96,7 @@ const BagCounter = ({ item }: { item: cardsObjType | whyNotToAddObjType }) => {
   return (
     <div className="bag_counter">
       <div className="bag_counter_flex">
-        <DispatchCouter type="decrement" item={item}>
+        <DispatchCounter type="decrement" item={item}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={18}
@@ -116,13 +119,13 @@ const BagCounter = ({ item }: { item: cardsObjType | whyNotToAddObjType }) => {
               <path d="M6.57703 10.3V9.69995H14.2514V10.3H6.57703Z" fill="#131313" />
             </g>
           </svg>
-        </DispatchCouter>
+        </DispatchCounter>
 
         <div className="bag_counter_item">
           <h5>{item.count}</h5>
         </div>
 
-        <DispatchCouter type="increment" item={item}>
+        <DispatchCounter type="increment" item={item}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width={18}
@@ -148,7 +151,7 @@ const BagCounter = ({ item }: { item: cardsObjType | whyNotToAddObjType }) => {
               />
             </g>
           </svg>
-        </DispatchCouter>
+        </DispatchCounter>
       </div>
 
       <h5
@@ -161,7 +164,7 @@ const BagCounter = ({ item }: { item: cardsObjType | whyNotToAddObjType }) => {
   );
 };
 
-const DispatchCouter = ({
+const DispatchCounter = ({
   item,
   type,
   children,

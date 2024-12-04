@@ -12,23 +12,15 @@ export function BitsAreBetter() {
 const FirstSecBg = () => {
   return (
     <div className="FirstSecMain">
-      <div className="FirstSecColumn">
-        <FirstSecElement arr={firstColumnArr} />
-      </div>
-      <div className="FirstSecColumn">
-        <FirstSecElement arr={secondColumnArr} />
-      </div>
+      <FirstSecElement arr={firstColumnArr} />
+      <FirstSecElement arr={secondColumnArr} />
     </div>
   );
 };
 
-const FirstSecElement = ({
-  arr,
-}: {
-  arr: typeof firstColumnArr | typeof secondColumnArr;
-}) => {
+const FirstSecElement = ({ arr }: { arr: typeof firstColumnArr | typeof secondColumnArr }) => {
   return (
-    <>
+    <div className="FirstSecColumn">
       {arr.map((element) => (
         <div key={element.id} className="FirstSecElement">
           <i className={`icon ${element.icon}`} role="presentation" />
@@ -36,7 +28,7 @@ const FirstSecElement = ({
           <h5 className="bits_are_better_content">{element.description}</h5>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
