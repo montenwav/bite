@@ -51,6 +51,7 @@
 
 .checkout_form_bag_container {
   padding: 40px;
+  height: 1000px;
   position: sticky;
   top: 0;
   right: 0;
@@ -674,6 +675,7 @@
 }
 
 .one_or_more_items {
+  display: none;
   margin-bottom: 40px;
   font-size: 1.1em;
   color: gray;
@@ -727,8 +729,13 @@
 
 @media (max-width: 1000px) {
   .checkout_form_bag_container {
-    display: none;
     width: 100%;
+    background: none;
+    padding: 0;
+    height: auto;
+  }
+  .full_bag {
+    display: none;
   }
 
   .checkout_form_reg {

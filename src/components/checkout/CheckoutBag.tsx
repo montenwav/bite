@@ -3,12 +3,14 @@ import { cardsObjType, whyNotToAddObjType, bagType } from "../../types";
 import { mainContext } from "../../Provider";
 import { availablePromocodes } from "../../availablePromocodes";
 
-export const CheckoutFormBag = () => {
+export const CheckoutFormBag = ({ isFull }: { isFull: boolean }) => {
   const { bag, filteredDiscount } = useContext(mainContext);
-  const allDiscounts = filteredDiscount.reduce((acc, promo) => acc + promo.discount, 0); // all discounts in percent
+
+  let allDiscounts: number = filteredDiscount.reduce((acc, promo) => acc + promo.discount, 0); // all discounts in percent
+  if (allDiscounts > 100) allDiscounts = 100;
 
   return (
-    <div className="checkout_form_bag_container">
+    <div className={`checkout_form_bag_container ${isFull ? "full_bag" : ""}`}>
       <div className="checkout_form_bag">
         {bag &&
           bag.map((card) => (
@@ -29,7 +31,7 @@ const CheckoutBagTotal = ({ allDiscounts }: { allDiscounts: number }) => {
   );
   const subtotal = (withoutDiscounts / 100) * (100 - allDiscounts); // all items with discounts
   const savings = (withoutDiscounts / 100) * allDiscounts;
-  const taxes = subtotal - (subtotal / 100) * 92.5; // 7.5% taxes
+  const taxes = (subtotal / 100) * 7.5; // 7.5% taxes
 
   return (
     <>
@@ -286,9 +288,9 @@ const CheckoutBagItem = ({ allDiscounts, card }: { allDiscounts: number; card: b
         <h5>{card.title}</h5>
         <h6>{(card as cardsObjType).type || (card as whyNotToAddObjType).description}</h6>
         {/* If discounts selected */}
-        {filteredDiscount.length > 0 && (
-          <div className="checkout_bag_discount">
-            {filteredDiscount.map((promo) => (
+        <div className="checkout_bag_discount">
+          {filteredDiscount.length > 0 &&
+            filteredDiscount.map((promo) => (
               <div key={promo.id} className="checkout_bag_discount_item">
                 <img
                   style={{ height: "16px", width: "16px", marginRight: "5px" }}
@@ -300,12 +302,10 @@ const CheckoutBagItem = ({ allDiscounts, card }: { allDiscounts: number; card: b
                 ).toFixed(2)}$)`}</h6>
               </div>
             ))}
-          </div>
-        )}
+        </div>
       </div>
       <div className="checkout_bag_price">
-        {filteredDiscount.length > 0 && (
-          // Usual price
+        {filteredDiscount.length > 0 && ( //prettier-ignore // Usual price
           <s>
             <h5 style={{ color: "gray" }}>{card.price * card.count}$</h5>
           </s>
@@ -320,7 +320,7 @@ const CheckoutBagItem = ({ allDiscounts, card }: { allDiscounts: number; card: b
 const CheckoutBagPromocode = () => {
   const { filteredDiscount, setFilteredDiscount } = useContext(mainContext); // Selected discounts
   const [promocode, setPromocode] = useState(""); // Discount input
-  const [notFoundPromo, setNotFoundPromo] = useState(false);
+  const [notFoundPromo, setNotFoundPromo] = useState(false); // Empty line handle
   const [isLoading, setIsLoading] = useState(false);
   const labelRef = useRef<HTMLFormElement>(null);
 
@@ -396,6 +396,7 @@ const EnteredPromos = () => {
   const { filteredDiscount, setFilteredDiscount } = useContext(mainContext);
 
   const handleDelete = (promocode: string) => {
+    // Delete from list of existing promocodes
     setFilteredDiscount(filteredDiscount.filter((promo) => promo.title !== promocode));
   };
 

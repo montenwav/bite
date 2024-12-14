@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect, useRef } from "react";
+import { useState, useContext, useRef } from "react";
 import { bagType, PaymentFormType } from "../../types";
 import { whyNotToAddArr } from "../../WhyNotToAddArr";
 import { CheckoutForms, FormInput } from "./CheckoutForms";
@@ -15,19 +15,15 @@ export const CheckoutReg = () => {
   const combinedArrays = bag
     .map((card) => card.title)
     .concat(...recArray.map((card) => card.title));
-
   // Counting how much same values we have
   const valueCounts = combinedArrays.reduce((acc: any, value: string) => {
     acc[value] = (acc[value] || 0) + 1;
     return acc;
   }, {});
-
-  // Return values that equals 1
-  const uniqueValues = Object.keys(valueCounts).filter((key) => valueCounts[key] === 1);
-  const uniqRecommenarions = uniqueValues.map((title) =>
-    whyNotToAddArr.filter((card) => card.title === title)
-  );
-  const [recommendationsArr, setRecommendationsArr] = useState(uniqRecommenarions.flat());
+  // Get valueCounts keys, then only return keys if its value equal 1
+  const uniqValues = Object.keys(valueCounts).filter((key) => valueCounts[key] === 1);
+  const uniqRecommenarions = recArray.filter((item) => uniqValues.includes(item.title)); // get recArrays objects by uniqValues title
+  const [recommendationsArr, setRecommendationsArr] = useState(uniqRecommenarions);
 
   return (
     <div className="checkout_form_reg">
@@ -81,6 +77,7 @@ const PaymentForm = () => {
 
     for (key in paymentForm) {
       if (key !== "apartment" && key !== "card_name") {
+        // empty string check
         if (paymentForm[key] === "") emptyArr.push(key);
       }
     }
@@ -113,18 +110,14 @@ const PaymentForm = () => {
       paymentForm.card_number.length === 20 && paymentForm.cvv.length >= 3 && paymentForm.card_date.length === 6 &&
       paymentForm.address.length >= 3 && paymentForm.phone.length >= 3
     ) {
-      setEmptyArrState([]);
+      setEmptyArrState([]); // clear array
       setIsSucced(true);
       fetch("", {
         method: "POST",
         body: JSON.stringify(paymentForm),
       });
-    }
+    } // send form if all tests passed
   };
-
-  useEffect(() => {
-    console.log(emptyArrState);
-  }, [emptyArrState]);
 
   return (
     <form ref={formRef} method="post">
@@ -132,7 +125,7 @@ const PaymentForm = () => {
       <ShippingMethod />
       <Payment />
       <RememberMe />
-      {windowSize < 1000 && <CheckoutFormBag />}
+      {windowSize < 1000 && <CheckoutFormBag isFull={false} />}
       <h5 className="one_or_more_items">
         One or more items in your cart is a deferred or recurring purchase. By continuing with your
         payment, you agree that your payment method will automatically be charged at the price and
@@ -275,10 +268,10 @@ const RecommendationsItem = ({
     setIsDisabled(true);
 
     setTimeout(() => {
-      //Добавляем элемент
+      // Add card
       localStorage.setItem("bag", JSON.stringify([...bag, card]));
       dispatch({ type: "if_not_exist", card: { ...card, id: nextId() } });
-      //Удаляем карточку
+      // Delete card
       setRecommendationsArr(recommendationsArr.filter((card) => card.id !== cardId));
 
       setIsDisabled(false);

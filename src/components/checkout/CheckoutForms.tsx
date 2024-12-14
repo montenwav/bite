@@ -80,7 +80,7 @@ const DeliveryForm = () => {
           <FormInput placeholder="City" name="city" type="text" required={true} />
           <select className="american_states" value={paymentForm.state} onChange={handleState}>
             {Object.values(USStates).map((state, index) => (
-              <option key={index} value={Object.keys(USStates)[index]}>
+              <option key={index} value={index}>
                 {state}
               </option>
             ))}
@@ -153,10 +153,10 @@ export const FormInput = ({
   } = useContext(mainContext);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
+    const { value } = event.target;
 
     // Setting current object by ZIP code
-    if (name === "zip" && currentStateZipCodes.length) {
+    if (name === "zip" && currentStateZipCodes.length > 0) {
       const currnetZipObj: zipCodesType | undefined = currentStateZipCodes.find(
         (obj) => obj.zip_code.toString() === value.slice(0, String(obj.zip_code).length) // paymentForm.zip
       );
@@ -166,7 +166,7 @@ export const FormInput = ({
     }
 
     // Setting current object by city
-    if (name === "city" && currentStateZipCodes.length) {
+    if (name === "city" && currentStateZipCodes.length > 0) {
       const currnetZipObj: zipCodesType | undefined = currentStateZipCodes.find(
         (obj) => obj.city === value // paymentForm.city
       );

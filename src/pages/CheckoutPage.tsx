@@ -38,7 +38,7 @@ const CheckoutForm = () => {
   return (
     <div className="checkout_form">
       <CheckoutReg />
-      <CheckoutFormBag />
+      <CheckoutFormBag isFull={true} />
     </div>
   );
 };
