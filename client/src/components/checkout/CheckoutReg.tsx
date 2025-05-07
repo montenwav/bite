@@ -59,8 +59,7 @@ export const CheckoutReg = () => {
 };
 
 const PaymentForm = () => {
-  const { paymentForm, emptyArrState, setEmptyArrState, currentStateZipCodes } =
-    useContext(mainContext);
+  const { paymentForm, setEmptyArrState, currentStateZipCodes } = useContext(mainContext);
   const [isSecced, setIsSucced] = useState(false);
   const windowSize = useSize();
   const formRef = useRef<HTMLFormElement>(null);

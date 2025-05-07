@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useSize } from "../../hooks/useSize.js";
 import { mainContext } from "../../Provider.js";
-import { cardsArr } from "../../../../server/cardsArr.js";
+import { cardsArr } from "./cardsArr.tsx";
 import { AdaptiveCards } from "./AdaptiveCards.js";
 import { FullCards } from "./FullCards.js";
 import { cardsObjType, cardsArrType } from "../../types.js";

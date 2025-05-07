@@ -5,7 +5,7 @@
 require("dotenv").config();
 const connectDB = require("./db/connect");
 const Product = require("./models/product");
-const { cardsArr } = require("./cardsArr.js");
+const { cardsArr } = require("../client/src/components/cards/cardsArr");
 
 (async () => {
   try {

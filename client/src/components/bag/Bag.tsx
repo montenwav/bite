@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { mainContext } from "../../Provider";
 import { BagTop } from "./BagTop";
 import { BagMiddle } from "./BagMiddle";

@@ -23,5 +23,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "../server/cardsArr.js"]
+  "include": ["src", "cardsArr.jsx"]
 }
