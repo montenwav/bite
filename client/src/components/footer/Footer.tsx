@@ -1,14 +1,12 @@
-import { useSize } from "../../hooks/useSize.jsx";
-import { MoblieFooter } from "./MobileFooter.jsx";
-import { FullFooter } from "./FullFooter.jsx";
+import { useSize } from "../../hooks/useSize.js";
+import { MoblieFooter } from "./MobileFooter.js";
+import { FullFooter } from "./FullFooter.js";
 
 export function Footer() {
   const windowsize = useSize();
 
   return (
-    <section className="footer">
-      {windowsize < 1000 ? <MoblieFooter /> : <FullFooter />}
-    </section>
+    <section className="footer">{windowsize < 1000 ? <MoblieFooter /> : <FullFooter />}</section>
   );
 }
 

@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { mainContext } from "../../Provider";
-import { Hamburger } from "./Hamburger.jsx";
+import { mainContext } from "../../Provider.js";
+import { Hamburger } from "./Hamburger.js";
 
 export const HeaderMain = () => {
   return (

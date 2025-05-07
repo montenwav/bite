@@ -1,10 +1,10 @@
 import { motion, useScroll, useMotionValueEvent, useAnimation } from "framer-motion";
 import { useContext, useEffect } from "react";
-import { mainContext } from "../../Provider";
-import { Bag } from "../bag/Bag.jsx";
-import { Adaptive } from "../Adaptive.jsx";
-import { HeaderMain } from "./HeaderMain.jsx";
-import { Promocode } from "./Promocode.jsx";
+import { mainContext } from "../../Provider.js";
+import { Bag } from "../bag/Bag.js";
+import { Adaptive } from "../Adaptive.js";
+import { HeaderMain } from "./HeaderMain.js";
+import { Promocode } from "./Promocode.js";
 
 export function Header() {
   const { isAdaptive, isBagOpen } = useContext(mainContext);

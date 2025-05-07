@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { mainContext } from "../../Provider";
-import { EmptyBag } from "./EmptyBag.jsx";
+import { mainContext } from "../../Provider.js";
+import { EmptyBag } from "./EmptyBag.js";
 import { cardsObjType, whyNotToAddObjType } from "../../types.js";
 
 export const BagMiddle = () => {

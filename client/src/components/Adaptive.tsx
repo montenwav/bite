@@ -1,6 +1,6 @@
 import { useRef, useContext, useEffect, Fragment } from "react";
-import { useSize } from "../hooks/useSize.jsx";
-import { mainContext } from "../Provider";
+import { useSize } from "../hooks/useSize.js";
+import { mainContext } from "../Provider.js";
 
 type AdaptiveObjType = {
   element: {

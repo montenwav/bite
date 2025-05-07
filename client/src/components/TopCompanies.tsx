@@ -1,6 +1,6 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { useAutoPlay } from "../hooks/useAutoPlay.js";
-import { companiesList } from "./CompaniesList.jsx";
+import { companiesList } from "./CompaniesList.js";
 
 export const TopCompanies = memo(function TopCompanies() {
   const [imgIndex, setImgIndex] = useState(0);

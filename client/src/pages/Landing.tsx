@@ -1,14 +1,14 @@
-import { Cards } from "../components/cards/Cards.jsx";
+import { Cards } from "../components/cards/Cards.js";
 import { TopCompanies } from "../components/TopCompanies.js";
-import { BitsAreBetter } from "../components/BitsAreBetter.jsx";
-import { Reviews } from "../components/Reviews.jsx";
-import { ShopByCategory } from "../components/ShopByCategory.jsx";
-import { BottomCompanies } from "../components/BottomCompanies.jsx";
-import { FAQs } from "../components/FAQs.jsx";
-import { HowToUse } from "../components/HowToUse.jsx";
+import { BitsAreBetter } from "../components/BitsAreBetter.js";
+import { Reviews } from "../components/Reviews.js";
+import { ShopByCategory } from "../components/ShopByCategory.js";
+import { BottomCompanies } from "../components/BottomCompanies.js";
+import { FAQs } from "../components/FAQs.js";
+import { HowToUse } from "../components/HowToUse.js";
 import { TwoUp } from "../components/TwoUp.js";
-import { PopUp } from "../components/PopUp.jsx";
-import { mainContext } from "../Provider";
+import { PopUp } from "../components/PopUp.js";
+import { mainContext } from "../Provider.js";
 import { useContext } from "react";
 import { Wallpaper } from "../components/Wallpaper.js";
 

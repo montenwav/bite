@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { useAutoPlay } from "../hooks/useAutoPlay.jsx";
-import { useDrugEffect } from "../hooks/useDrugEffect.jsx";
-import { useSize } from "../hooks/useSize.jsx";
+import { useAutoPlay } from "../hooks/useAutoPlay.js";
+import { useDrugEffect } from "../hooks/useDrugEffect.js";
+import { useSize } from "../hooks/useSize.js";
 import { useState } from "react";
 
 export function ShopByCategory() {

@@ -1,14 +1,13 @@
-import { useContext, useState } from "react";
-import { useSize } from "../../hooks/useSize.jsx";
-import { mainContext } from "../../Provider";
-import { cardsArr } from "./cardsArr";
-import { AdaptiveCards } from "./AdaptiveCards.jsx";
-import { FullCards } from "./FullCards.jsx";
+import { useContext, useEffect, useState } from "react";
+import { useSize } from "../../hooks/useSize.js";
+import { mainContext } from "../../Provider.js";
+import { cardsArr } from "../../../../server/cardsArr.js";
+import { AdaptiveCards } from "./AdaptiveCards.js";
+import { FullCards } from "./FullCards.js";
 import { cardsObjType, cardsArrType } from "../../types.js";
 
 export type addItemType = (card: cardsObjType) => void;
 export type setCardsType = React.Dispatch<React.SetStateAction<cardsArrType>>;
-
 export type CardArgsType = {
   addItem: addItemType;
   cards: cardsArrType;
@@ -19,6 +18,19 @@ export function Cards() {
   const [cards, setCards] = useState<cardsArrType>(cardsArr);
   const { bag, dispatch, setIsBagOpen } = useContext(mainContext);
   const windowsize = useSize(); // Add dynamic width
+
+  // Getting cards
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch("http://localhost:3000/api/products");
+        const parsed = await response.json();
+        setCards(parsed.data);
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, []);
 
   const addItem = (card: cardsObjType) => {
     setIsBagOpen(true);
