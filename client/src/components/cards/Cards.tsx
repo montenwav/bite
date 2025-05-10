@@ -23,7 +23,7 @@ export default function Cards() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/products");
+        const response = await fetch(`${import.meta.env.FRONTEND_SERVER}/api/products`);
         const parsed = await response.json();
         setCards(parsed.data);
       } catch (err) {
