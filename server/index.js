@@ -9,12 +9,14 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors({ origin: process.env.FRONTEND_SERVER }));
+console.log(process.env.FRONTEND_SERVER)
 // statics
 app.use(express.static("../client/public"));
 app.use(express.static("../client/src"));
 
 // app routes
-// app.use("/", (req, res) => res.send("server is runnig"));
+app.get("/", (req, res) => res.send("server is runnig"));
 
 // routers
 app.use("/api/products", router);
@@ -22,7 +24,6 @@ app.use("/api/products", router);
 // middlewares
 app.use(notFound);
 app.use(errorHandlerMiddleware);
-app.use(cors());
 
 (async () => {
   try {
