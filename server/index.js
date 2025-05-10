@@ -14,7 +14,7 @@ app.use(express.static("../client/public"));
 app.use(express.static("../client/src"));
 
 // app routes
-app.get("/", (req, res) => res.send("main"));
+// app.use("/", (req, res) => res.send("server is runnig"));
 
 // routers
 app.use("/api/products", router);
