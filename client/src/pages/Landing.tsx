@@ -1,12 +1,13 @@
-import { Cards } from "../components/cards/Cards.js";
-import { TopCompanies } from "../components/TopCompanies.js";
-import { BitsAreBetter } from "../components/BitsAreBetter.js";
+import { lazy, Suspense } from "react";
+const TopCompanies = lazy(() => import("../components/TopCompanies.js"));
 import { Reviews } from "../components/Reviews.js";
-import { ShopByCategory } from "../components/ShopByCategory.js";
-import { BottomCompanies } from "../components/BottomCompanies.js";
-import { FAQs } from "../components/FAQs.js";
-import { HowToUse } from "../components/HowToUse.js";
+const ShopByCategory = lazy(() => import("../components/ShopByCategory.js"));
+const BitsAreBetter = lazy(() => import("../components/BitsAreBetter.js"));
+const BottomCompanies = lazy(() => import("../components/BottomCompanies.js"));
+const HowToUse = lazy(() => import("../components/HowToUse.js"));
+const Cards = lazy(() => import("../components/cards/Cards.js"));
 import { TwoUp } from "../components/TwoUp.js";
+import { FAQs } from "../components/FAQs.js";
 import { PopUp } from "../components/PopUp.js";
 import { mainContext } from "../Provider.js";
 import { useContext } from "react";
@@ -19,14 +20,18 @@ export const Landing = () => {
     <>
       {isPopUp && <PopUp />}
       <Wallpaper />
-      <TopCompanies />
+      <Suspense fallback={<p>Loading...</p>}>
+        <TopCompanies />
+      </Suspense>
       <HowToUse />
       <Reviews />
-      <ShopByCategory />
-      <BitsAreBetter />
-      <TwoUp />
-      <Cards />
-      <BottomCompanies />
+      <Suspense fallback={<p>Loading...</p>}>
+        <ShopByCategory />
+        <BitsAreBetter />
+        <TwoUp />
+        <Cards />
+        <BottomCompanies />
+      </Suspense>
       <FAQs />
     </>
   );

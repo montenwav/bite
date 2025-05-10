@@ -12,7 +12,6 @@ const port = process.env.PORT || 3000;
 // statics
 app.use(express.static("../client/public"));
 app.use(express.static("../client/src"));
-app.use(cors());
 
 // app routes
 app.get("/", (req, res) => res.send("main"));
@@ -23,6 +22,7 @@ app.use("/api/products", router);
 // middlewares
 app.use(notFound);
 app.use(errorHandlerMiddleware);
+app.use(cors());
 
 (async () => {
   try {

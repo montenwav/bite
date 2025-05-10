@@ -1,4 +1,4 @@
-export function BitsAreBetter() {
+export default function BitsAreBetter() {
   return (
     <section className="BitsAreBetter">
       <h1>Why Bits are Better</h1>

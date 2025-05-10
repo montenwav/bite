@@ -14,7 +14,7 @@ export type CardArgsType = {
   setCards: setCardsType;
 };
 
-export function Cards() {
+export default function Cards() {
   const [cards, setCards] = useState<cardsArrType>(cardsArr);
   const { bag, dispatch, setIsBagOpen } = useContext(mainContext);
   const windowsize = useSize(); // Add dynamic width

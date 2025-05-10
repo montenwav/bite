@@ -6,7 +6,7 @@ import { companiesList } from "./CompaniesList";
 
 type BottomCompaniesList = { title: string; src: string }[];
 
-export function BottomCompanies() {
+export default function BottomCompanies() {
   const [imgIndex, setImgIndex] = useState(0);
   const [_, setIsDragging] = useState(false);
 

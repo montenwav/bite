@@ -2,7 +2,7 @@ import { memo, useEffect, useRef, useState } from "react";
 import { useAutoPlay } from "../hooks/useAutoPlay.js";
 import { companiesList } from "./CompaniesList.js";
 
-export const TopCompanies = memo(function TopCompanies() {
+const TopCompanies = memo(function TopCompanies() {
   const [imgIndex, setImgIndex] = useState(0);
   useAutoPlay(imgIndex, setImgIndex, companiesList.length - 5, true);
 
@@ -46,3 +46,5 @@ const CompaniesContainer = ({ imgIndex }: { imgIndex: number }) => {
     </div>
   );
 };
+
+export default TopCompanies;

@@ -1,4 +1,4 @@
-export function HowToUse() {
+export default function HowToUse() {
   return (
     <div className="how-to-use">
       <a href="/">

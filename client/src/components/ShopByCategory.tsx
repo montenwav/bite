@@ -4,7 +4,7 @@ import { useDrugEffect } from "../hooks/useDrugEffect.js";
 import { useSize } from "../hooks/useSize.js";
 import { useState } from "react";
 
-export function ShopByCategory() {
+export default function ShopByCategory() {
   const [imgIndex, setImgIndex] = useState(0);
   const [_, setIsDragging] = useState(false);
   const windowsize = useSize();
