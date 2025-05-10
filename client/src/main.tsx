@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./pages/App.js";
+const App = React.lazy(() => import("./pages/App.js"));
 import "/src/css/index.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Login } from "./pages/Login.js";
-import { Landing } from "./pages/Landing.js";
+const Landing = React.lazy(() => import("./pages/Landing.js"));
 import { CheckoutPage } from "./pages/CheckoutPage.js";
 import { Provider } from "./Provider.js";
 

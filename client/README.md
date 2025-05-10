@@ -1,4 +1,4 @@
-Bite Toothpaste copy on React + TS.
+Bite Toothpaste MERN copy
 
 0. Install NodeJS
 1. To install all dependencies use /npm i;
