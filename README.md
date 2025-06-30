@@ -1,5 +1,19 @@
-Bite Toothpaste MERN copy
+# Bite Toothpaste MERN copy
 
-0. Install NodeJS
-1. To install all dependencies use /npm i;
-2. To run project use /npm run preview;
+## Clone repo
+
+```
+git clone https://github.com/montenwav/bite.git
+```
+
+## Install dependencies
+```
+npm i
+```
+
+## Run projectt
+```
+npm run dev
+```
+
+### Project in development stage..
