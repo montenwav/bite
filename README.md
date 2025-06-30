@@ -16,4 +16,4 @@ npm i
 npm run dev
 ```
 
-### Project in development stage..
+Project in development stage..
